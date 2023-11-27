@@ -71,6 +71,12 @@ npm run dev
 npm i react-router-dom
 ```
 
+# 3. Create Header component 
+### Install React Icons
+```
+npm i react-icons
+```
+
 
 
 
@@ -96,3 +102,5 @@ npm i react-router-dom
 [Tailwind CSS with Vite](https://tailwindcss.com/docs/guides/vite)
 
 [React Router DOM](https://www.npmjs.com/package/react-router-dom)
+
+[React Icons](https://www.npmjs.com/package/react-icons)
