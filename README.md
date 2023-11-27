@@ -6,6 +6,9 @@
 ```
 cd "D:\Thuc Tap 2023\SleepEZ\rental-website\client"
 ```
+```
+cd "D:\Thuc Tap 2023\SleepEZ\rental-website\api"
+```
 
 # 1. Install React js and Tailwind CSS and create the first template
 
@@ -77,8 +80,78 @@ npm i react-router-dom
 npm i react-icons
 ```
 
+# 4. Create and run the server
+### Create a new folder & file 
+- SleepEZ/rental-website/api/index.js
+
+```
+cd "D:\Thuc Tap 2023\SleepEZ\rental-website"
+```
+### Tạo ra file `package.json` (SleepEZ/rental-website/)
+```
+npm init -y
+```
+
+### Edit add `"type": "module",` for `package.json` (SleepEZ/rental-website/)
+#### Before
+```
+...
+  "main": "index.js",
+  "scripts": {
+  ...
+  },
+...
+```
+#### After
+```
+...
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+  ...
+  },
+...
+```
+
+### Edit script when installed `nodemon` for `package.json` (SleepEZ/rental-website/)
+#### Before
+```
+...
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+...
+```
+#### After
+```
+...
+  "scripts": {
+    "dev": "nodemon api/index.js",
+    "start": "node api/index.js"
+  },
+...
+```
 
 
+### Install Express (SleepEZ/rental-website)
+```
+npm i express
+```
+
+### Install Nodemon (SleepEZ/rental-website)
+```
+npm i nodemon
+```
+
+### Run nodejs (SleepEZ/rental-website)
+#### Before (not install nodemon)
+```
+node api/index.js
+```
+#### After (installed nodemon)
+```
+npm run dev
+```
 
 
 --- 
@@ -104,3 +177,7 @@ npm i react-icons
 [React Router DOM](https://www.npmjs.com/package/react-router-dom)
 
 [React Icons](https://www.npmjs.com/package/react-icons)
+
+[Express](https://www.npmjs.com/package/express?activeTab=readme)
+
+[Nodemon](https://www.npmjs.com/package/nodemon?activeTab=readme)
