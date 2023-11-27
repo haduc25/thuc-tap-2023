@@ -184,6 +184,7 @@ npm i dotenv
 ```
 
 # 6. Create user model
+# 7. Create a test api route
 
 
 --- 
