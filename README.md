@@ -2,6 +2,8 @@
 
 "Tutorial from:  [MERN Stack Project...](https://youtu.be/VAaUy_Moivw?si=Vd7tDAyCJQRd4-Pg)"
 
+"Original repo from: [sahandghavidel/mern-estate](https://github.com/sahandghavidel/mern-estate)"
+
 #### *[Terminal] - Go to main directory fast from root folder (D:\Thuc Tap 2023): 
 ```
 cd "D:\Thuc Tap 2023\SleepEZ\rental-website\client"
@@ -153,6 +155,34 @@ node api/index.js
 npm run dev
 ```
 
+# 5. Connect to database
+### Install Mongoose (SleepEZ/rental-website)
+```
+npm i mongoose
+```
+
+### Settings MongoDB on website (cloud.mongodb.com)
+[Tutorial (skip video to) - 57:20](https://youtu.be/VAaUy_Moivw?si=K9HAB7RgOCmQiBC7)
+
+
+### Code for connect (SleepEZ/rental-website/api/index.js & SleepEZ/rental-website/.env)
+#### Template
+```
+mongodb+srv://haduc25:<password>@sleep-ez.xlzmz2i.mongodb.net/?retryWrites=true&w=majority
+```
+#### Deploy
+```
+mongodb+srv://haduc25:abcd1234@sleep-ez.xlzmz2i.mongodb.net/sleep-ez?retryWrites=true&w=majority
+```
+
+### Create a file for setting MongoDB
+- SleepEZ/rental-website/.env
+
+### Install Dotenv for `.env` file (SleepEZ/rental-website/.env)
+```
+npm i dotenv
+```
+
 
 --- 
 --- 
@@ -181,3 +211,7 @@ npm run dev
 [Express](https://www.npmjs.com/package/express?activeTab=readme)
 
 [Nodemon](https://www.npmjs.com/package/nodemon?activeTab=readme)
+
+[Mongoose](https://www.npmjs.com/package/mongoose)
+
+[Dotenv](https://www.npmjs.com/package/dotenv)
