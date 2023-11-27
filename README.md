@@ -183,6 +183,8 @@ mongodb+srv://haduc25:abcd1234@sleep-ez.xlzmz2i.mongodb.net/sleep-ez?retryWrites
 npm i dotenv
 ```
 
+# 6. Create user model
+
 
 --- 
 --- 
