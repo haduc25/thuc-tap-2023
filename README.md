@@ -2,6 +2,11 @@
 
 "Tutorial from:  [MERN Stack Project...](https://youtu.be/VAaUy_Moivw?si=Vd7tDAyCJQRd4-Pg)"
 
+#### *[Terminal] - Go to main directory fast from root folder (D:\Thuc Tap 2023): 
+```
+cd "D:\Thuc Tap 2023\SleepEZ\rental-website\client"
+```
+
 # 1. Install React js and Tailwind CSS and create the first template
 
 ```
@@ -59,6 +64,17 @@ npm run dev
 - ➜ Network: use --host to expose
 
 
+# 2. Create pages and routes
+
+### Install React Router DOM
+```
+npm i react-router-dom
+```
+
+
+
+
+
 --- 
 --- 
 
@@ -78,3 +94,5 @@ npm run dev
 [Vite - React](https://www.npmjs.com/package/create-vite)
 
 [Tailwind CSS with Vite](https://tailwindcss.com/docs/guides/vite)
+
+[React Router DOM](https://www.npmjs.com/package/react-router-dom)
