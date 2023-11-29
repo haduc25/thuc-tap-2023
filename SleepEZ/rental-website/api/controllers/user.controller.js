@@ -1,5 +1,5 @@
 export const test = (req, res) => {
-    res.json({
-        message: 'Hello Word!123'
-      })
-}
+  res.json({
+    message: "Hello Word!123",
+  });
+};

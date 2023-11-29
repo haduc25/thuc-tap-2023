@@ -185,6 +185,15 @@ npm i dotenv
 
 # 6. Create user model
 # 7. Create a test api route
+# 8. Create sign up API route
+#### Mã hóa mật khẩu
+```
+npm i bcryptjs
+```
+
+### Settings Insomnia API on website (insomnia.rest)
+[Tutorial (skip video to) - 01:26:20](https://youtu.be/VAaUy_Moivw?si=K9HAB7RgOCmQiBC7)
+
 
 
 --- 
@@ -209,12 +218,19 @@ npm i dotenv
 
 [React Router DOM](https://www.npmjs.com/package/react-router-dom)
 
+<!-- Icon -->
 [React Icons](https://www.npmjs.com/package/react-icons)
 
 [Express](https://www.npmjs.com/package/express?activeTab=readme)
 
+<!-- Tự động refresh khi code thay đổi -->
 [Nodemon](https://www.npmjs.com/package/nodemon?activeTab=readme)
 
+<!-- Database -->
 [Mongoose](https://www.npmjs.com/package/mongoose)
 
+<!-- Xử lý file .env -->
 [Dotenv](https://www.npmjs.com/package/dotenv)
+
+<!-- Mã hóa mật khẩu -->
+[Bcryptjs](https://www.npmjs.com/package/bcryptjs)
