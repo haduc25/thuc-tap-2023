@@ -224,6 +224,10 @@ npm i dotenv
 
 # 7. Create a test api route
 
+### Settings Insomnia API on website (insomnia.rest)
+
+[Tutorial (skip video to) - 01:26:20](https://youtu.be/VAaUy_Moivw?si=K9HAB7RgOCmQiBC7)
+
 # 8. Create sign up API route
 
 #### Mã hóa mật khẩu
@@ -238,9 +242,7 @@ npm i bcryptjs
 
 -   api/utils/error.js
 
-### Settings Insomnia API on website (insomnia.rest)
-
-[Tutorial (skip video to) - 01:26:20](https://youtu.be/VAaUy_Moivw?si=K9HAB7RgOCmQiBC7)
+# 10. Complete sign up page Ul
 
 ---
 
