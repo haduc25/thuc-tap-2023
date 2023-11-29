@@ -280,6 +280,8 @@ export default defineConfig({
 npm i jsonwebtoken
 ```
 
+# 13. Complete sign in page functionality
+
 ---
 
 ---
