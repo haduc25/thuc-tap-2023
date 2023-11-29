@@ -282,6 +282,35 @@ npm i jsonwebtoken
 
 # 13. Complete sign in page functionality
 
+# 14. Add redux toolkit
+
+### Install Redux Toolkit and React-Redux (SleepEZ\rental-website\client)
+
+```
+npm install @reduxjs/toolkit react-redux
+```
+
+### Config Redux create some files
+
+-   client/src/redux/store.js
+-   client/src/redux/user/userSlice.js
+
+### Provide the Redux Store to React
+
+[Provide the Redux Store to React (client/src/main.jsx)](https://redux-toolkit.js.org/tutorials/quick-start#provide-the-redux-store-to-react)
+
+### Create a Redux State Slice
+
+[Create a Redux State Slice (client/src/redux/user/userSlice.js)](https://redux-toolkit.js.org/tutorials/quick-start#create-a-redux-state-slice)
+
+### Add Slice Reducers to the Store
+
+[Add Slice Reducers to the Store (client/src/redux/store.js)](https://redux-toolkit.js.org/tutorials/quick-start#add-slice-reducers-to-the-store)
+
+### Use Redux State and Actions in React Components
+
+[Use Redux State and Actions in React Components (client/src/redux/user/SignIn.jsx)](https://redux-toolkit.js.org/tutorials/quick-start#use-redux-state-and-actions-in-react-components)
+
 ---
 
 ---
@@ -299,6 +328,10 @@ npm i jsonwebtoken
 -   Console Ninja
 -   Prettier
 -   Tailwind CSS IntelliSense
+
+## Extentions Browser
+
+-   [Redux DevTools - \*Required restart browser](https://chromewebstore.google.com/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd)
 
 ## Documentation
 
@@ -333,3 +366,5 @@ npm i jsonwebtoken
 <!-- JSON Web Tokens -->
 
 [Jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken)
+
+[Redux Toolkit and React-Redux](https://redux-toolkit.js.org/tutorials/quick-start#install-redux-toolkit-and-react-redux)

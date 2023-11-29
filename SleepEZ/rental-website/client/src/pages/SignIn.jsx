@@ -1,11 +1,21 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { signInStart, signInSuccess, signInFailure } from '../redux/user/userSlice';
 
 export default function SignIn() {
     const [formData, setFormData] = useState({});
-    const [error, setError] = useState(null);
-    const [loading, setLoading] = useState(false);
+    // const [error, setError] = useState(null);
+    // const [loading, setLoading] = useState(false);
+    const { loading, error } = useSelector((state) => state.user);
+    /** const { loading, error } = userSelector((state) => state.user);
+     * Biết rằng `state.user` lấy từ `userSlice.js`
+     * `userSelector` là một hàm hoặc selector để lấy thông tin người dùng từ trạng thái.
+        `loading` và error được tạo ra bằng cách lấy giá trị tương ứng từ kết quả của `userSelector`.
+     * Dùng để truy cập trạng thái "đang tải" (loading) và thông báo lỗi (error) từ trạng thái người dùng.
+     */
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const handleChange = (e) => {
         setFormData({
@@ -21,7 +31,8 @@ export default function SignIn() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            setLoading(true);
+            // setLoading(true);
+            dispatch(signInStart());
             const res = await fetch('api/auth/signin', {
                 method: 'POST',
                 headers: {
@@ -35,18 +46,21 @@ export default function SignIn() {
             // check xem register thành công hay k?
             if (data.success === false) {
                 // nếu có lỗi
-                setLoading(false);
-                setError(data.message);
+                // setLoading(false);
+                // setError(data.message);
+                dispatch(signInFailure(data.message));
                 return;
             }
-            setLoading(false);
-            setError(null);
+            // setLoading(false);
+            // setError(null);
+            dispatch(signInSuccess(data));
 
             // chuyển hướng về trang chủ
             navigate('/');
         } catch (error) {
-            setLoading(false);
-            setError(error.message);
+            // setLoading(false);
+            // setError(error.message);
+            dispatch(signInFailure(error.message));
         }
     };
 
