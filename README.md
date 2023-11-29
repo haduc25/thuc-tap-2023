@@ -244,16 +244,42 @@ npm i bcryptjs
 
 # 10. Complete sign up page Ul
 
+### Config vite file (add proxy for `localhost:3000`) - (client/vite.config.js)
+
+#### Before
+
+```
+export default defineConfig({
+  plugins: [react()],
+})
+```
+
+#### After
+
+```
+export default defineConfig({
+    server: {
+        proxy: {
+            '/api': {
+                target: 'http://localhost:3000',
+                secure: false,
+            },
+        },
+    },
+    plugins: [react()],
+});
+```
+
 ---
 
 ---
 
 ## List shortcut in React
 
-| Shortcut | Description                                    |
-| -------- | ---------------------------------------------- |
-| rfc      | React Function Component                       |
-| git diff | Show file differences that haven't been staged |
+| Shortcut  | Description                       |
+| --------- | --------------------------------- |
+| rfc       | React Function Component          |
+| MB1 + Alt | Dùng để sửa nhiều dòng cùng 1 lúc |
 
 ## Extentions VSCode
 
