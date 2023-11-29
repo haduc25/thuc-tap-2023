@@ -244,6 +244,8 @@ npm i bcryptjs
 
 # 10. Complete sign up page Ul
 
+# 11. Complete sign up page functionality
+
 ### Config vite file (add proxy for `localhost:3000`) - (client/vite.config.js)
 
 #### Before
