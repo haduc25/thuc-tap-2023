@@ -272,6 +272,14 @@ export default defineConfig({
 });
 ```
 
+# 12. Create sign in API route
+
+### Install JSON Web Tokens
+
+```
+npm i jsonwebtoken
+```
+
 ---
 
 ---
@@ -319,3 +327,7 @@ export default defineConfig({
 <!-- Mã hóa mật khẩu -->
 
 [Bcryptjs](https://www.npmjs.com/package/bcryptjs)
+
+<!-- JSON Web Tokens -->
+
+[Jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken)
