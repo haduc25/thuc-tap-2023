@@ -38,12 +38,22 @@ export const signin = async (req, res, next) => {
         // thêm `secret key`
         const token = jwt.sign({ id: validUser._id }, process.env.JWT_SECRET);
 
+        // Xóa mật khẩu người dùng ở api (tránh bị leak)
+        /**
+         * password: pass: vì bên trên đã có `password` nên đổi tên thành `pass`
+         *
+         * before: res.cookie('access_token', token, { httpOnly: true }).status(200).json(validUser);
+         * after: res.cookie('access_token', token, { httpOnly: true }).status(200).json(rest);
+         * => và ở json thay vì trả về cả `password` thì trả về phần k có `password` là `rest`
+         */
+        const { password: pass, ...rest } = validUser._doc;
+
         // Tạo cookie (lưu `token` trong `cookie`)
         /** res.cookie('access_token', token, { httpOnly: true });
          * httpOnly: true => các ứng dụng bên thứ 3 không thể được truy cập hoặc thay đổi
          * expires: hạn sử dụng `cookie` || nếu k có thì là k có thời gian tồn tại
          */
-        res.cookie('access_token', token, { httpOnly: true }).status(200).json(validUser);
+        res.cookie('access_token', token, { httpOnly: true }).status(200).json(rest);
     } catch (error) {
         next(error);
     }
