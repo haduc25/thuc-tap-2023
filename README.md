@@ -311,7 +311,17 @@ npm install @reduxjs/toolkit react-redux
 
 [Use Redux State and Actions in React Components (client/src/redux/user/SignIn.jsx)](https://redux-toolkit.js.org/tutorials/quick-start#use-redux-state-and-actions-in-react-components)
 
----
+# 15. Add redux persist
+
+### Install Redux Persist (SleepEZ\rental-website\client)
+
+```
+npm i redux-persist
+```
+
+### Config & using (SleepEZ\rental-website\client\src\redux\store.js)
+
+### Add `PersistGate` to (SleepEZ\rental-website\client\src\main.jsx)
 
 ---
 
@@ -368,3 +378,5 @@ npm install @reduxjs/toolkit react-redux
 [Jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken)
 
 [Redux Toolkit and React-Redux](https://redux-toolkit.js.org/tutorials/quick-start#install-redux-toolkit-and-react-redux)
+
+[Redux Persist](https://www.npmjs.com/package/redux-persist)
