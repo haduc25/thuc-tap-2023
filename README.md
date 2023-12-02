@@ -323,6 +323,20 @@ npm i redux-persist
 
 ### Add `PersistGate` to (SleepEZ\rental-website\client\src\main.jsx)
 
+# 16. Add Google OAuth functionality
+
+### Config Google OAuth create some files
+
+-   SleepEZ\rental-website\client\src\components\OAuth.jsx
+
+-   SleepEZ\rental-website\client\src\firebase.js
+
+-   SleepEZ\rental-website\client\.env
+
+### Config Google Firebase
+
+[Tutorial (skip video to) - 03:04:15](https://youtu.be/VAaUy_Moivw?si=K9HAB7RgOCmQiBC7)
+
 ---
 
 ## List shortcut in React
