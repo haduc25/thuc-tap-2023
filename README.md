@@ -345,7 +345,25 @@ npm i redux-persist
 
 # 18. Complete profile page Ul
 
----
+# 19. Complete image upload functionality
+
+### Config store in firebase (save avatar image)
+
+[Tutorial (skip video to) - 03:47:15](https://youtu.be/VAaUy_Moivw?si=K9HAB7RgOCmQiBC7)
+
+#### firebase storage
+
+```
+service firebase.storage {
+  match /b/{bucket}/o {
+    match /{allPaths=**} {
+      allow read;
+      allow write: if request.resource.size < 2 * 1024 * 1024 &&
+      request.resource.contentType.matches('image/.*');
+    }
+  }
+}
+```
 
 ## List shortcut in React
 
