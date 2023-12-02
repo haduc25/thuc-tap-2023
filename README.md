@@ -337,6 +337,12 @@ npm i redux-persist
 
 [Tutorial (skip video to) - 03:04:15](https://youtu.be/VAaUy_Moivw?si=K9HAB7RgOCmQiBC7)
 
+# 17. Update the header and make the profile page private
+
+### Config page private create some files
+
+-   SleepEZ\rental-website\client\src\components\PrivateRoute.jsx
+
 ---
 
 ## List shortcut in React

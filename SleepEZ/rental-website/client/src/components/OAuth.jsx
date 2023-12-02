@@ -16,7 +16,7 @@ export default function OAuth() {
             // popups
             const result = await signInWithPopup(auth, provider);
 
-            // console.log('result: ', result);
+            console.log('result: ', result);
 
             // gửi thông báo cho backend
             const res = await fetch('/api/auth/google', {
@@ -34,6 +34,7 @@ export default function OAuth() {
             // Chuyển thành JSON & lưu trữ
             const data = await res.json();
             dispatch(signInSuccess(data));
+            navigate('/');
         } catch (error) {
             console.log('could not sign in with google', error);
         }
