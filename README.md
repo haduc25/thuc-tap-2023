@@ -343,6 +343,8 @@ npm i redux-persist
 
 -   SleepEZ\rental-website\client\src\components\PrivateRoute.jsx
 
+# 18. Complete profile page Ul
+
 ---
 
 ## List shortcut in React
