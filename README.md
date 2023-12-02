@@ -353,6 +353,8 @@ npm i redux-persist
 
 #### firebase storage
 
+# 20. Create update user API route
+
 ```
 service firebase.storage {
   match /b/{bucket}/o {
@@ -363,6 +365,16 @@ service firebase.storage {
     }
   }
 }
+```
+
+### Config API create some files
+
+-   SleepEZ\rental-website\api\utils\veriUser.js
+
+### Install Cookie Parser - (SleepEZ\rental-website\)
+
+```
+npm i cookie-parser
 ```
 
 ## List shortcut in React
@@ -420,3 +432,5 @@ service firebase.storage {
 [Redux Toolkit and React-Redux](https://redux-toolkit.js.org/tutorials/quick-start#install-redux-toolkit-and-react-redux)
 
 [Redux Persist](https://www.npmjs.com/package/redux-persist)
+
+[Cookie Parser](https://www.npmjs.com/package/cookie-parser)
