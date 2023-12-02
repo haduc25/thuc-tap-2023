@@ -377,6 +377,8 @@ service firebase.storage {
 npm i cookie-parser
 ```
 
+# 21. Complete update user functionality
+
 ## List shortcut in React
 
 | Shortcut  | Description                       |
