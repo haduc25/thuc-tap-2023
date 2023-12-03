@@ -397,6 +397,8 @@ npm i cookie-parser
 
 -   SleepEZ\rental-website\client\src\pages\CreateListing.jsx
 
+# 26. Complete upload listing images functionality
+
 //////////////////////////////////////////////////////////////
 
 ## List shortcut in React

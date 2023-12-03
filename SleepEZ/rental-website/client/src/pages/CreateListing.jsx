@@ -1,6 +1,107 @@
-import React from 'react';
+import { useState } from 'react';
+import { getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/storage';
+import { app } from '../firebase';
 
 export default function CreateListing() {
+    const [files, setFiles] = useState([]);
+    const [formData, setFormData] = useState({
+        imageUrls: [],
+    });
+    const [imageUploadError, setImageUploadError] = useState(false);
+    const [uploading, setUploading] = useState(false);
+
+    // console.log('files: ', files);
+    console.log('formData: ', formData);
+
+    const handleImageSubmit = (e) => {
+        e.preventDefault();
+        if (files.length > 0 && files.length + formData.imageUrls.length < 7) {
+            setUploading(true);
+            setImageUploadError(false);
+            const promises = [];
+
+            for (let i = 0; i < files.length; i++) {
+                promises.push(storeImage(files[i]));
+            }
+
+            Promise.all(promises)
+                .then((urls) => {
+                    setFormData({ ...formData, imageUrls: formData.imageUrls.concat(urls) });
+                    setImageUploadError(false);
+                    setUploading(false);
+                })
+                .catch((err) => {
+                    setImageUploadError('Image upload failed (2 mb max per image)');
+                    setUploading(false);
+                });
+
+            /** Promise.all(promises)
+             * tạo một promise mới, giải quyết khi tất cả các promise trong mảng promises đã giải quyết.
+             * Khi nó giải quyết, urls là một mảng chứa kết quả từ mỗi promise.
+             *
+             * setFormData({ ...formData, imageUrls: formData.imageUrls.concat(urls) })
+             * cập nhật state formData, thêm các URL mới (urls) vào mảng imageUrls trong formData.
+             */
+        } else {
+            setImageUploadError('You can only upload 6 images per listing');
+            setUploading(false);
+        }
+    };
+
+    const storeImage = async (file) => {
+        return new Promise((resolve, reject) => {
+            const storage = getStorage(app);
+            const fileName = new Date().getTime() + file.name;
+            const storageRef = ref(storage, fileName);
+            const uploadTask = uploadBytesResumable(storageRef, file);
+
+            uploadTask.on(
+                'state_changed',
+                (snapshot) => {
+                    const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                    console.log('Upload is ' + progress + '% done');
+                    // setFilePerc(Math.round(progress));
+                },
+                (error) => {
+                    reject(error);
+                },
+                () => {
+                    getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+                        resolve(downloadURL);
+                    });
+                },
+            );
+        });
+    };
+
+    const handleRemoveImage = (index) => {
+        setFormData({
+            ...formData,
+            imageUrls: formData.imageUrls.filter((_, i) => i !== index),
+        });
+
+        /** setFormData({ ...formData, imageUrls: formData.imageUrls.filter((_, i) => i !== index) });:
+         *
+         * setFormData được sử dụng để cập nhật state formData.
+         * Một object mới được tạo bằng cách sao chép tất cả thuộc tính từ state formData hiện tại (...formData).
+         * imageUrls được cập nhật bằng cách sử dụng phương thức filter để tạo một mảng mới chỉ chứa các phần tử không trùng với chỉ số (index) đã được chọn để xóa.
+         * Điều này có nghĩa là hình ảnh tại chỉ số index sẽ bị loại bỏ khỏi mảng imageUrls.
+         * Ví dụ: Nếu imageUrls là ['url1', 'url2', 'url3'] và index là 1
+         *
+         * (ví dụ: nút xóa được nhấp trên hình ảnh thứ hai), sau khi gọi handleRemoveImage(1), imageUrls mới sẽ trở thành ['url1', 'url3'].
+         * 
+         * == Chi tiết == (.filter((_, i) => i !== index).)
+         * .filter((_, i) => ...): Đây là một phương thức của mảng JavaScript, nó tạo ra một mảng mới bằng cách lọc các phần tử dựa trên một hàm điều kiện. 
+         * Trong trường hợp này, hàm điều kiện là một hàm lambda (arrow function) với hai tham số: _ và i.
+         * (_ , i) => ...: Dấu gạch dưới (_) thường được sử dụng khi bạn không quan tâm đến giá trị của một tham số nào đó. 
+         * Trong trường hợp này, giá trị của mỗi phần tử không quan trọng, chúng ta chỉ cần biết vị trí của nó là i.
+         * i !== index: Điều kiện này kiểm tra xem chỉ số i của mỗi phần tử có khác với index không. 
+         * Nếu có, phần tử đó sẽ được giữ lại trong mảng kết quả; ngược lại, nếu chỉ số i bằng với index, phần tử đó sẽ bị loại bỏ khỏi mảng kết quả.
+
+         * Ví dụ: Nếu imageUrls là ['url1', 'url2', 'url3'] và index là 1, khi chạy .filter((_, i) => i !== index), chỉ số i của 'url1' là 0 và không bằng index, nên 'url1' sẽ được giữ lại. Chỉ số i của 'url2' là 1 (bằng index), nên 'url2' sẽ bị loại bỏ khỏi mảng kết quả. Chỉ số i của 'url3' là 2 và không bằng index, nên 'url3' cũng sẽ được giữ lại. Kết quả là một mảng mới ['url1', 'url3'], là mảng không chứa phần tử tại chỉ số index.
+         */
+    };
+
     return (
         <main className="p-3 max-w-4xl mx-auto">
             <h1 className="text-3xl font-semibold text-center my-7">Create a Listing</h1>
@@ -119,16 +220,44 @@ export default function CreateListing() {
 
                     <div className="flex gap-4">
                         <input
+                            onChange={(e) => setFiles(e.target.files)}
                             className="p-3 border border-gray-300 rounded w-full"
                             type="file"
                             id="images"
                             accept="image/*"
                             multiple
                         />
-                        <button className="p-3 text-green-700 border rounded uppercase hover:shadow-lg disabled:opacity-80">
-                            Upload
+                        <button
+                            onClick={handleImageSubmit}
+                            disabled={uploading}
+                            type="button"
+                            className="p-3 text-green-700 border rounded uppercase hover:shadow-lg disabled:opacity-80"
+                        >
+                            {uploading ? 'Uploading...' : 'Upload'}
                         </button>
                     </div>
+                    <p className="text-red-700 text-sm">{imageUploadError && imageUploadError}</p>
+                    {
+                        // Hiển thị files khi upload thành công
+                        formData.imageUrls.length > 0 &&
+                            formData.imageUrls.map((url, index) => (
+                                <div key={index} className="flex justify-between p-3 border items-center">
+                                    <img
+                                        className="w-20 h-20 object-contain rounded-lg"
+                                        src={url}
+                                        alt="listing image"
+                                    />
+                                    <button
+                                        onClick={() => handleRemoveImage(index)}
+                                        type="button"
+                                        className="p-3 text-red-700 rounded-lg uppercase hover:opacity-75"
+                                    >
+                                        Delete
+                                    </button>
+                                </div>
+                            ))
+                    }
+
                     <button className="p-3 bg-slate-700 text-white rounded-lg uppercase hover:opacity-95 disabled:opacity-80">
                         Create Listing
                     </button>
