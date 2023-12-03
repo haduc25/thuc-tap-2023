@@ -399,6 +399,8 @@ npm i cookie-parser
 
 # 26. Complete upload listing images functionality
 
+# 27. Complete create listing page functionality
+
 //////////////////////////////////////////////////////////////
 
 ## List shortcut in React
