@@ -391,6 +391,12 @@ npm i cookie-parser
 -   SleepEZ\rental-website\api\controllers\listing.controller.js
 -   SleepEZ\rental-website\api\models\listing.model.js
 
+# 25. Complete create listing page Ul
+
+### Config listing page Ul create some files
+
+-   SleepEZ\rental-website\client\src\pages\CreateListing.jsx
+
 //////////////////////////////////////////////////////////////
 
 ## List shortcut in React
