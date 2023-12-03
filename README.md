@@ -383,6 +383,16 @@ npm i cookie-parser
 
 # 23. Add sign out user functionality
 
+# 24. Add create listing API route
+
+### Config listing API create some files
+
+-   SleepEZ\rental-website\api\route\listing.router.js
+-   SleepEZ\rental-website\api\controllers\listing.controller.js
+-   SleepEZ\rental-website\api\models\listing.model.js
+
+//////////////////////////////////////////////////////////////
+
 ## List shortcut in React
 
 | Shortcut  | Description                       |
