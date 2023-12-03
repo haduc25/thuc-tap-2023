@@ -381,6 +381,8 @@ npm i cookie-parser
 
 # 22. Add delete user functionality
 
+# 23. Add sign out user functionality
+
 ## List shortcut in React
 
 | Shortcut  | Description                       |
