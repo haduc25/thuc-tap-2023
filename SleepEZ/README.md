@@ -403,6 +403,17 @@ npm i cookie-parser
 
 # 28. Create get user listings API route
 
+# 29. Complete show user listings functionality
+
+#### Thuộc tính scss trong `tailwind`
+
+```
+
+truncate
+```
+
+-   khi text quá dài sẽ hiển thị `...`
+
 //////////////////////////////////////////////////////////////
 
 ## List shortcut in React
