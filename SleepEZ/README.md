@@ -500,6 +500,8 @@ npm install -D @tailwindcss/line-clamp
 
 # 42. Complete home page
 
+# 43. Complete about page
+
 //////////////////////////////////////////////////////////////
 
 ## List shortcut in React
