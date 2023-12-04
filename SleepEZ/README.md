@@ -416,6 +416,8 @@ truncate
 
 # 30. Complete delete user listing functionality
 
+# 31. Create update listing API route
+
 //////////////////////////////////////////////////////////////
 
 ## List shortcut in React
