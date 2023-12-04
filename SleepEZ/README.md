@@ -466,6 +466,8 @@ npm i swiper
 
     //////////////////////////////////////////////////////////////
 
+# 39. Add onChange and onSubmit functionality to the search page
+
 ## List shortcut in React
 
 | Shortcut  | Description                       |
