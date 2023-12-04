@@ -438,6 +438,12 @@ npm i swiper
 
 # 34. Complete listing page
 
+# 35. Add contact landlord functionality to the listing page
+
+### Config contact landlord create some files
+
+-   SleepEZ\rental-website\client\src\components\Contact.jsx
+
 //////////////////////////////////////////////////////////////
 
 ## List shortcut in React
