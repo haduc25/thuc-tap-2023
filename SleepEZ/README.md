@@ -418,6 +418,12 @@ truncate
 
 # 31. Create update listing API route
 
+# 32. Complete update listing functionality
+
+### Config update listing page Ul create some files
+
+-   SleepEZ\rental-website\client\src\pages\CreateListing.jsx
+
 //////////////////////////////////////////////////////////////
 
 ## List shortcut in React
