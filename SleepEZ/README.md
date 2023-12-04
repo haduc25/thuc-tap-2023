@@ -464,9 +464,39 @@ npm i swiper
 
 -   SleepEZ\rental-website\client\src\pages\Search.jsx
 
-    //////////////////////////////////////////////////////////////
-
 # 39. Add onChange and onSubmit functionality to the search page
+
+# 40. Create the listing item component and show listings
+
+### Config search page Ul create some files
+
+-   SleepEZ\rental-website\client\src\components\ListingItem.jsx
+
+### Install TailWind CSS - Line-clamp (SleepEZ\rental-website\)
+
+```
+npm install -D @tailwindcss/line-clamp
+```
+
+### Install TailWind CSS - Line-clamp Config & add the plugin to `tailwind.config.js` file (SleepEZ\rental-website\client)
+
+#### Before
+
+```
+...
+    plugins: [],
+...
+```
+
+#### After
+
+```
+...
+    plugins: [require('@tailwindcss/line-clamp')],
+...
+```
+
+//////////////////////////////////////////////////////////////
 
 ## List shortcut in React
 
@@ -529,3 +559,5 @@ npm i swiper
 <!-- Thanh trượt slider cho navbar -->
 
 [Swiper - Slider](https://www.npmjs.com/package/swiper)
+
+[TailWind CSS - Line-clamp](https://github.com/tailwindlabs/tailwindcss-line-clamp)
