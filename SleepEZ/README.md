@@ -424,6 +424,18 @@ truncate
 
 -   SleepEZ\rental-website\client\src\pages\CreateListing.jsx
 
+# 33. Add image slider to the listing page
+
+### Config listing page Ul create some files
+
+-   SleepEZ\rental-website\client\src\pages\Listing.jsx
+
+### Install Swiper (its slider) - (SleepEZ\rental-website\client)
+
+```
+npm i swiper
+```
+
 //////////////////////////////////////////////////////////////
 
 ## List shortcut in React
@@ -483,3 +495,7 @@ truncate
 [Redux Persist](https://www.npmjs.com/package/redux-persist)
 
 [Cookie Parser](https://www.npmjs.com/package/cookie-parser)
+
+<!-- Thanh trượt slider cho navbar -->
+
+[Swiper - Slider](https://www.npmjs.com/package/swiper)
