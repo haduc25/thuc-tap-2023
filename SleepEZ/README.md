@@ -414,6 +414,8 @@ truncate
 
 -   khi text quá dài sẽ hiển thị `...`
 
+# 30. Complete delete user listing functionality
+
 //////////////////////////////////////////////////////////////
 
 ## List shortcut in React
