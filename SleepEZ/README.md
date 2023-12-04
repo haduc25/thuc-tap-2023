@@ -496,6 +496,8 @@ npm install -D @tailwindcss/line-clamp
 ...
 ```
 
+# 41. Add show more listings functionality
+
 //////////////////////////////////////////////////////////////
 
 ## List shortcut in React
