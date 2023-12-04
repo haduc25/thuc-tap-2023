@@ -457,6 +457,13 @@ npm i swiper
 # 37. Complete header search form functionality
 
 -   sử dụng `URLSearchParams(window.location.search)` có thể tìm kiếm bằng thanh `url` luôn
+
+# 38. Create search page Ul
+
+### Config search page Ul create some files
+
+-   SleepEZ\rental-website\client\src\pages\Search.jsx
+
     //////////////////////////////////////////////////////////////
 
 ## List shortcut in React
