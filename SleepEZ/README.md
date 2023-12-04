@@ -454,7 +454,10 @@ npm i swiper
 ...
 ```
 
-//////////////////////////////////////////////////////////////
+# 37. Complete header search form functionality
+
+-   sử dụng `URLSearchParams(window.location.search)` có thể tìm kiếm bằng thanh `url` luôn
+    //////////////////////////////////////////////////////////////
 
 ## List shortcut in React
 
