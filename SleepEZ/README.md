@@ -401,6 +401,8 @@ npm i cookie-parser
 
 # 27. Complete create listing page functionality
 
+# 28. Create get user listings API route
+
 //////////////////////////////////////////////////////////////
 
 ## List shortcut in React
