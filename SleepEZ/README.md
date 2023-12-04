@@ -436,6 +436,8 @@ truncate
 npm i swiper
 ```
 
+# 34. Complete listing page
+
 //////////////////////////////////////////////////////////////
 
 ## List shortcut in React

@@ -26,6 +26,10 @@ const listingSchema = new mongoose.Schema(
             type: Number,
             require: true,
         },
+        bedrooms: {
+            type: Number,
+            require: true,
+        },
         // đồ đạc
         furnished: {
             type: Boolean,
