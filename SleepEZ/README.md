@@ -444,6 +444,16 @@ npm i swiper
 
 -   SleepEZ\rental-website\client\src\components\Contact.jsx
 
+# 36. Create search API route
+
+-   Search: tìm từ đồng nghĩa bằng `#regex`
+
+```
+...
+ name: { $regex: searchTerm, $options: 'i' },
+...
+```
+
 //////////////////////////////////////////////////////////////
 
 ## List shortcut in React
