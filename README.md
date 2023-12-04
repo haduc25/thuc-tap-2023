@@ -2,3 +2,4 @@
 
 ## PROJECT
 #### - SleepEZ
+#### - ThaiNguyenHome (SleepEZ 2.0)
