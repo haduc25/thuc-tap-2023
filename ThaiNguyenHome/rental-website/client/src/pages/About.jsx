@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function About() {
     return (
-        <div className="py-20 px-4 max-w-6xl mx-auto ">
+        <div className="py-20 px-4 max-w-6xl mx-auto min-h-[83vh]">
             <h1 className="text-3xl font-bold mb-4 text-slate-800">Giới thiệu về ThaiNguyenHome</h1>
             <p className="mb-4 text-slate-700">
                 ThaiNguyenHome là một công ty cung cấp dịch vụ cho thuê phòng, chỗ ở hàng đầu chuyên về việc hỗ trợ

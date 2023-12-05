@@ -661,6 +661,12 @@ plugins: [require('@tailwindcss/line-clamp')],
 
 [TailWind CSS - Line-clamp](https://github.com/tailwindlabs/tailwindcss-line-clamp)
 
-```
+[Primereact](https://primereact.org/installation/)
 
+### Install more
+
+#### Dialog ("D:\Thuc Tap 2023\ThaiNguyenHome\rental-website\")
+
+```
+npm install primereact
 ```

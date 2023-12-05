@@ -15,6 +15,7 @@ import {
 } from '../redux/user/userSlice';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import ConfirmDialog from '../components/ConfirmDialog';
 
 export default function Profile() {
     const fileRef = useRef(null);
@@ -26,6 +27,7 @@ export default function Profile() {
     const [updateSuccess, setUpdateSuccess] = useState(false);
     const [showListingsError, setShowListingsError] = useState(false);
     const [userListings, setUserListings] = useState([]);
+    const [isConfirmOpen, setConfirmOpen] = useState(false);
     const dispatch = useDispatch();
 
     // console.log('file: ', file);
@@ -102,23 +104,25 @@ export default function Profile() {
     };
 
     const handleDeleteUser = async () => {
-        try {
-            dispatch(deleteUserStart());
+        setConfirmOpen(true);
+        // delete
+        // try {
+        //     dispatch(deleteUserStart());
 
-            const res = await fetch(`/api/user/delete/${currentUser._id}`, {
-                method: 'DELETE',
-            });
+        //     const res = await fetch(`/api/user/delete/${currentUser._id}`, {
+        //         method: 'DELETE',
+        //     });
 
-            const data = await res.json();
-            if (data.success === false) {
-                dispatch(deleteUserFailure(data.message));
-                return;
-            }
+        //     const data = await res.json();
+        //     if (data.success === false) {
+        //         dispatch(deleteUserFailure(data.message));
+        //         return;
+        //     }
 
-            dispatch(deleteUserSuccess(data));
-        } catch (error) {
-            dispatch(deleteUserFailure(error.message));
-        }
+        //     dispatch(deleteUserSuccess(data));
+        // } catch (error) {
+        //     dispatch(deleteUserFailure(error.message));
+        // }
     };
 
     const handleSignOut = async (e) => {
@@ -176,6 +180,23 @@ export default function Profile() {
         }
     };
 
+    // confirm
+    const handleDelete = () => {
+        // Hiển thị ConfirmDialog khi muốn xóa
+        setConfirmOpen(true);
+    };
+
+    const handleCancel = () => {
+        // Hủy bỏ thao tác xóa
+        setConfirmOpen(false);
+    };
+
+    const handleConfirm = () => {
+        // Xác nhận xóa, thực hiện hành động xóa tại đây
+        // Ví dụ: gọi hàm xóa, dispatch action xóa, etc.
+        setConfirmOpen(false);
+    };
+
     return (
         <div className="p-3 max-w-lg mx-auto">
             <h1 className="text-3xl font-semibold text-center my-7">Profile</h1>
@@ -227,7 +248,7 @@ export default function Profile() {
                     disabled={loading}
                     className="bg-slate-700 text-white rounded-lg p-3 uppercase hover:opacity-95 disabled:opacity-80"
                 >
-                    {loading ? 'Loading...' : 'Update'}
+                    {loading ? 'Loading...' : 'Cập nhật'}
                 </button>
 
                 <Link
@@ -240,10 +261,10 @@ export default function Profile() {
 
             <div className="flex justify-between mt-5">
                 <span onClick={handleDeleteUser} className="text-red-700 cursor-pointer">
-                    Delete account
+                    Xóa tài khoản
                 </span>
                 <span onClick={handleSignOut} className="text-red-700 cursor-pointer">
-                    Sign out
+                    Đăng xuất
                 </span>
             </div>
 
@@ -281,16 +302,26 @@ export default function Profile() {
                                     onClick={() => handleListingDelete(listing._id)}
                                     className="text-red-700 uppercase"
                                 >
-                                    Delete
+                                    Xóa
                                 </button>
                                 <Link to={`/update-listing/${listing._id}`}>
-                                    <button className="text-green-700 uppercase">EDIT</button>
+                                    <button className="text-green-700 uppercase">Chỉnh sửa</button>
                                 </Link>
                             </div>
                         </div>
                     ))}
                 </div>
             )}
+
+            <button onClick={handleDelete}>Delete Item</button>
+            {/* Truyền các props cho ConfirmDialog */}
+            <ConfirmDialog
+                isOpen={isConfirmOpen}
+                title="Xác nhận xóa"
+                message="Bạn có chắc chắn muốn xóa không?"
+                onCancel={handleCancel}
+                onConfirm={handleConfirm}
+            />
         </div>
     );
 }
