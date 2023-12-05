@@ -27,7 +27,13 @@ export default function Profile() {
     const [updateSuccess, setUpdateSuccess] = useState(false);
     const [showListingsError, setShowListingsError] = useState(false);
     const [userListings, setUserListings] = useState([]);
-    const [isConfirmOpen, setConfirmOpen] = useState(false);
+    const [dialogConfig, setDialogConfig] = useState({
+        isOpen: false,
+        title: '',
+        message: '',
+        onCancel: () => setDialogConfig({ ...dialogConfig, isOpen: false }),
+        onConfirm: () => setDialogConfig({ ...dialogConfig, isOpen: false }),
+    });
     const dispatch = useDispatch();
 
     // console.log('file: ', file);
@@ -76,7 +82,6 @@ export default function Profile() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
         try {
             dispatch(updateUserStart());
 
@@ -104,25 +109,23 @@ export default function Profile() {
     };
 
     const handleDeleteUser = async () => {
-        setConfirmOpen(true);
-        // delete
-        // try {
-        //     dispatch(deleteUserStart());
+        try {
+            dispatch(deleteUserStart());
 
-        //     const res = await fetch(`/api/user/delete/${currentUser._id}`, {
-        //         method: 'DELETE',
-        //     });
+            const res = await fetch(`/api/user/delete/${currentUser._id}`, {
+                method: 'DELETE',
+            });
 
-        //     const data = await res.json();
-        //     if (data.success === false) {
-        //         dispatch(deleteUserFailure(data.message));
-        //         return;
-        //     }
+            const data = await res.json();
+            if (data.success === false) {
+                dispatch(deleteUserFailure(data.message));
+                return;
+            }
 
-        //     dispatch(deleteUserSuccess(data));
-        // } catch (error) {
-        //     dispatch(deleteUserFailure(error.message));
-        // }
+            dispatch(deleteUserSuccess(data));
+        } catch (error) {
+            dispatch(deleteUserFailure(error.message));
+        }
     };
 
     const handleSignOut = async (e) => {
@@ -181,26 +184,46 @@ export default function Profile() {
     };
 
     // confirm
+    const openDialog = (title, message, onConfirm) => {
+        setDialogConfig({
+            isOpen: true,
+            title,
+            message,
+            onCancel: () => setDialogConfig({ ...dialogConfig, isOpen: false }),
+            onConfirm: () => {
+                onConfirm && onConfirm();
+                setDialogConfig({ ...dialogConfig, isOpen: false });
+            },
+        });
+    };
+
+    const handleCreate = () => {
+        // Xử lý logic khi người dùng xác nhận tạo mới
+        console.log('Create confirmed');
+    };
+
+    const handleUpdate = () => {
+        // Xử lý logic khi người dùng xác nhận cập nhật
+        console.log('Update confirmed');
+    };
+
     const handleDelete = () => {
-        // Hiển thị ConfirmDialog khi muốn xóa
-        setConfirmOpen(true);
-    };
-
-    const handleCancel = () => {
-        // Hủy bỏ thao tác xóa
-        setConfirmOpen(false);
-    };
-
-    const handleConfirm = () => {
-        // Xác nhận xóa, thực hiện hành động xóa tại đây
-        // Ví dụ: gọi hàm xóa, dispatch action xóa, etc.
-        setConfirmOpen(false);
+        // Xử lý logic khi người dùng xác nhận xóa
+        console.log('Delete confirmed');
     };
 
     return (
         <div className="p-3 max-w-lg mx-auto">
-            <h1 className="text-3xl font-semibold text-center my-7">Profile</h1>
-            <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+            <h1 className="text-3xl font-semibold text-center my-7">Quản lý tài khoản</h1>
+            <form
+                onSubmit={(e) => {
+                    e.preventDefault();
+                    openDialog('Cập nhật tài khoản', 'Bạn có chắc chắn muốn xác nhận những thay đổi này không?', () =>
+                        handleSubmit(e),
+                    );
+                }}
+                className="flex flex-col gap-4"
+            >
                 {/* onChange={(e) => setFile(e.target.files[0])}: lấy ra file */}
                 <input onChange={(e) => setFile(e.target.files[0])} type="file" ref={fileRef} hidden accept="image/*" />
                 <img
@@ -237,9 +260,10 @@ export default function Profile() {
                     className="border p-3 rounded-lg"
                     onChange={handleChange}
                 />
+                <p className="pl-3">Thay đổi mật khẩu</p>
                 <input
                     type="password"
-                    placeholder="password"
+                    placeholder="Nhập mật khẩu mới"
                     id="password"
                     className="border p-3 rounded-lg"
                     onChange={handleChange}
@@ -248,22 +272,40 @@ export default function Profile() {
                     disabled={loading}
                     className="bg-slate-700 text-white rounded-lg p-3 uppercase hover:opacity-95 disabled:opacity-80"
                 >
-                    {loading ? 'Loading...' : 'Cập nhật'}
+                    {loading ? 'Loading...' : 'Cập nhật tài khoản'}
                 </button>
 
                 <Link
                     className="bg-green-700 text-white p-3 rounded-lg uppercase text-center hover:opacity-95"
                     to={'/create-listing'}
                 >
-                    Create Listing
+                    Tạo danh sách mới
                 </Link>
             </form>
 
             <div className="flex justify-between mt-5">
-                <span onClick={handleDeleteUser} className="text-red-700 cursor-pointer">
+                <span
+                    onClick={() =>
+                        openDialog(
+                            'Xóa tài khoản vĩnh viễn',
+                            'Bạn có chắc chắn muốn xóa tài khoản không?',
+                            handleDeleteUser,
+                        )
+                    }
+                    className="text-red-700 cursor-pointer"
+                >
                     Xóa tài khoản
                 </span>
-                <span onClick={handleSignOut} className="text-red-700 cursor-pointer">
+                <span
+                    onClick={() =>
+                        openDialog(
+                            'Đăng xuất tài khoản',
+                            'Bạn có chắc bạn muốn đăng xuất tài khoản không?',
+                            handleSignOut,
+                        )
+                    }
+                    className="text-red-700 cursor-pointer"
+                >
                     Đăng xuất
                 </span>
             </div>
@@ -272,12 +314,12 @@ export default function Profile() {
             <p className="text-green-700 mt-5">{updateSuccess ? 'User is updated successfully' : ''}</p>
 
             <button onClick={handleShowListings} className="text-green-700 w-full">
-                Show Listings
+                Hiển thị danh sách
             </button>
             <p className="text-red-700 mt-5">{showListingsError ? 'Error showing listings' : ''}</p>
             {userListings && userListings.length > 0 && (
                 <div className="flex flex-col gap-4">
-                    <h1 className="text-center mt-7 text-2xl font-semibold">Your Listings</h1>
+                    <h1 className="text-center mt-7 text-2xl font-semibold">Danh sách của bạn</h1>
                     {userListings.map((listing) => (
                         <div
                             key={listing._id}
@@ -313,15 +355,8 @@ export default function Profile() {
                 </div>
             )}
 
-            <button onClick={handleDelete}>Delete Item</button>
             {/* Truyền các props cho ConfirmDialog */}
-            <ConfirmDialog
-                isOpen={isConfirmOpen}
-                title="Xác nhận xóa"
-                message="Bạn có chắc chắn muốn xóa không?"
-                onCancel={handleCancel}
-                onConfirm={handleConfirm}
-            />
+            <ConfirmDialog {...dialogConfig} />
         </div>
     );
 }

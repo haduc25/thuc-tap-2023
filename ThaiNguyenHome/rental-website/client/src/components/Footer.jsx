@@ -10,13 +10,13 @@ export default function Footer() {
                     </div>
                     <div className="flex gap-4">
                         <a href="/terms" className="text-slate-700 hover:underline">
-                            Terms of Service
+                            Điều khoản dịch vụ
                         </a>
                         <a href="/privacy" className="text-slate-700 hover:underline">
-                            Privacy Policy
+                            Chính sách bảo mật
                         </a>
                         <a href="/contact" className="text-slate-700 hover:underline">
-                            Contact Us
+                            Liên hệ với chúng tôi
                         </a>
                     </div>
                 </div>
