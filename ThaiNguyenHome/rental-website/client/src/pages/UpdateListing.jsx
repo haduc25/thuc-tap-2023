@@ -156,7 +156,7 @@ export default function CreateListing() {
     };
     return (
         <main className="p-3 max-w-4xl mx-auto min-h-screen">
-            <h1 className="text-3xl font-semibold text-center my-7">Update a Listing</h1>
+            <h1 className="text-3xl font-semibold text-center my-7">Cập nhật danh sách phòng cho thuê</h1>
             <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-4">
                 <div className="flex flex-col gap-4 flex-1">
                     <input
@@ -272,15 +272,15 @@ export default function CreateListing() {
                                 type="number"
                                 id="regularPrice"
                                 min="50"
-                                max="10000000"
+                                max="9000000000"
                                 required
                                 className="p-3 border border-gray-300 rounded-lg"
                                 onChange={handleChange}
                                 value={formData.regularPrice}
                             />
                             <div className="flex flex-col items-center">
-                                <p>Regular price</p>
-                                {formData.type === 'rent' && <span className="text-xs">($ / month)</span>}
+                                <p>Giá đề xuất</p>
+                                {formData.type === 'rent' && <span className="text-xs">(VND / tháng)</span>}
                             </div>
                         </div>
                         {formData.offer && (
@@ -289,7 +289,7 @@ export default function CreateListing() {
                                     type="number"
                                     id="discountPrice"
                                     min="0"
-                                    max="10000000"
+                                    max="9000000000"
                                     required
                                     className="p-3 border border-gray-300 rounded-lg"
                                     onChange={handleChange}
@@ -297,7 +297,7 @@ export default function CreateListing() {
                                 />
                                 <div className="flex flex-col items-center">
                                     <p>Discounted price</p>
-                                    {formData.type === 'rent' && <span className="text-xs">($ / month)</span>}
+                                    {formData.type === 'rent' && <span className="text-xs">(VND / tháng)</span>}
                                 </div>
                             </div>
                         )}
@@ -338,7 +338,7 @@ export default function CreateListing() {
                                     onClick={() => handleRemoveImage(index)}
                                     className="p-3 text-red-700 rounded-lg uppercase hover:opacity-75"
                                 >
-                                    Delete
+                                    Xóa
                                 </button>
                             </div>
                         ))}
@@ -346,7 +346,7 @@ export default function CreateListing() {
                         disabled={loading || uploading}
                         className="p-3 bg-slate-700 text-white rounded-lg uppercase hover:opacity-95 disabled:opacity-80"
                     >
-                        {loading ? 'Updating...' : 'Update listing'}
+                        {loading ? 'Updating...' : 'Cập nhật danh sách'}
                     </button>
                     {error && <p className="text-red-700 text-sm">{error}</p>}
                 </div>

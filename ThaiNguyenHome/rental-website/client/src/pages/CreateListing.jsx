@@ -17,7 +17,7 @@ export default function CreateListing() {
         type: 'rent',
         bedrooms: 1,
         bathrooms: 1,
-        regularPrice: 50,
+        regularPrice: 100000,
         discountPrice: 0,
         offer: false,
         parking: false,
@@ -311,8 +311,8 @@ export default function CreateListing() {
                                 className="p-3 border border-gray-300 rounded-lg"
                             />
                             <div className="flex flex-col items-center">
-                                <p>Regular price</p>
-                                {formData.type === 'rent' && <span className="text-xs">($ / month)</span>}
+                                <p>Giá đề xuất</p>
+                                {formData.type === 'rent' && <span className="text-xs">(VND / tháng)</span>}
                             </div>
                         </div>
                         {formData.offer && (
@@ -329,7 +329,7 @@ export default function CreateListing() {
                                 />
                                 <div className="flex flex-col items-center">
                                     <p>Discounted price</p>
-                                    {formData.type === 'rent' && <span className="text-xs">($ / month)</span>}
+                                    {formData.type === 'rent' && <span className="text-xs">(VND / tháng)</span>}
                                 </div>
                             </div>
                         )}
@@ -378,7 +378,7 @@ export default function CreateListing() {
                                         type="button"
                                         className="p-3 text-red-700 rounded-lg uppercase hover:opacity-75"
                                     >
-                                        Delete
+                                        Xóa
                                     </button>
                                 </div>
                             ))
@@ -388,7 +388,7 @@ export default function CreateListing() {
                         disabled={loading || uploading}
                         className="p-3 bg-slate-700 text-white rounded-lg uppercase hover:opacity-95 disabled:opacity-80"
                     >
-                        {loading ? 'Creating...' : 'Create Listing'}
+                        {loading ? 'Đang tạo...' : 'Tạo danh sách mới'}
                     </button>
                     {error && <p className="text-red-700 text-sm">{error}</p>}
                 </div>
