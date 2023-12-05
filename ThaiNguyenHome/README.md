@@ -2,20 +2,46 @@
 
 # Project: Thái Nguyên Home (SleepEZ version 2.0)
 
+#### CONFIG START
+
+1. go to `...\ThaiNguyenHome\rental-website\client`
+
+```
+npm i
+```
+
+2. go to `...\ThaiNguyenHome\rental-website\`
+
+```
+npm i
+```
+
+3. run 2 console
+
+```
+npm run dev
+```
+
 #### \*[Terminal] - Go to main directory fast from root folder (D:\Thuc Tap 2023):
 
 ```
+
 cd "D:\Thuc Tap 2023\ThaiNguyenHome\rental-website\client"
+
 ```
 
 ```
+
 cd "D:\Thuc Tap 2023\ThaiNguyenHome\rental-website\api"
+
 ```
 
 # 1. Install React js and Tailwind CSS and create the first template
 
 ```
+
 npm create vite@latest client
+
 ```
 
 ## step by step (after run above line)
@@ -26,39 +52,47 @@ npm create vite@latest client
 ### Intall Project
 
 ```
+
 cd client
 npm i
+
 ```
 
 ### Intall Tailwind CSS
 
 ```
+
 npm install -D tailwindcss postcss autoprefixer
 npx tailwindcss init -p
+
 ```
 
 ### Configure Tailwind CSS (tailwind.config.js)
 
 ```
-/** @type {import('tailwindcss').Config} */
+
+/** @type {import('tailwindcss').Config} \*/
 export default {
-  content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
-  ],
-  theme: {
-    extend: {},
-  },
-  plugins: [],
+content: [
+"./index.html",
+"./src/**/\*.{js,ts,jsx,tsx}",
+],
+theme: {
+extend: {},
+},
+plugins: [],
 }
+
 ```
 
 ### Add the Tailwind directives to your CSS (src/index.css)
 
 ```
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 ```
 
 ### Delete some files - when using Tailwind CSS
@@ -70,7 +104,9 @@ export default {
 ### Run project
 
 ```
+
 npm run dev
+
 ```
 
 -   ➜ Local: http://localhost:5173/
@@ -81,7 +117,9 @@ npm run dev
 ### Install React Router DOM
 
 ```
+
 npm i react-router-dom
+
 ```
 
 # 3. Create Header component
@@ -89,7 +127,9 @@ npm i react-router-dom
 ### Install React Icons
 
 ```
+
 npm i react-icons
+
 ```
 
 # 4. Create and run the server
@@ -99,13 +139,17 @@ npm i react-icons
 -   ThaiNguyenHome/rental-website/api/index.js
 
 ```
+
 cd "D:\Thuc Tap 2023\ThaiNguyenHome\rental-website"
+
 ```
 
 ### Tạo ra file `package.json` (ThaiNguyenHome/rental-website/)
 
 ```
+
 npm init -y
+
 ```
 
 ### Edit add `"type": "module",` for `package.json` (ThaiNguyenHome/rental-website/)
@@ -113,24 +157,28 @@ npm init -y
 #### Before
 
 ```
+
 ...
-  "main": "index.js",
-  "scripts": {
-  ...
-  },
+"main": "index.js",
+"scripts": {
 ...
+},
+...
+
 ```
 
 #### After
 
 ```
+
 ...
-  "main": "index.js",
-  "type": "module",
-  "scripts": {
-  ...
-  },
+"main": "index.js",
+"type": "module",
+"scripts": {
 ...
+},
+...
+
 ```
 
 ### Edit script when installed `nodemon` for `package.json` (ThaiNguyenHome/rental-website/)
@@ -138,34 +186,42 @@ npm init -y
 #### Before
 
 ```
+
 ...
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+"scripts": {
+"test": "echo \"Error: no test specified\" && exit 1"
+},
 ...
+
 ```
 
 #### After
 
 ```
+
 ...
-  "scripts": {
-    "dev": "nodemon api/index.js",
-    "start": "node api/index.js"
-  },
+"scripts": {
+"dev": "nodemon api/index.js",
+"start": "node api/index.js"
+},
 ...
+
 ```
 
 ### Install Express (ThaiNguyenHome/rental-website)
 
 ```
+
 npm i express
+
 ```
 
 ### Install Nodemon (ThaiNguyenHome/rental-website)
 
 ```
+
 npm i nodemon
+
 ```
 
 ### Run nodejs (ThaiNguyenHome/rental-website)
@@ -173,13 +229,17 @@ npm i nodemon
 #### Before (not install nodemon)
 
 ```
+
 node api/index.js
+
 ```
 
 #### After (installed nodemon)
 
 ```
+
 npm run dev
+
 ```
 
 # 5. Connect to database
@@ -187,7 +247,9 @@ npm run dev
 ### Install Mongoose (ThaiNguyenHome/rental-website)
 
 ```
+
 npm i mongoose
+
 ```
 
 ### Settings MongoDB on website (cloud.mongodb.com)
@@ -199,13 +261,17 @@ npm i mongoose
 #### Template
 
 ```
+
 mongodb+srv://haduc25:<password>@sleep-ez.xlzmz2i.mongodb.net/?retryWrites=true&w=majority
+
 ```
 
 #### Deploy
 
 ```
+
 mongodb+srv://haduc25:abcd1234@sleep-ez.xlzmz2i.mongodb.net/sleep-ez?retryWrites=true&w=majority
+
 ```
 
 ### Create a file for setting MongoDB
@@ -215,7 +281,9 @@ mongodb+srv://haduc25:abcd1234@sleep-ez.xlzmz2i.mongodb.net/sleep-ez?retryWrites
 ### Install Dotenv for `.env` file (ThaiNguyenHome/rental-website/.env)
 
 ```
+
 npm i dotenv
+
 ```
 
 # 6. Create user model
@@ -231,7 +299,9 @@ npm i dotenv
 #### Mã hóa mật khẩu
 
 ```
+
 npm i bcryptjs
+
 ```
 
 # 9. Create a middleware and a function to handle possible errors
@@ -249,25 +319,29 @@ npm i bcryptjs
 #### Before
 
 ```
+
 export default defineConfig({
-  plugins: [react()],
+plugins: [react()],
 })
+
 ```
 
 #### After
 
 ```
+
 export default defineConfig({
-    server: {
-        proxy: {
-            '/api': {
-                target: 'http://localhost:3000',
-                secure: false,
-            },
-        },
-    },
-    plugins: [react()],
+server: {
+proxy: {
+'/api': {
+target: 'http://localhost:3000',
+secure: false,
+},
+},
+},
+plugins: [react()],
 });
+
 ```
 
 # 12. Create sign in API route
@@ -275,7 +349,9 @@ export default defineConfig({
 ### Install JSON Web Tokens
 
 ```
+
 npm i jsonwebtoken
+
 ```
 
 # 13. Complete sign in page functionality
@@ -285,7 +361,9 @@ npm i jsonwebtoken
 ### Install Redux Toolkit and React-Redux (ThaiNguyenHome\rental-website\client)
 
 ```
+
 npm install @reduxjs/toolkit react-redux
+
 ```
 
 ### Config Redux create some files
@@ -314,7 +392,9 @@ npm install @reduxjs/toolkit react-redux
 ### Install Redux Persist (ThaiNguyenHome\rental-website\client)
 
 ```
+
 npm i redux-persist
+
 ```
 
 ### Config & using (ThaiNguyenHome\rental-website\client\src\redux\store.js)
@@ -354,15 +434,17 @@ npm i redux-persist
 # 20. Create update user API route
 
 ```
+
 service firebase.storage {
-  match /b/{bucket}/o {
-    match /{allPaths=**} {
-      allow read;
-      allow write: if request.resource.size < 2 * 1024 * 1024 &&
-      request.resource.contentType.matches('image/.*');
-    }
-  }
+match /b/{bucket}/o {
+match /{allPaths=\*_} {
+allow read;
+allow write: if request.resource.size < 2 _ 1024 _ 1024 &&
+request.resource.contentType.matches('image/._');
 }
+}
+}
+
 ```
 
 ### Config API create some files
@@ -372,7 +454,9 @@ service firebase.storage {
 ### Install Cookie Parser - (ThaiNguyenHome\rental-website\)
 
 ```
+
 npm i cookie-parser
+
 ```
 
 # 21. Complete update user functionality
@@ -408,6 +492,7 @@ npm i cookie-parser
 ```
 
 truncate
+
 ```
 
 -   khi text quá dài sẽ hiển thị `...`
@@ -431,7 +516,9 @@ truncate
 ### Install Swiper (its slider) - (ThaiNguyenHome\rental-website\client)
 
 ```
+
 npm i swiper
+
 ```
 
 # 34. Complete listing page
@@ -447,9 +534,11 @@ npm i swiper
 -   Search: tìm từ đồng nghĩa bằng `#regex`
 
 ```
+
 ...
- name: { $regex: searchTerm, $options: 'i' },
+name: { $regex: searchTerm, $options: 'i' },
 ...
+
 ```
 
 # 37. Complete header search form functionality
@@ -473,7 +562,9 @@ npm i swiper
 ### Install TailWind CSS - Line-clamp (ThaiNguyenHome\rental-website\)
 
 ```
+
 npm install -D @tailwindcss/line-clamp
+
 ```
 
 ### Install TailWind CSS - Line-clamp Config & add the plugin to `tailwind.config.js` file (ThaiNguyenHome\rental-website\client)
@@ -481,17 +572,21 @@ npm install -D @tailwindcss/line-clamp
 #### Before
 
 ```
+
 ...
-    plugins: [],
+plugins: [],
 ...
+
 ```
 
 #### After
 
 ```
+
 ...
-    plugins: [require('@tailwindcss/line-clamp')],
+plugins: [require('@tailwindcss/line-clamp')],
 ...
+
 ```
 
 # 41. Add show more listings functionality
@@ -565,3 +660,7 @@ npm install -D @tailwindcss/line-clamp
 [Swiper - Slider](https://www.npmjs.com/package/swiper)
 
 [TailWind CSS - Line-clamp](https://github.com/tailwindlabs/tailwindcss-line-clamp)
+
+```
+
+```

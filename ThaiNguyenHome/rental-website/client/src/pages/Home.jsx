@@ -55,9 +55,9 @@ export default function Home() {
                     place with ease
                 </h1>
                 <div className="text-gray-400 text-xs sm:text-sm">
-                    Sahand Estate is the best place to find your next perfect place to live.
+                    ThaiNguyenHome là lựa chọn tốt nhất để tìm kiếm ngôi nhà hoàn hảo cho cuộc sống của bạn
                     <br />
-                    We have a wide range of properties for you to choose from.
+                    Chúng tôi có sẵn một loạt căn hộ, căn phòng rộng lớn để bạn lựa chọn.
                 </div>
                 <Link to={'/search'} className="text-xs sm:text-sm text-blue-800 font-bold hover:underline">
                     Let's get started...
@@ -88,7 +88,7 @@ export default function Home() {
                 {offerListings && offerListings.length > 0 && (
                     <div className="">
                         <div className="my-3">
-                            <h2 className="text-2xl font-semibold text-slate-600">Recent offers</h2>
+                            <h2 className="text-2xl font-semibold text-slate-600">Ưu đãi gần đây</h2>
                             <Link className="text-sm text-blue-800 hover:underline" to={'/search?offer=true'}>
                                 Show more offers
                             </Link>
@@ -103,7 +103,7 @@ export default function Home() {
                 {rentListings && rentListings.length > 0 && (
                     <div className="">
                         <div className="my-3">
-                            <h2 className="text-2xl font-semibold text-slate-600">Recent places for rent</h2>
+                            <h2 className="text-2xl font-semibold text-slate-600">Địa điểm cho thuê gần đây</h2>
                             <Link className="text-sm text-blue-800 hover:underline" to={'/search?type=rent'}>
                                 Show more places for rent
                             </Link>
