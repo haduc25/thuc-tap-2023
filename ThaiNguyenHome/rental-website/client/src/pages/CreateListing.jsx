@@ -184,7 +184,7 @@ export default function CreateListing() {
 
     return (
         <main className="p-3 max-w-4xl mx-auto min-h-screen">
-            <h1 className="text-3xl font-semibold text-center my-7">Create a Listing</h1>
+            <h1 className="text-3xl font-semibold text-center my-7">Tạo một danh sách phòng cho thuê</h1>
             <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-4">
                 <div className="flex flex-col gap-4 flex-1">
                     <input
@@ -338,9 +338,9 @@ export default function CreateListing() {
 
                 <div className="flex flex-col flex-1 gap-4">
                     <p className="font-semibold">
-                        Images:
+                        Hình ảnh:
                         <span className="font-normal text-gray-600 ml-2">
-                            The first image will be the cover (max 6)
+                            Hình ảnh đầu tiên sẽ là ảnh bìa (tối đa 6 ảnh)
                         </span>
                     </p>
 
