@@ -2,23 +2,23 @@ import React from 'react';
 
 export default function About() {
     return (
-        <div className="py-20 px-4 max-w-6xl mx-auto">
-            <h1 className="text-3xl font-bold mb-4 text-slate-800">About ThaiNguyenHome</h1>
+        <div className="py-20 px-4 max-w-6xl mx-auto ">
+            <h1 className="text-3xl font-bold mb-4 text-slate-800">Giới thiệu về ThaiNguyenHome</h1>
             <p className="mb-4 text-slate-700">
-                ThaiNguyenHome is a leading real estate agency that specializes in helping clients buy, sell, and rent
-                properties in the most desirable neighborhoods. Our team of experienced agents is dedicated to providing
-                exceptional service and making the buying and selling process as smooth as possible.
+                ThaiNguyenHome là một công ty cung cấp dịch vụ cho thuê phòng, chỗ ở hàng đầu chuyên về việc hỗ trợ
+                khách hàng mua, bán và cho thuê tại những khu vực đắc địa nhất. Đội ngũ chuyên viên giàu kinh nghiệm của
+                chúng tôi cam kết cung cấp dịch vụ xuất sắc và làm cho quá trình trở nên mượt mà nhất có thể.
             </p>
             <p className="mb-4 text-slate-700">
-                Our mission is to help our clients achieve their real estate goals by providing expert advice,
-                personalized service, and a deep understanding of the local market. Whether you are looking to buy,
-                sell, or rent a property, we are here to help you every step of the way.
+                Sứ mệnh của chúng tôi là giúp khách hàng đạt được mục tiêu bất động sản của họ bằng cách cung cấp lời
+                khuyên chuyên nghiệp, dịch vụ cá nhân hóa và hiểu biết sâu sắc về thị trường địa phương. Cho dù bạn đang
+                tìm kiếm để mua, bán hay cho thuê, chúng tôi ở đây để hỗ trợ bạn.
             </p>
             <p className="mb-4 text-slate-700">
-                Our team of agents has a wealth of experience and knowledge in the real estate industry, and we are
-                committed to providing the highest level of service to our clients. We believe that buying or selling a
-                property should be an exciting and rewarding experience, and we are dedicated to making that a reality
-                for each and every one of our clients.
+                Đội ngũ chuyên viên của chúng tôi có một lượng kinh nghiệm và kiến thức đồ sộ, và chúng tôi cam kết cung
+                cấp mức dịch vụ cao nhất cho khách hàng của mình. Chúng tôi tin rằng việc mua, bán hay cho thuê nên là
+                một trải nghiệm hứng khởi và đầy đủ ý nghĩa, và chúng tôi tận tụy trong việc biến điều đó thành hiện
+                thực cho từng khách hàng của chúng tôi.
             </p>
         </div>
     );

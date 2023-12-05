@@ -90,7 +90,7 @@ export default function Home() {
                         <div className="my-3">
                             <h2 className="text-2xl font-semibold text-slate-600">Ưu đãi gần đây</h2>
                             <Link className="text-sm text-blue-800 hover:underline" to={'/search?offer=true'}>
-                                Show more offers
+                                Hiển thị thêm ưu đãi
                             </Link>
                         </div>
                         <div className="flex flex-wrap gap-4">
@@ -105,7 +105,7 @@ export default function Home() {
                         <div className="my-3">
                             <h2 className="text-2xl font-semibold text-slate-600">Địa điểm cho thuê gần đây</h2>
                             <Link className="text-sm text-blue-800 hover:underline" to={'/search?type=rent'}>
-                                Show more places for rent
+                                Hiển thị thêm địa điểm cho thuê
                             </Link>
                         </div>
                         <div className="flex flex-wrap gap-4">
