@@ -12,6 +12,7 @@ import { FaBath, FaBed, FaWifi, FaMapMarkedAlt, FaMapMarkerAlt, FaParking, FaSha
 
 // https://sabe.io/blog/javascript-format-numbers-commas#:~:text=The%20best%20way%20to%20format,format%20the%20number%20with%20commas.
 import Contact from '../components/Contact';
+import GoogleMap from '../components/GoogleMap';
 
 export default function Listing() {
     SwiperCore.use([Navigation]);
@@ -122,31 +123,10 @@ export default function Listing() {
                                 </p>
                             )}
                         </div>
+                        {/* GoogleMap */}
+                        <GoogleMap address={listing.address} />
                         <p className="text-slate-800">
                             <span className="font-semibold text-black">Thông tin liên hệ</span>
-                            {/* <p>{listing.description}</p> */}
-                            {/* <ul className="text-green-900 font-semibold text-sm flex flex-col flex-wrap gap-4 sm:gap-6">
-                                <li className="flex items-center gap-1 whitespace-nowrap ">
-                                    <FaBed className="text-lg" />
-                                    {listing.bedrooms > 1
-                                        ? `${listing.bedrooms} giường ngủ `
-                                        : `${listing.bedrooms} giường ngủ `}
-                                </li>
-                                <li className="flex items-center gap-1 whitespace-nowrap ">
-                                    <FaBath className="text-lg" />
-                                    {listing.bathrooms > 1
-                                        ? `${listing.bathrooms} phòng tắm `
-                                        : `${listing.bathrooms} phòng tắm `}
-                                </li>
-                                <li className="flex items-center gap-1 whitespace-nowrap ">
-                                    <FaParking className="text-lg" />
-                                    {listing.parking ? 'Chỗ để xe miễn phí' : 'Không có chỗ để xe'}
-                                </li>
-                                <li className="flex items-center gap-1 whitespace-nowrap ">
-                                    <FaWifi className="text-lg" />
-                                    {listing.furnished ? 'WiFi miễn phí' : 'Không có WiFi'}
-                                </li>
-                            </ul> */}
                         </p>
                         {landlordInfo && (
                             <table className="min-w-full divide-y divide-gray-200">

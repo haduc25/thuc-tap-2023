@@ -670,3 +670,7 @@ plugins: [require('@tailwindcss/line-clamp')],
 ```
 npm install primereact
 ```
+
+<!-- Lấy API Google Map -->
+
+[Google Map - Lấy Embed](https://www.maps.ie/create-google-map/)
