@@ -248,7 +248,7 @@ export default function CreateListing() {
                                 id="parking"
                                 className="w-5"
                             />
-                            <span>Parking spot</span>
+                            <span>Chỗ để xe</span>
                         </div>
                         <div className="flex gap-2">
                             <input
@@ -258,7 +258,7 @@ export default function CreateListing() {
                                 id="furnished"
                                 className="w-5"
                             />
-                            <span>Furnished</span>
+                            <span>WiFi miễn phí</span>
                         </div>
                         <div className="flex gap-2">
                             <input
@@ -284,7 +284,7 @@ export default function CreateListing() {
                                 required
                                 className="p-3 border border-gray-300 rounded-lg"
                             />
-                            <p>Beds</p>
+                            <p>Giường ngủ</p>
                         </div>
                         <div className="flex item-center gap-2">
                             <input
@@ -297,7 +297,7 @@ export default function CreateListing() {
                                 required
                                 className="p-3 border border-gray-300 rounded-lg"
                             />
-                            <p>Baths</p>
+                            <p>Phòng tắm</p>
                         </div>
                         <div className="flex item-center gap-2">
                             <input
@@ -305,8 +305,8 @@ export default function CreateListing() {
                                 value={formData.regularPrice}
                                 type="number"
                                 id="regularPrice"
-                                min="50"
-                                max="1000000"
+                                min="100000"
+                                max="900000000"
                                 required
                                 className="p-3 border border-gray-300 rounded-lg"
                             />
@@ -323,7 +323,7 @@ export default function CreateListing() {
                                     type="number"
                                     id="discountPrice"
                                     min="0"
-                                    max="1000000"
+                                    max="900000000"
                                     required
                                     className="p-3 border border-gray-300 rounded-lg"
                                 />

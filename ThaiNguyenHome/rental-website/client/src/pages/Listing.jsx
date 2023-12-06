@@ -109,19 +109,23 @@ export default function Listing() {
                         <ul className="text-green-900 font-semibold text-sm flex flex-wrap items-center gap-4 sm:gap-6">
                             <li className="flex items-center gap-1 whitespace-nowrap ">
                                 <FaBed className="text-lg" />
-                                {listing.bedrooms > 1 ? `${listing.bedrooms} beds ` : `${listing.bedrooms} bed `}
+                                {listing.bedrooms > 1
+                                    ? `${listing.bedrooms} giường ngủ `
+                                    : `${listing.bedrooms} giường ngủ `}
                             </li>
                             <li className="flex items-center gap-1 whitespace-nowrap ">
                                 <FaBath className="text-lg" />
-                                {listing.bathrooms > 1 ? `${listing.bathrooms} baths ` : `${listing.bathrooms} bath `}
+                                {listing.bathrooms > 1
+                                    ? `${listing.bathrooms} phòng tắm `
+                                    : `${listing.bathrooms} phòng tắm `}
                             </li>
                             <li className="flex items-center gap-1 whitespace-nowrap ">
                                 <FaParking className="text-lg" />
-                                {listing.parking ? 'Parking spot' : 'No Parking'}
+                                {listing.parking ? 'Chỗ để xe' : 'Không có chỗ để xe'}
                             </li>
                             <li className="flex items-center gap-1 whitespace-nowrap ">
                                 <FaChair className="text-lg" />
-                                {listing.furnished ? 'Furnished' : 'Unfurnished'}
+                                {listing.furnished ? 'WiFi miễn phí' : 'Không có WiFi'}
                             </li>
                         </ul>
                         {currentUser && listing.userRef !== currentUser._id && !contact && (
@@ -129,7 +133,7 @@ export default function Listing() {
                                 onClick={() => setContact(true)}
                                 className="bg-slate-700 text-white rounded-lg uppercase hover:opacity-95 p-3"
                             >
-                                Contact landlord
+                                Liên hệ chủ nhà
                             </button>
                         )}
                         {contact && <Contact listing={listing} />}

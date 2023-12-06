@@ -217,7 +217,7 @@ export default function CreateListing() {
                                 onChange={handleChange}
                                 checked={formData.parking}
                             />
-                            <span>Parking spot</span>
+                            <span>Chỗ để xe</span>
                         </div>
                         <div className="flex gap-2">
                             <input
@@ -227,7 +227,7 @@ export default function CreateListing() {
                                 onChange={handleChange}
                                 checked={formData.furnished}
                             />
-                            <span>Furnished</span>
+                            <span>WiFi miễn phí</span>
                         </div>
                         <div className="flex gap-2">
                             <input
@@ -252,7 +252,7 @@ export default function CreateListing() {
                                 onChange={handleChange}
                                 value={formData.bedrooms}
                             />
-                            <p>Beds</p>
+                            <p>Giường ngủ</p>
                         </div>
                         <div className="flex items-center gap-2">
                             <input
@@ -265,7 +265,7 @@ export default function CreateListing() {
                                 onChange={handleChange}
                                 value={formData.bathrooms}
                             />
-                            <p>Baths</p>
+                            <p>Phòng tắm</p>
                         </div>
                         <div className="flex items-center gap-2">
                             <input
