@@ -107,7 +107,7 @@ export default function Listing() {
                             {listing.offer
                                 ? listing.discountPrice.toLocaleString('en-US')
                                 : listing.regularPrice.toLocaleString('en-US')}
-                            {listing.type === 'rent' && ' VND / tháng'}
+                            {listing.type === 'rent' ? ' VND / tháng' : ' VND'}
                         </p>
                         <p className="flex items-center mt-4 gap-2 text-slate-600 text-sm">
                             <FaMapMarkerAlt className="text-green-700" />
@@ -115,11 +115,20 @@ export default function Listing() {
                         </p>
                         <div className="flex gap-4">
                             <p className="bg-red-900 w-full max-w-[200px] text-white text-center p-1 rounded-md">
-                                {listing.type === 'rent' ? 'Cho thuê' : 'For Sale'}
+                                {listing.type === 'rent' ? 'Cho thuê' : 'Đang bán'}
                             </p>
                             {listing.offer && (
                                 <p className="bg-green-900 w-full max-w-[200px] text-white text-center p-1 rounded-md">
-                                    {+listing.regularPrice - +listing.discountPrice} OFF
+                                    Giá cũ{' '}
+                                    <span className="line-through">
+                                        {listing.regularPrice.toLocaleString('en-US')} VND
+                                    </span>
+                                </p>
+                            )}
+                            {listing.offer && (
+                                <p className="bg-green-900 w-full max-w-[200px] text-white text-center p-1 rounded-md">
+                                    Giảm lên đến{' '}
+                                    {(+listing.regularPrice - +listing.discountPrice).toLocaleString('en-US')} VND
                                 </p>
                             )}
                         </div>
