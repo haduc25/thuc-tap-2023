@@ -189,7 +189,7 @@ export default function Search() {
                                 onChange={handleChange}
                                 checked={sidebardata.parking}
                             />
-                            <span>Chỗ để xe</span>
+                            <span>Chỗ để xe miễn phí</span>
                         </div>
                         <div className="flex gap-2">
                             <input

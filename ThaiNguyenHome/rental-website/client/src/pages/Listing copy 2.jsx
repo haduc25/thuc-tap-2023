@@ -19,7 +19,6 @@ export default function Listing() {
     const [error, setError] = useState(false);
     const [copied, setCopied] = useState(false);
     const [contact, setContact] = useState(false);
-    const [landlordInfo, setLandlordInfo] = useState(null);
 
     const params = useParams();
     const { currentUser } = useSelector((state) => state.user);
@@ -46,24 +45,6 @@ export default function Listing() {
         fetchListing();
     }, [params.listingId]);
     // console.log(loading);
-
-    useEffect(() => {
-        // Gọi API để lấy thông tin người đăng khi component được tải
-        const fetchLandlord = async () => {
-            try {
-                const res = await fetch(`/api/user/${listing?.userRef}`);
-                const data = await res.json();
-                setLandlordInfo(data);
-            } catch (error) {
-                console.log(error);
-            }
-        };
-
-        // Chỉ gọi API nếu có listing và chưa có thông tin người đăng
-        if (listing && !landlordInfo) {
-            fetchLandlord();
-        }
-    }, [listing, landlordInfo]);
 
     return (
         <main>
@@ -147,26 +128,22 @@ export default function Listing() {
                                 </li>
                             </ul> */}
                         </p>
-                        {landlordInfo && (
-                            <table className="min-w-full divide-y divide-gray-200">
-                                <tbody>
-                                    <tr className="bg-f1f5f1">
-                                        <td className="px-6 py-2 whitespace-nowrap font-medium">Người đăng:</td>
-                                        <td className="px-6 py-2 whitespace-nowrap">{landlordInfo.username}</td>
-                                    </tr>
-                                    <tr className="bg-blue-100">
-                                        <td className="px-6 py-2 whitespace-nowrap font-medium">Số điện thoại:</td>
-                                        <td className="px-6 py-2 whitespace-nowrap">
-                                            {landlordInfo.phoneNumber || 'Chưa có'}
-                                        </td>
-                                    </tr>
-                                    <tr className="bg-f1f5f1">
-                                        <td className="px-6 py-2 whitespace-nowrap font-medium">Email:</td>
-                                        <td className="px-6 py-2 whitespace-nowrap">{landlordInfo.email}</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        )}
+                        <table className="min-w-full divide-y divide-gray-200">
+                            <tbody>
+                                <tr className="bg-f1f5f1">
+                                    <td className="px-6 py-2 whitespace-nowrap font-medium">Người đăng:</td>
+                                    <td className="px-6 py-2 whitespace-nowrap">{listing.name}</td>
+                                </tr>
+                                <tr className="bg-blue-100">
+                                    <td className="px-6 py-2 whitespace-nowrap font-medium">Số điện thoại:</td>
+                                    <td className="px-6 py-2 whitespace-nowrap">0964103861</td>
+                                </tr>
+                                <tr className="bg-f1f5f1">
+                                    <td className="px-6 py-2 whitespace-nowrap font-medium">Email:</td>
+                                    <td className="px-6 py-2 whitespace-nowrap">haducvcvb@mail.com</td>
+                                </tr>
+                            </tbody>
+                        </table>
                         <div className="text-slate-800">
                             <p className="font-semibold text-black">Thông tin mô tả</p>
                             <p className="mt-2">{listing.description}</p>
@@ -201,12 +178,7 @@ export default function Listing() {
                                 Liên hệ chủ nhà
                             </button>
                         )}
-                        {/* Truyền dữ liệu từ Contact component vào Listing component bằng cách thêm một hàm callback vào Contact */}
-                        {/* {contact && <Contact listing={listing} />} */}
-                        {/* <Contact listing={listing} onLandlordInfo={(info) => setLandlordInfo(info)} /> */}
-                        {/* // Trong component Listing */}
-                        {/* {contact && <Contact listing={listing} onLandlordInfo={(info) => setLandlordInfo(info)} />} */}
-                        {contact && <Contact listing={listing} />} {/* Chỉ truyền listing */}
+                        {contact && <Contact listing={listing} />}
                     </div>
                 </div>
             )}

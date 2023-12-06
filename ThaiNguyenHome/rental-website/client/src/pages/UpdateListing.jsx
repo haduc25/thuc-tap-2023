@@ -217,7 +217,7 @@ export default function CreateListing() {
                                 onChange={handleChange}
                                 checked={formData.parking}
                             />
-                            <span>Chỗ để xe</span>
+                            <span>Chỗ để xe miễn phí</span>
                         </div>
                         <div className="flex gap-2">
                             <input

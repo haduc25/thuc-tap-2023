@@ -248,7 +248,7 @@ export default function CreateListing() {
                                 id="parking"
                                 className="w-5"
                             />
-                            <span>Chỗ để xe</span>
+                            <span>Chỗ để xe miễn phí</span>
                         </div>
                         <div className="flex gap-2">
                             <input
