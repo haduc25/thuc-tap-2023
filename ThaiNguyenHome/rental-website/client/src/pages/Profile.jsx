@@ -246,7 +246,7 @@ export default function Profile() {
 
                 <input
                     type="text"
-                    placeholder="username"
+                    placeholder="Thay đổi tên hiển thị của bạn"
                     id="username"
                     defaultValue={currentUser.username}
                     className="border p-3 rounded-lg"
@@ -254,9 +254,17 @@ export default function Profile() {
                 />
                 <input
                     type="email"
-                    placeholder="email"
+                    placeholder="Thay đổi địa chỉ email của bạn"
                     id="email"
                     defaultValue={currentUser.email}
+                    className="border p-3 rounded-lg"
+                    onChange={handleChange}
+                />
+                <input
+                    type="text"
+                    placeholder="Cập nhật số điện thoại của bạn"
+                    id="phoneNumber"
+                    defaultValue={currentUser.phoneNumber}
                     className="border p-3 rounded-lg"
                     onChange={handleChange}
                 />

@@ -4,13 +4,13 @@ import { errorHandler } from '../utils/error.js';
 import jwt from 'jsonwebtoken';
 
 export const signup = async (req, res, next) => {
-    const { username, email, password } = req.body;
+    const { username, email, phoneNumber, password } = req.body;
 
     // mã hóa password
     const hashedPassword = bcryptjs.hashSync(password, 10);
 
     // Sử dụng User Model
-    const newUser = new User({ username, email, password: hashedPassword });
+    const newUser = new User({ username, email, phoneNumber, password: hashedPassword });
 
     // Kt trạng thái
     try {
@@ -90,10 +90,11 @@ export const google = async (req, res, next) => {
             const hashedPassword = bcryptjs.hashSync(generatedPassword, 10);
             // const newUser = new User({ username: req.body.name, email: req.body.email, password: hashedPassword });
 
-            // dùng phuonwng pháp chia tên xóa khoảng trắng
+            // dùng phương pháp chia tên xóa khoảng trắng
             const newUser = new User({
                 username: req.body.name.split(' ').join('').toLowerCase() + Math.random().toString(36).slice(-4),
                 email: req.body.email,
+                phoneNumber: req.body.phoneNumber, // cần thêm reg
                 password: hashedPassword,
                 avatar: req.body.photo,
             });

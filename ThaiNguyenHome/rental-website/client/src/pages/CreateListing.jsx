@@ -191,7 +191,7 @@ export default function CreateListing() {
                         onChange={handleChange}
                         value={formData.name}
                         type="text"
-                        placeholder="Name"
+                        placeholder="Nhập tên phòng"
                         className="border p-3 rounded-lg"
                         id="name"
                         maxLength="62"
@@ -202,7 +202,7 @@ export default function CreateListing() {
                         onChange={handleChange}
                         value={FormData.description}
                         type="text"
-                        placeholder="Description"
+                        placeholder="Mô tả chi tiết về phòng, tiện ích, và không gian xung quanh..."
                         className="border p-3 rounded-lg"
                         id="description"
                         required
@@ -211,7 +211,7 @@ export default function CreateListing() {
                         onChange={handleChange}
                         value={FormData.address}
                         type="text"
-                        placeholder="Address"
+                        placeholder="Địa chỉ chính xác của phòng - số nhà, đường, quận..."
                         className="border p-3 rounded-lg"
                         id="address"
                         maxLength="62"

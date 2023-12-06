@@ -51,7 +51,7 @@ export default function SignUp() {
         }
     };
 
-    // console.log(formData);
+    console.log(formData);
 
     return (
         <div className="p-3 max-w-lg mx-auto min-h-[83vh]">
@@ -69,6 +69,13 @@ export default function SignUp() {
                     placeholder="Email của bạn (ví dụ: example@example.com)"
                     className="border p-3 rounded-lg"
                     id="email"
+                    onChange={handleChange}
+                />
+                <input
+                    type="tel"
+                    placeholder="Số điện thoại của bạn"
+                    className="border p-3 rounded-lg"
+                    id="phoneNumber"
                     onChange={handleChange}
                 />
                 <input

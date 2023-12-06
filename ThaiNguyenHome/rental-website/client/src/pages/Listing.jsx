@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore from 'swiper';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { Navigation } from 'swiper/modules';
 import 'swiper/css/bundle';
 
@@ -152,17 +153,46 @@ export default function Listing() {
                                 <tbody>
                                     <tr className="bg-f1f5f1">
                                         <td className="px-6 py-2 whitespace-nowrap font-medium">Người đăng:</td>
-                                        <td className="px-6 py-2 whitespace-nowrap">{landlordInfo.username}</td>
+                                        <td
+                                            className={`px-6 py-2 whitespace-nowrap ${
+                                                currentUser ? '' : 'hover:underline'
+                                            }`}
+                                        >
+                                            {currentUser ? (
+                                                landlordInfo.username
+                                            ) : (
+                                                <Link to="/profile">Đăng nhập để xem</Link>
+                                            )}
+                                        </td>
                                     </tr>
                                     <tr className="bg-blue-100">
                                         <td className="px-6 py-2 whitespace-nowrap font-medium">Số điện thoại:</td>
-                                        <td className="px-6 py-2 whitespace-nowrap">
-                                            {landlordInfo.phoneNumber || 'Chưa có'}
+                                        <td
+                                            className={`px-6 py-2 whitespace-nowrap ${
+                                                currentUser ? '' : 'hover:underline'
+                                            }`}
+                                        >
+                                            {currentUser ? (
+                                                landlordInfo.phoneNumber || 'Chưa cập nhật'
+                                            ) : (
+                                                <Link to="/profile">Đăng nhập để xem</Link>
+                                            )}
                                         </td>
                                     </tr>
                                     <tr className="bg-f1f5f1">
                                         <td className="px-6 py-2 whitespace-nowrap font-medium">Email:</td>
-                                        <td className="px-6 py-2 whitespace-nowrap">{landlordInfo.email}</td>
+                                        <td
+                                            className={`px-6 py-2 whitespace-nowrap ${
+                                                currentUser ? '' : 'hover:underline'
+                                            }`}
+                                        >
+                                            {' '}
+                                            {currentUser ? (
+                                                landlordInfo.email || 'Chưa cập nhật'
+                                            ) : (
+                                                <Link to="/profile">Đăng nhập để xem</Link>
+                                            )}
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
