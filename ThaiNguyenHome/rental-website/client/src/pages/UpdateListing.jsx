@@ -207,7 +207,7 @@ export default function CreateListing() {
                                 onChange={handleChange}
                                 checked={formData.type === 'rent'}
                             />
-                            <span>Rent</span>
+                            <span>Cho thuê</span>
                         </div>
                         <div className="flex gap-2">
                             <input

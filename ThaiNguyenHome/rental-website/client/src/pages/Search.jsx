@@ -136,47 +136,49 @@ export default function Search() {
                             onChange={handleChange}
                         />
                     </div>
-                    <div className="flex gap-2 flex-wrap items-center">
-                        <label className="font-semibold">Kiểu phòng:</label>
-                        <div className="flex gap-2">
-                            <input
-                                type="checkbox"
-                                id="all"
-                                className="w-5"
-                                onChange={handleChange}
-                                checked={sidebardata.type === 'all'}
-                            />
-                            <span>Cho thuê & Bán</span>
-                        </div>
-                        <div className="flex gap-2">
-                            <input
-                                type="checkbox"
-                                id="rent"
-                                className="w-5"
-                                onChange={handleChange}
-                                checked={sidebardata.type === 'rent'}
-                            />
-                            <span>Cho thuê</span>
-                        </div>
-                        <div className="flex gap-2">
-                            <input
-                                type="checkbox"
-                                id="sale"
-                                className="w-5"
-                                onChange={handleChange}
-                                checked={sidebardata.type === 'sale'}
-                            />
-                            <span>Bán</span>
-                        </div>
-                        <div className="flex gap-2">
-                            <input
-                                type="checkbox"
-                                id="offer"
-                                className="w-5"
-                                onChange={handleChange}
-                                checked={sidebardata.offer}
-                            />
-                            <span>Offer</span>
+                    <div className="flex gap-2 flex-wrap items-start">
+                        <label className="font-semibold mr-2">Kiểu phòng:</label>
+                        <div className="flex-col">
+                            <div className="flex gap-2">
+                                <input
+                                    type="checkbox"
+                                    id="all"
+                                    className="w-5"
+                                    onChange={handleChange}
+                                    checked={sidebardata.type === 'all'}
+                                />
+                                <span>Cho thuê & Đang bán</span>
+                            </div>
+                            <div className="flex gap-2">
+                                <input
+                                    type="checkbox"
+                                    id="rent"
+                                    className="w-5"
+                                    onChange={handleChange}
+                                    checked={sidebardata.type === 'rent'}
+                                />
+                                <span>Cho thuê</span>
+                            </div>
+                            <div className="flex gap-2">
+                                <input
+                                    type="checkbox"
+                                    id="sale"
+                                    className="w-5"
+                                    onChange={handleChange}
+                                    checked={sidebardata.type === 'sale'}
+                                />
+                                <span>Đang bán</span>
+                            </div>
+                            <div className="flex gap-2">
+                                <input
+                                    type="checkbox"
+                                    id="offer"
+                                    className="w-5"
+                                    onChange={handleChange}
+                                    checked={sidebardata.offer}
+                                />
+                                <span>Offer</span>
+                            </div>
                         </div>
                     </div>
                     <div className="flex gap-2 flex-wrap items-center">

@@ -228,7 +228,7 @@ export default function CreateListing() {
                                 id="sale"
                                 className="w-5"
                             />
-                            <span>Sell</span>
+                            <span>Đăng bán</span>
                         </div>
                         <div className="flex gap-2">
                             <input
@@ -238,7 +238,7 @@ export default function CreateListing() {
                                 id="rent"
                                 className="w-5"
                             />
-                            <span>Rent</span>
+                            <span>Cho thuê</span>
                         </div>
                         <div className="flex gap-2">
                             <input

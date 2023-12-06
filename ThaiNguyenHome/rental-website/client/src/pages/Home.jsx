@@ -25,7 +25,7 @@ export default function Home() {
         };
         const fetchRentListings = async () => {
             try {
-                const res = await fetch('/api/listing/get?type=rent&limit=4');
+                const res = await fetch('/api/listing/get?type=rent&limit=6');
                 const data = await res.json();
                 setRentListings(data);
                 fetchSaleListings();
@@ -36,7 +36,7 @@ export default function Home() {
 
         const fetchSaleListings = async () => {
             try {
-                const res = await fetch('/api/listing/get?type=sale&limit=4');
+                const res = await fetch('/api/listing/get?type=sale&limit=3');
                 const data = await res.json();
                 setSaleListings(data);
             } catch (error) {
@@ -118,9 +118,9 @@ export default function Home() {
                 {saleListings && saleListings.length > 0 && (
                     <div className="">
                         <div className="my-3">
-                            <h2 className="text-2xl font-semibold text-slate-600">Địa điểm cho thuê mới nhất</h2>
+                            <h2 className="text-2xl font-semibold text-slate-600">Địa điểm phòng đang được bán</h2>
                             <Link className="text-sm text-blue-800 hover:underline" to={'/search?type=sale'}>
-                                Hiển thị thêm địa điểm cho thuê
+                                Hiển thị thêm phòng đang được bán
                             </Link>
                         </div>
                         <div className="flex flex-wrap gap-4">
