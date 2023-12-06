@@ -109,7 +109,7 @@ export default function Listing() {
                                 : listing.regularPrice.toLocaleString('en-US')}
                             {listing.type === 'rent' && ' VND / tháng'}
                         </p>
-                        <p className="flex items-center mt-6 gap-2 text-slate-600  text-sm">
+                        <p className="flex items-center mt-4 gap-2 text-slate-600 text-sm">
                             <FaMapMarkerAlt className="text-green-700" />
                             {listing.address}
                         </p>
@@ -123,8 +123,6 @@ export default function Listing() {
                                 </p>
                             )}
                         </div>
-                        {/* GoogleMap */}
-                        <GoogleMap address={listing.address} />
                         <p className="text-slate-800">
                             <span className="font-semibold text-black">Thông tin liên hệ</span>
                         </p>
@@ -203,6 +201,15 @@ export default function Listing() {
                                 {listing.furnished ? 'WiFi miễn phí' : 'Không có WiFi'}
                             </li>
                         </ul>
+                        {/* GoogleMap */}
+                        <div className="text-slate-800">
+                            <p className="font-semibold text-black">Bản đồ</p>
+                            <p className="flex items-center mt-2 gap-2 text-slate-600 text-sm">
+                                {' '}
+                                Địa chỉ: {listing.address}
+                            </p>
+                        </div>
+                        <GoogleMap address={listing.address} />
                         {currentUser && listing.userRef !== currentUser._id && !contact && (
                             <button
                                 onClick={() => setContact(true)}
