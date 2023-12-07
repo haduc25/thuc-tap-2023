@@ -163,7 +163,9 @@ const RoomList = () => {
 
 const Admin = () => {
     const [danhSachUsers, setdanhSachUsers] = useState([]);
+    const [danhSachListing, setDanhSachListing] = useState([]);
 
+    // users
     useEffect(() => {
         const fetchLandlord = async () => {
             try {
@@ -176,6 +178,21 @@ const Admin = () => {
             }
         };
         fetchLandlord();
+    }, []);
+
+    // listing
+    useEffect(() => {
+        const fetchListing = async () => {
+            // try {
+            //     const res = await fetch(`api/user/listings/${currentUser._id}`);
+            //     const data = await res.json();
+            //     setDanhSachListing(data);
+            //     console.log('running2');
+            // } catch (error) {
+            //     console.log('error2: ', error);
+            // }
+        };
+        fetchListing();
     }, []);
 
     const handleEdit = (userId) => {
@@ -194,6 +211,7 @@ const Admin = () => {
         <div>
             <div className="flex">
                 {/* {danhSachUsers && danhSachUsers.length > 0 && <p>11</p>} */}
+                {danhSachListing.length > 0 ? <p>co dl</p> : <p>k co</p>}
                 <button
                     onClick={() => setCurrentTab('users')}
                     className={`px-4 py-2 mx-2 font-bold ${
