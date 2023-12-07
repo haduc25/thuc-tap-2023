@@ -1,8 +1,50 @@
-import React, { useState } from 'react';
+import { useState, useEffect } from 'react';
+
+// ICONS
+import { FaSearch, FaUser, FaUserEdit, FaUserPlus, FaUserCog, FaUserTimes } from 'react-icons/fa';
 
 const UserList = ({ users, handleEdit, handleDelete }) => {
+    function formatDateTime(input) {
+        const date = new Date(input);
+
+        const hours = String(date.getUTCHours()).padStart(2, '0');
+        const minutes = String(date.getUTCMinutes()).padStart(2, '0');
+        const seconds = String(date.getUTCSeconds()).padStart(2, '0');
+
+        const day = String(date.getUTCDate()).padStart(2, '0');
+        const month = String(date.getUTCMonth() + 1).padStart(2, '0'); // Tháng bắt đầu từ 0, nên cộng thêm 1
+        const year = date.getUTCFullYear();
+
+        const formattedDateTime = `${hours}:${minutes}:${seconds} ${day}/${month}/${year}`;
+
+        return formattedDateTime;
+    }
+
     return (
         <div className="min-h-[83vh]">
+            <div className="flex justify-between mx-6 my-10">
+                <div className="px-6 py-3 whitespace-nowrap border bg-blue-500 hover:bg-blue-700 focus:border-blue-300 rounded-md hover:cursor-pointer">
+                    <button onClick={() => handleAddUser()} className="flex items-center space-x-1 text-slate-100  ">
+                        <FaUserPlus className="text-xl" />
+                        <span className="hidden md:inline">Thêm người dùng mới</span>
+                    </button>
+                </div>
+                {/* <input type="text" placeholder="Search..." /> */}
+                {/* <form onSubmit={handleSubmit} className="bg-slate-100 p-3 rounded-lg flex items-center"> */}
+                <form className="bg-slate-100 p-3 rounded-lg flex items-center border">
+                    <input
+                        // onChange={(e) => setSearchTerm(e.target.value)}
+                        type="text"
+                        placeholder="Tìm kiếm..."
+                        className="bg-transparent focus:outline-none w-50 sm:w-96"
+                        // value={searchTerm}
+                    />
+                    <button>
+                        <FaSearch className="text-slate-600" />
+                    </button>
+                </form>
+            </div>
+
             <table className="min-w-full divide-y divide-gray-200">
                 <thead className="bg-gray-50">
                     <tr>
@@ -72,18 +114,34 @@ const UserList = ({ users, handleEdit, handleDelete }) => {
                             <td className="px-6 py-4 whitespace-nowrap">
                                 <img src={user.avatar} alt="Avatar" className="w-8 h-8 rounded-full" />
                             </td>
-                            <td className="px-6 py-4 whitespace-nowrap">{user.createdAt}</td>
-                            <td className="px-6 py-4 whitespace-nowrap">{user.updatedAt}</td>
-                            <td className="px-6 py-4 whitespace-nowrap">{user.role}</td>
-                            <td className="px-12 py-4 whitespace-nowrap">{user.postCount}</td>
-                            <td className="px-6 py-4 whitespace-nowrap border">
-                                <button onClick={() => handleEdit(user._id)} className="text-blue-500 hover:underline ">
-                                    Sửa
+                            <td className="px-6 py-4 whitespace-nowrap">{formatDateTime(user.createdAt)}</td>
+                            <td className="px-6 py-4 whitespace-nowrap">{formatDateTime(user.updatedAt)}</td>
+                            <td className="px-6 py-4 whitespace-nowrap">
+                                {user.role === 'admin' ? (
+                                    <FaUserCog className="text-xl text-blue-500" />
+                                ) : user.role === 'user' ? (
+                                    <FaUser className="text-base text-blue-500 sma" />
+                                ) : (
+                                    <span className="text-gray-500">unset</span>
+                                )}
+                            </td>
+                            <td className="px-12 py-4 whitespace-nowrap">{user.postCount || 0}</td>
+                            <td className="px-6 py-4 whitespace-nowrap border ">
+                                <button
+                                    onClick={() => handleEdit(user._id)}
+                                    className="flex items-center space-x-1 text-blue-500 hover:text-blue-700  focus:border-blue-300 hover:underline"
+                                >
+                                    <FaUserEdit className="text-xl" />
+                                    <span className="hidden md:inline">Sửa</span>
                                 </button>
                             </td>
                             <td className="px-6 py-4 whitespace-nowrap border">
-                                <button onClick={() => handleDelete(user._id)} className="text-red-500 hover:underline">
-                                    Xoá
+                                <button
+                                    onClick={() => handleDelete(user._id)}
+                                    className="flex items-center space-x-1 text-red-500 hover:text-red-700  focus:border-red-300"
+                                >
+                                    <FaUserTimes className="text-xl" />
+                                    <span className="hidden md:inline">Xoá</span>
                                 </button>
                             </td>
                         </tr>
@@ -104,46 +162,30 @@ const RoomList = () => {
 };
 
 const Admin = () => {
-    const users = [
-        {
-            _id: '1',
-            username: 'john_doe',
-            email: 'john.doe@example.com',
-            avatar: 'https://th.bing.com/th/id/R.d066dbbaf670ea810082b082cbabf368?rik=dpSBI42TQxQehw&pid=ImgRaw&r=0',
-            createdAt: '2023-01-01T12:00:00Z',
-            updatedAt: '2023-01-05T15:30:00Z',
-            role: 'user',
-            postCount: 10,
-        },
-        {
-            _id: '2',
-            username: 'john_doe',
-            email: 'john.doe@example.com',
-            avatar: 'https://th.bing.com/th/id/R.d066dbbaf670ea810082b082cbabf368?rik=dpSBI42TQxQehw&pid=ImgRaw&r=0',
-            createdAt: '2023-01-01T12:00:00Z',
-            updatedAt: '2023-01-05T15:30:00Z',
-            role: 'user',
-            postCount: 10,
-        },
-        {
-            _id: '3',
-            username: 'john_doe',
-            email: 'john.doe@example.com',
-            avatar: 'https://th.bing.com/th/id/R.d066dbbaf670ea810082b082cbabf368?rik=dpSBI42TQxQehw&pid=ImgRaw&r=0',
-            createdAt: '2023-01-01T12:00:00Z',
-            updatedAt: '2023-01-05T15:30:00Z',
-            role: 'user',
-            postCount: 10,
-        },
-    ];
+    const [danhSachUsers, setdanhSachUsers] = useState([]);
+
+    useEffect(() => {
+        const fetchLandlord = async () => {
+            try {
+                const res = await fetch(`/api/admin/getAllUsers`);
+                const data = await res.json();
+                setdanhSachUsers(data);
+                console.log('running');
+            } catch (error) {
+                console.log('error2: ', error);
+            }
+        };
+        fetchLandlord();
+    }, []);
+
     const handleEdit = (userId) => {
         // Xử lý chức năng sửa đổi
-        console.log(`Edit user with ID ${userId}`);
+        alert(`Edit user with ID ${userId}`);
     };
 
     const handleDelete = (userId) => {
         // Xử lý chức năng xóa
-        console.log(`Delete user with ID ${userId}`);
+        alert(`Delete user with ID ${userId}`);
     };
 
     const [currentTab, setCurrentTab] = useState('users'); // Mặc định hiển thị tab người dùng
@@ -151,13 +193,14 @@ const Admin = () => {
     return (
         <div>
             <div className="flex">
+                {/* {danhSachUsers && danhSachUsers.length > 0 && <p>11</p>} */}
                 <button
                     onClick={() => setCurrentTab('users')}
                     className={`px-4 py-2 mx-2 font-bold ${
                         currentTab === 'users' ? 'bg-gray-100' : 'bg-gray-300 opacity-20'
                     } rounded-md`}
                 >
-                    Danh sách gười dùng
+                    Danh sách người dùng
                 </button>
                 <button
                     onClick={() => setCurrentTab('rooms')}
@@ -178,7 +221,7 @@ const Admin = () => {
             </div>
 
             {currentTab === 'users' ? (
-                <UserList users={users} handleEdit={handleEdit} handleDelete={handleDelete} />
+                <UserList users={danhSachUsers} handleEdit={handleEdit} handleDelete={handleDelete} />
             ) : (
                 <RoomList />
             )}

@@ -4,6 +4,7 @@ import { errorHandler } from '../utils/error.js';
 import bcryptjs from 'bcryptjs';
 
 export const test = (req, res) => {
+    console.log('meowww');
     res.json({
         message: 'Api route is working!',
     });
