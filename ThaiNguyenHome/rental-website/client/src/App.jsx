@@ -6,12 +6,13 @@ import About from './pages/About';
 import Profile from './pages/Profile';
 
 import Header from './components/Header';
+import Footer from './components/Footer';
 import PrivateRoute from './components/PrivateRoute';
 import CreateListing from './pages/CreateListing';
 import UpdateListing from './pages/UpdateListing';
 import Listing from './pages/Listing';
 import Search from './pages/Search';
-import Footer from './components/Footer';
+import Admin from './pages/Admin';
 
 export default function App() {
     return (
@@ -28,6 +29,7 @@ export default function App() {
                 {/* Private - nên sẽ ẩn đi `path` */}
                 <Route element={<PrivateRoute />}>
                     <Route path="/profile" element={<Profile />} />
+                    <Route path="/admin" element={<Admin />} />
                     <Route path="/create-listing" element={<CreateListing />} />
                     <Route path="/update-listing/:listingId" element={<UpdateListing />} />
                 </Route>
