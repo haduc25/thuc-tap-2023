@@ -2,7 +2,9 @@ import { useState, useEffect } from 'react';
 
 // ICONS
 import { FaSearch, FaUser, FaUserEdit, FaUserPlus, FaUserCog, FaUserTimes } from 'react-icons/fa';
-import AdminUserList from '../components/AdminUserList';
+import AdminDashboard from '../components/Admin/AdminDashboard';
+import AdminUserList from '../components/Admin/AdminUserList';
+import AdminListing from '../components/Admin/AdminListing';
 
 const RoomList = () => {
     return (
@@ -57,48 +59,54 @@ const Admin = () => {
         alert(`Delete user with ID ${userId}`);
     };
 
-    const [currentTab, setCurrentTab] = useState('users'); // Mặc định hiển thị tab người dùng
+    const [currentTab, setCurrentTab] = useState('dashboard'); // Mặc định hiển thị tab người dùng
+
+    // Thêm các tab mới vào mảng tabs khi cần
+    const tabs = [
+        { key: 'dashboard', label: 'Dashboard' },
+        { key: 'users', label: 'Danh sách người dùng' },
+        { key: 'rooms', label: 'Danh sách phòng' },
+        { key: 'notifications', label: 'Thông báo' },
+        // Thêm tab mới nếu cần
+    ];
 
     return (
         <div>
             <div className="flex">
-                {/* {danhSachUsers && danhSachUsers.length > 0 && <p>11</p>} */}
-                {/* {danhSachListing.length > 0 ? <p>co dl</p> : <p>k co</p>} */}
-                <button
-                    onClick={() => setCurrentTab('users')}
-                    className={`px-4 py-2 mx-2 font-bold ${
-                        currentTab === 'users' ? 'bg-gray-100' : 'bg-gray-300 opacity-20'
-                    } rounded-md`}
-                >
-                    Danh sách người dùng
-                </button>
-                <button
-                    onClick={() => setCurrentTab('rooms')}
-                    className={`px-4 py-2 mx-2 font-bold ${
-                        currentTab === 'rooms' ? 'bg-gray-100' : 'bg-gray-300 opacity-20'
-                    } rounded-md`}
-                >
-                    Danh sách phòng
-                </button>
-                <button
-                    onClick={() => setCurrentTab('notifications')}
-                    className={`px-4 py-2 mx-2 font-bold ${
-                        currentTab === 'notifications' ? 'bg-gray-100' : 'bg-gray-300 opacity-20'
-                    } rounded-md`}
-                >
-                    Thông báo
-                </button>
+                {tabs.map((tab) => (
+                    <button
+                        key={tab.key}
+                        onClick={() => setCurrentTab(tab.key)}
+                        className={`px-4 py-2 mx-2 font-bold ${
+                            currentTab === tab.key ? 'bg-gray-100' : 'bg-gray-300 opacity-20'
+                        } rounded-md`}
+                    >
+                        {tab.label}
+                    </button>
+                ))}
             </div>
 
-            {currentTab === 'users' ? (
+            {currentTab === 'dashboard' ? (
+                <AdminDashboard />
+            ) : currentTab === 'users' ? (
                 <AdminUserList
                     users={danhSachUsers}
                     listings={danhSachListing}
                     handleEdit={handleEdit}
                     handleDelete={handleDelete}
                 />
+            ) : currentTab === 'rooms' ? (
+                // <RoomList />
+                <AdminListing
+                    users={danhSachUsers}
+                    listings={danhSachListing}
+                    handleEdit={handleEdit}
+                    handleDelete={handleDelete}
+                />
+            ) : currentTab === 'notifications' ? (
+                <p>NotificationComponent</p>
             ) : (
-                <RoomList />
+                <p>Component của tab này chưa được định nghĩa.</p>
             )}
         </div>
     );
