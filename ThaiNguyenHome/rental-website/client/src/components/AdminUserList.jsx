@@ -15,6 +15,12 @@ export default function AdminUserList({ users, listings, handleEdit, handleDelet
         return date.toLocaleString('vi-VN', options);
     }
 
+    const roleIcons = {
+        admin: <FaUserCog className="text-xl text-blue-500" />,
+        user: <FaUser className="text-base text-blue-500 sma" />,
+        unset: <span className="text-gray-500">unset</span>,
+    };
+
     return (
         <div className="min-h-[83vh]">
             <div className="flex justify-between mx-6 my-10">
@@ -101,17 +107,23 @@ export default function AdminUserList({ users, listings, handleEdit, handleDelet
                     </tr>
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
-                    {users.map((user, index) => (
-                        <tr key={user._id} className={index % 2 === 0 ? 'bg-gray-100' : ''}>
-                            <td className="px-6 py-4 whitespace-nowrap">{index + 1}</td>
-                            <td className="px-6 py-4 whitespace-nowrap">{user.username}</td>
-                            <td className="px-6 py-4 whitespace-nowrap">{user.email}</td>
-                            <td className="px-6 py-4 whitespace-nowrap">
-                                <img src={user.avatar} alt="Avatar" className="w-8 h-8 rounded-full" />
-                            </td>
-                            <td className="px-6 py-4 whitespace-nowrap">{formatDateTime(user.createdAt)}</td>
-                            <td className="px-6 py-4 whitespace-nowrap">{formatDateTime(user.updatedAt)}</td>
-                            <td className="px-6 py-4 whitespace-nowrap">
+                    {users.map((user, index) => {
+                        const userId = user._id;
+                        const userListing = listings.find((listing) => listing._id === userId);
+                        return (
+                            <tr key={user._id} className={index % 2 === 0 ? 'bg-gray-100' : ''}>
+                                <td className="px-6 py-4 whitespace-nowrap">{index + 1}</td>
+                                <td className="px-6 py-4 whitespace-nowrap">{user.username}</td>
+                                <td className="px-6 py-4 whitespace-nowrap">{user.email}</td>
+                                <td className="px-6 py-4 whitespace-nowrap">
+                                    <img src={user.avatar} alt="Avatar" className="w-8 h-8 rounded-full" />
+                                </td>
+                                <td className="px-6 py-4 whitespace-nowrap">{formatDateTime(user.createdAt)}</td>
+                                <td className="px-6 py-4 whitespace-nowrap">{formatDateTime(user.updatedAt)}</td>
+                                <td className="px-6 py-4 whitespace-nowrap">
+                                    {roleIcons[user.role] || roleIcons.unset}
+                                </td>
+                                {/* <td className="px-6 py-4 whitespace-nowrap">
                                 {user.role === 'admin' ? (
                                     <FaUserCog className="text-xl text-blue-500" />
                                 ) : user.role === 'user' ? (
@@ -119,31 +131,33 @@ export default function AdminUserList({ users, listings, handleEdit, handleDelet
                                 ) : (
                                     <span className="text-gray-500">unset</span>
                                 )}
-                            </td>
-                            {/* <td className="px-12 py-4 whitespace-nowrap">{user.postCount || 0}</td> */}
-                            <td className="px-12 py-4 whitespace-nowrap">
-                                {listings.find((listing) => listing._id === user._id)?.totalPosts || 0}
-                            </td>
-                            <td className="px-6 py-4 whitespace-nowrap border ">
-                                <button
-                                    onClick={() => handleEdit(user._id)}
-                                    className="flex items-center space-x-1 text-blue-500 hover:text-blue-700  focus:border-blue-300 hover:underline"
-                                >
-                                    <FaUserEdit className="text-xl" />
-                                    <span className="hidden md:inline">Sửa</span>
-                                </button>
-                            </td>
-                            <td className="px-6 py-4 whitespace-nowrap border">
-                                <button
-                                    onClick={() => handleDelete(user._id)}
-                                    className="flex items-center space-x-1 text-red-500 hover:text-red-700  focus:border-red-300"
-                                >
-                                    <FaUserTimes className="text-xl" />
-                                    <span className="hidden md:inline">Xoá</span>
-                                </button>
-                            </td>
-                        </tr>
-                    ))}
+                            </td> */}
+                                {/* <td className="px-12 py-4 whitespace-nowrap">{user.postCount || 0}</td> */}
+                                <td className="px-12 py-4 whitespace-nowrap">
+                                    {/* {listings.find((listing) => listing._id === user._id)?.totalPosts || 0} */}
+                                    {userListing?.totalPosts || 0}
+                                </td>
+                                <td className="px-6 py-4 whitespace-nowrap border ">
+                                    <button
+                                        onClick={() => handleEdit(user._id)}
+                                        className="flex items-center space-x-1 text-blue-500 hover:text-blue-700  focus:border-blue-300 hover:underline"
+                                    >
+                                        <FaUserEdit className="text-xl" />
+                                        <span className="hidden md:inline">Sửa</span>
+                                    </button>
+                                </td>
+                                <td className="px-6 py-4 whitespace-nowrap border">
+                                    <button
+                                        onClick={() => handleDelete(user._id)}
+                                        className="flex items-center space-x-1 text-red-500 hover:text-red-700  focus:border-red-300"
+                                    >
+                                        <FaUserTimes className="text-xl" />
+                                        <span className="hidden md:inline">Xoá</span>
+                                    </button>
+                                </td>
+                            </tr>
+                        );
+                    })}
                 </tbody>
             </table>
         </div>

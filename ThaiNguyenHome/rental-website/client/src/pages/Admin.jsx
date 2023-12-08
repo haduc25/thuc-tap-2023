@@ -63,7 +63,7 @@ const Admin = () => {
         <div>
             <div className="flex">
                 {/* {danhSachUsers && danhSachUsers.length > 0 && <p>11</p>} */}
-                {danhSachListing.length > 0 ? <p>co dl</p> : <p>k co</p>}
+                {/* {danhSachListing.length > 0 ? <p>co dl</p> : <p>k co</p>} */}
                 <button
                     onClick={() => setCurrentTab('users')}
                     className={`px-4 py-2 mx-2 font-bold ${
