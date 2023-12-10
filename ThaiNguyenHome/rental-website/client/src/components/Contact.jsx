@@ -19,6 +19,12 @@ export default function Contact({ listing }) {
         fetchLandlord();
     }, [listing.userRef]);
 
+    // for msg
+    const encodedMessage = encodeURIComponent(message);
+
+    // url
+    // const mailtoUrl = ;
+
     return (
         <>
             {landlord && (
@@ -38,9 +44,10 @@ export default function Contact({ listing }) {
                     ></textarea>
 
                     <Link
-                        to={`mailto:${landlord.email}?subject=Regarding ${listing.name}&body=${message}`}
+                        to={`mailto:${landlord.email}?subject=Regarding ${listing.name}&body=${encodedMessage}`}
                         className="bg-slate-700 text-white text-center p-3 uppercase rounded-lg hover:opacity-95"
                     >
+                        {console.log('encodedMessage: ', encodedMessage)}
                         Gửi tin nhắn
                     </Link>
                 </div>

@@ -674,3 +674,9 @@ npm install primereact
 <!-- Lấy API Google Map -->
 
 [Google Map - Lấy Embed](https://www.maps.ie/create-google-map/)
+
+#### install (../client/)
+
+```
+npm install react-chartjs-2 chart.js
+```

@@ -1,6 +1,16 @@
 // ICONS
 import { useState, useEffect } from 'react';
-import { FaSearch, FaUser, FaUserEdit, FaUserPlus, FaUserCog, FaUserTimes } from 'react-icons/fa';
+import {
+    FaSearch,
+    FaUser,
+    FaUserEdit,
+    FaUserPlus,
+    FaUserCog,
+    FaUserTimes,
+    FaEdit,
+    FaTimesCircle,
+    FaPlusCircle,
+} from 'react-icons/fa';
 
 export default function AdminListing({ users, listings, handleEdit, handleDelete }) {
     const [danhSachListing, setDanhSachListing] = useState([]);
@@ -44,8 +54,8 @@ export default function AdminListing({ users, listings, handleEdit, handleDelete
             <div className="flex justify-between mx-6 my-10">
                 <div className="px-6 py-3 whitespace-nowrap border bg-blue-500 hover:bg-blue-700 focus:border-blue-300 rounded-md hover:cursor-pointer">
                     <button onClick={() => handleAddUser()} className="flex items-center space-x-1 text-slate-100  ">
-                        <FaUserPlus className="text-xl" />
-                        <span className="hidden md:inline">Thêm người dùng mới</span>
+                        <FaPlusCircle className="text-xl" />
+                        <span className="hidden md:inline">Thêm danh sách phòng mới</span>
                     </button>
                 </div>
                 {/* <input type="text" placeholder="Search..." /> */}
@@ -78,12 +88,6 @@ export default function AdminListing({ users, listings, handleEdit, handleDelete
                             className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                         >
                             Tên phòng
-                        </th>
-                        <th
-                            scope="col"
-                            className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                        >
-                            Giá đề xuất
                         </th>
                         <th
                             scope="col"
@@ -126,15 +130,15 @@ export default function AdminListing({ users, listings, handleEdit, handleDelete
                         return (
                             <tr key={listing._id} className={index % 2 === 0 ? 'bg-gray-100' : ''}>
                                 <td className="px-6 py-4 whitespace-nowrap">{index + 1}</td>
-                                <td className="px-6 py-4 whitespace-nowrap">{listing.name}</td>
-                                <td className="px-6 py-4 whitespace-nowrap">
-                                    {listing.regularPrice.toLocaleString('en-US')} VND
+                                <td className="px-6 py-4 whitespace-nowrap max-w-[350px] truncate truncate-overflow">
+                                    {listing.name}
                                 </td>
+
                                 <td className="px-6 py-4 whitespace-nowrap">
                                     <img
                                         src={listing.imageUrls[0]}
                                         alt="preview image"
-                                        className="w-32 h-w-32 rounded-md"
+                                        className="min-w-32 h-w-32 rounded-md"
                                     />
                                 </td>
                                 <td className="px-6 py-4 whitespace-nowrap">{formatDateTime(listing.createdAt)}</td>
@@ -148,7 +152,7 @@ export default function AdminListing({ users, listings, handleEdit, handleDelete
                                         onClick={() => handleEdit(listing._id)}
                                         className="flex items-center space-x-1 text-blue-500 hover:text-blue-700  focus:border-blue-300 hover:underline"
                                     >
-                                        <FaUserEdit className="text-xl" />
+                                        <FaEdit className="text-xl" />
                                         <span className="hidden md:inline">Sửa</span>
                                     </button>
                                 </td>
@@ -157,7 +161,7 @@ export default function AdminListing({ users, listings, handleEdit, handleDelete
                                         onClick={() => handleDelete(listing._id)}
                                         className="flex items-center space-x-1 text-red-500 hover:text-red-700  focus:border-red-300"
                                     >
-                                        <FaUserTimes className="text-xl" />
+                                        <FaTimesCircle className="text-xl" />
                                         <span className="hidden md:inline">Xoá</span>
                                     </button>
                                 </td>

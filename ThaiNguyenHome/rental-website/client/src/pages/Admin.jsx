@@ -63,7 +63,7 @@ const Admin = () => {
 
     // Thêm các tab mới vào mảng tabs khi cần
     const tabs = [
-        { key: 'dashboard', label: 'Dashboard' },
+        { key: 'dashboard', label: 'Trang tổng quan' },
         { key: 'users', label: 'Danh sách người dùng' },
         { key: 'rooms', label: 'Danh sách phòng' },
         { key: 'notifications', label: 'Thông báo' },
@@ -87,7 +87,12 @@ const Admin = () => {
             </div>
 
             {currentTab === 'dashboard' ? (
-                <AdminDashboard />
+                <AdminDashboard
+                    users={danhSachUsers}
+                    listings={danhSachListing}
+                    handleEdit={handleEdit}
+                    handleDelete={handleDelete}
+                />
             ) : currentTab === 'users' ? (
                 <AdminUserList
                     users={danhSachUsers}
