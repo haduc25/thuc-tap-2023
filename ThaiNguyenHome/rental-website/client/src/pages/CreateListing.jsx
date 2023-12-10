@@ -214,7 +214,7 @@ export default function CreateListing() {
                         placeholder="Địa chỉ chính xác của Phòng - số nhà, đường, quận..."
                         className="border p-3 rounded-lg"
                         id="address"
-                        maxLength="62"
+                        maxLength="128"
                         minLength="10"
                         required
                     />

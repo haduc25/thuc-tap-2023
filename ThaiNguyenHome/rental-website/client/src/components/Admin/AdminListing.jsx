@@ -141,6 +141,7 @@ export default function AdminListing({ users, listings, handleEdit, handleDelete
                                         className="min-w-32 h-w-32 rounded-md"
                                     />
                                 </td>
+
                                 <td className="px-6 py-4 whitespace-nowrap">{formatDateTime(listing.createdAt)}</td>
                                 <td className="px-6 py-4 whitespace-nowrap">{formatDateTime(listing.updatedAt)}</td>
                                 <td className="px-6 py-4 whitespace-nowrap">
