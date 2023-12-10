@@ -1,53 +1,87 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 
 // ICONS
-import { FaSearch, FaUser, FaUserEdit, FaUserPlus, FaUserCog, FaUserTimes } from 'react-icons/fa';
 import AdminDashboard from '../components/Admin/AdminDashboard';
-import AdminUserList from '../components/Admin/AdminUserList';
 import AdminListing from '../components/Admin/AdminListing';
-
-const RoomList = () => {
-    return (
-        <div className="min-h-[83vh]">
-            {/* Nội dung cho tab danh sách Phòng */}
-            {/* ... */}
-        </div>
-    );
-};
+import AdminUserList from '../components/Admin/AdminUserList';
+import { useSelector } from 'react-redux';
 
 const Admin = () => {
+    const navigate = useNavigate();
+
     const [danhSachUsers, setdanhSachUsers] = useState([]);
     const [danhSachListing, setDanhSachListing] = useState([]);
 
-    // users
-    useEffect(() => {
-        const fetchLandlord = async () => {
-            try {
-                const res = await fetch(`/api/admin/getAllUsers`);
-                const data = await res.json();
-                setdanhSachUsers(data);
-                console.log('running');
-            } catch (error) {
-                console.log('error2: ', error);
-            }
-        };
-        fetchLandlord();
-    }, []);
+    const { currentUser } = useSelector((state) => state.user);
+    console.log('currentUser: ', currentUser.role); //user
 
-    // listing
+    // Kiểm tra nếu không phải là admin thì hiển thị thông báo và quay lại trang chủ
     useEffect(() => {
-        const fetchListing = async () => {
-            try {
-                const res = await fetch('api/admin/getTotalPostCount');
-                const data = await res.json();
-                setDanhSachListing(data);
-                console.log('running2');
-            } catch (error) {
-                console.log('error2: ', error);
-            }
-        };
-        fetchListing();
-    }, []);
+        if (currentUser.role !== 'admin') {
+            alert('Bạn không có quyền truy cập trang này');
+            // Thực hiện chuyển hướng đến trang chủ hoặc điều hướng khác
+            // Ví dụ: window.location.href = '/';
+
+            // chuyển hướng về trang chủ
+            navigate('/');
+        } else {
+            // Nếu là admin, thực hiện fetch dữ liệu
+            const fetchLandlord = async () => {
+                try {
+                    const res = await fetch(`/api/admin/getAllUsers`);
+                    const data = await res.json();
+                    setdanhSachUsers(data);
+                    console.log('running');
+                } catch (error) {
+                    console.log('error2: ', error);
+                }
+            };
+            fetchLandlord();
+
+            const fetchListing = async () => {
+                try {
+                    const res = await fetch('api/admin/getTotalPostCount');
+                    const data = await res.json();
+                    setDanhSachListing(data);
+                    console.log('running2');
+                } catch (error) {
+                    console.log('error2: ', error);
+                }
+            };
+            fetchListing();
+        }
+    }, [currentUser.role]);
+
+    // // users
+    // useEffect(() => {
+    //     const fetchLandlord = async () => {
+    //         try {
+    //             const res = await fetch(`/api/admin/getAllUsers`);
+    //             const data = await res.json();
+    //             setdanhSachUsers(data);
+    //             console.log('running');
+    //         } catch (error) {
+    //             console.log('error2: ', error);
+    //         }
+    //     };
+    //     fetchLandlord();
+    // }, []);
+
+    // // listing
+    // useEffect(() => {
+    //     const fetchListing = async () => {
+    //         try {
+    //             const res = await fetch('api/admin/getTotalPostCount');
+    //             const data = await res.json();
+    //             setDanhSachListing(data);
+    //             console.log('running2');
+    //         } catch (error) {
+    //             console.log('error2: ', error);
+    //         }
+    //     };
+    //     fetchListing();
+    // }, []);
 
     const handleEdit = (userId) => {
         // Xử lý chức năng sửa đổi
