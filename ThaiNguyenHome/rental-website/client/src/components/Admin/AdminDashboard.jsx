@@ -218,197 +218,115 @@ export default function AdminDashboard({ users, listings, handleEdit, handleDele
         ],
     });
 
-    const [listingData, setListingData] = useState(() => createListingData([0, 0]));
+    // sort for table
+    // Sắp xếp mảng danhSachListing theo thời gian tạo mới giảm dần
+    const sortedListings = danhSachListing.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            setListingData(() => {
-                const percentages = calculateListingPercentage();
-                const newData = createListingData(percentages);
-                return newData;
-            });
-        }, 2000);
-
-        console.log('mâm');
-        // Clear the timeout on component unmount
-        return () => clearTimeout(timer);
-    }, [danhSachListing]);
-
-    // bd4
-    // Lọc những user có totalPosts > 0
-    // const usersWithPosts = users.filter((user) => user.totalPosts);
-    // console.log('usersWithPosts: ', usersWithPosts);
-
-    // const usernamesWithPosts = usersWithPosts.map((user) => user.username);
-    // console.log('usernamesWithPosts: ', usernamesWithPosts);
-
-    // test 1
-    // const kiki = () => {
-    //     users.map((user) => {
-    //         const userId = user._id;
-    //         const userListing = listings.find((listing) => listing._id === userId);
-    //         // return userListing?.totalPosts && `${userListing?.username}`;
-    //         const filterOnlyHavePosted = userListing?.totalPosts && `${userListing?.username}`;
-    //         console.log('userListing: ', filterOnlyHavePosted);
-    //     });
-    // };
-
-    const meow = () => {
-        users.map((user, index) => {
-            // const userId = user._id;
-            // const userListing = listings.find((listing) => listing._id === userId);
-            // const haveData = userListing?.totalPosts ? userListing?.username : null;
-            // return console.log(haveData);
-            console.log(
-                (listings.find((listing) => listing._id === user._id)?.totalPosts &&
-                    listings.find((listing) => listing._id === user._id)?.username) ||
-                    null,
-            );
-        });
-    };
-    meow();
+    // Chỉ lấy 5 phần tử đầu tiên
+    const latestListings = sortedListings.slice(0, 5);
 
     return (
         <div className="min-h-[83vh]">
-            <div className="flex justify-between mx-6 my-10">
-                <div className="px-6 py-3 whitespace-nowrap border bg-blue-500 hover:bg-blue-700 focus:border-blue-300 rounded-md hover:cursor-pointer">
-                    <button onClick={() => handleAddUser()} className="flex items-center space-x-1 text-slate-100  ">
-                        <FaPlusCircle className="text-xl" />
-                        <span className="hidden md:inline">Thêm danh sách phòng mới</span>
-                    </button>
+            <div className="flex">
+                <div className="w-1/2 pl-4">
+                    {/* Phần biểu đồ */}
+                    <div className="my-32 mx-2 max-w-sm">
+                        <h2>Biểu đồ polararea tổng quan về tiện ích</h2>
+                        <PolarArea data={polarAreaChartData} />
+                    </div>
+                    {/* Phần biểu đồ */}
+                    <div className="my-32 mx-2 max-w-lg">
+                        <h2>Biểu đồ số người tạo mới trong 7 ngày qua</h2>
+                        <Line data={chartData} />
+                    </div>
                 </div>
-                {/* <input type="text" placeholder="Search..." /> */}
-                {/* <form onSubmit={handleSubmit} className="bg-slate-100 p-3 rounded-lg flex items-center"> */}
-                <form className="bg-slate-100 p-3 rounded-lg flex items-center border">
-                    <input
-                        // onChange={(e) => setSearchTerm(e.target.value)}
-                        type="text"
-                        placeholder="Tìm kiếm..."
-                        className="bg-transparent focus:outline-none w-50 sm:w-96"
-                        // value={searchTerm}
-                    />
-                    <button>
-                        <FaSearch className="text-slate-600" />
-                    </button>
-                </form>
-            </div>
 
-            <table className="min-w-full divide-y divide-gray-200">
-                <thead className="bg-gray-50">
-                    <tr>
-                        <th
-                            scope="col"
-                            className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                        >
-                            STT
-                        </th>
-                        <th
-                            scope="col"
-                            className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                        >
-                            Tên phòng
-                        </th>
-                        <th
-                            scope="col"
-                            className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                        >
-                            Ảnh bìa
-                        </th>
-                        <th
-                            scope="col"
-                            className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                        >
-                            Create At
-                        </th>
-                        <th
-                            scope="col"
-                            className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                        >
-                            Update At
-                        </th>
-                        <th
-                            scope="col"
-                            className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                        >
-                            Người đăng
-                        </th>
+                <div className="w-2/3 pr-4">
+                    <div className="flex justify-end mx-6 my-10">
+                        {/* <input type="text" placeholder="Search..." /> */}
+                        {/* <form onSubmit={handleSubmit} className="bg-slate-100 p-3 rounded-lg flex items-center"> */}
+                        <form className="bg-slate-100 p-3 rounded-lg flex items-center border">
+                            <input
+                                // onChange={(e) => setSearchTerm(e.target.value)}
+                                type="text"
+                                placeholder="Tìm kiếm..."
+                                className="bg-transparent focus:outline-none w-50 sm:w-96"
+                                // value={searchTerm}
+                            />
+                            <button>
+                                <FaSearch className="text-slate-600" />
+                            </button>
+                        </form>
+                    </div>
 
-                        <th
-                            colSpan={2}
-                            scope="col"
-                            className="px-4 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider"
-                        >
-                            Tùy chọn
-                        </th>
-                    </tr>
-                </thead>
-                <tbody className="bg-white divide-y divide-gray-200">
-                    {danhSachListing.map((listing, index) => {
-                        const userId = listing._id;
-                        // const userListing = listings.find((listing) => listing._id === userId);
-                        return (
-                            <tr key={listing._id} className={index % 2 === 0 ? 'bg-gray-100' : ''}>
-                                <td className="px-6 py-4 whitespace-nowrap">{index + 1}</td>
-                                <td className="px-6 py-4 whitespace-nowrap max-w-[350px] truncate truncate-overflow">
-                                    {listing.name}
-                                </td>
-
-                                <td className="px-6 py-4 whitespace-nowrap">
-                                    <img
-                                        src={listing.imageUrls[0]}
-                                        alt="preview image"
-                                        className="w-32 h-w-32 rounded-md"
-                                    />
-                                </td>
-                                <td className="px-6 py-4 whitespace-nowrap">{formatDateTime(listing.createdAt)}</td>
-                                <td className="px-6 py-4 whitespace-nowrap">{formatDateTime(listing.updatedAt)}</td>
-                                <td className="px-6 py-4 whitespace-nowrap">
-                                    {/* {roleIcons[listing.role] || roleIcons.unset} */}
-                                    {listing.username}
-                                </td>
-                                <td className="px-6 py-4 whitespace-nowrap border ">
-                                    <button
-                                        onClick={() => handleEdit(listing._id)}
-                                        className="flex items-center space-x-1 text-blue-500 hover:text-blue-700  focus:border-blue-300 hover:underline"
-                                    >
-                                        <FaEdit className="text-xl" />
-                                        <span className="hidden md:inline">Sửa</span>
-                                    </button>
-                                </td>
-                                <td className="px-6 py-4 whitespace-nowrap border">
-                                    <button
-                                        onClick={() => handleDelete(listing._id)}
-                                        className="flex items-center space-x-1 text-red-500 hover:text-red-700  focus:border-red-300"
-                                    >
-                                        <FaTimesCircle className="text-xl" />
-                                        <span className="hidden md:inline">Xoá</span>
-                                    </button>
-                                </td>
+                    <table className="min-w-full divide-y divide-gray-200">
+                        <thead className="bg-gray-50">
+                            <tr>
+                                <th
+                                    scope="col"
+                                    className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                >
+                                    STT
+                                </th>
+                                <th
+                                    scope="col"
+                                    className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                >
+                                    Tên phòng
+                                </th>
+                                <th
+                                    scope="col"
+                                    className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                >
+                                    Ảnh bìa
+                                </th>
+                                <th
+                                    scope="col"
+                                    className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                >
+                                    Create At
+                                </th>
+                                <th
+                                    scope="col"
+                                    className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                >
+                                    Người đăng
+                                </th>
                             </tr>
-                        );
-                    })}
-                </tbody>
-            </table>
+                        </thead>
+                        <tbody className="bg-white divide-y divide-gray-200">
+                            {latestListings.map((listing, index) => {
+                                const userId = listing._id;
+                                return (
+                                    <tr key={listing._id} className={index % 2 === 0 ? 'bg-gray-100' : ''}>
+                                        <td className="px-6 py-4 whitespace-nowrap">{index + 1}</td>
+                                        <td className="px-6 py-4 whitespace-nowrap max-w-[250px] truncate truncate-overflow">
+                                            {listing.name}
+                                        </td>
 
-            {/* Phần biểu đồ */}
-            <div className="my-2 mx-2 max-w-sm">
-                <h2>Biểu đồ polararea tổng quan về tiện ích</h2>
-                <PolarArea data={polarAreaChartData} />
-            </div>
-            {/* Phần biểu đồ */}
-            <div className="my-2 mx-2 max-w-lg">
-                <h2>Biểu đồ số người tạo mới trong 7 ngày qua</h2>
-                <Line data={chartData} />
+                                        <td className="px-6 py-4 whitespace-nowrap">
+                                            <img
+                                                src={listing.imageUrls[0]}
+                                                alt="preview image"
+                                                className="w-32 h-w-32 rounded-md"
+                                            />
+                                        </td>
+                                        <td className="px-6 py-4 whitespace-nowrap">
+                                            {formatDateTime(listing.createdAt)}
+                                        </td>
+                                        <td className="px-6 py-4 whitespace-nowrap">{listing.username}</td>
+                                    </tr>
+                                );
+                            })}
+                        </tbody>
+                    </table>
+                </div>
             </div>
 
             {/* REAL DATA _ CHART */}
-            <div className="my-6">
-                <h2>Biểu đồ Giá bình thường và Giảm giá của các listing</h2>
+            <div className="my-16 mx-8">
+                <h2>Biểu đồ Giá bình thường và Giảm giá của các phòng</h2>
                 <Bar data={barChartData} />
-            </div>
-            <div className="my-6">
-                <h2>Biểu đồ Bar - Tỷ lệ phần trăm giữa các loại listing</h2>
-                <Bar data={listingData} />
             </div>
         </div>
     );
