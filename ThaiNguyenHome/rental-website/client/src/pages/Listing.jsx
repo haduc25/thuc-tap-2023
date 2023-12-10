@@ -192,14 +192,14 @@ export default function Listing() {
                             <li className="flex items-center gap-1 whitespace-nowrap ">
                                 <FaBed className="text-lg" />
                                 {listing.bedrooms > 1
-                                    ? `${listing.bedrooms} giường ngủ `
-                                    : `${listing.bedrooms} giường ngủ `}
+                                    ? `${listing.bedrooms} Phòng ngủ `
+                                    : `${listing.bedrooms} Phòng ngủ `}
                             </li>
                             <li className="flex items-center gap-1 whitespace-nowrap ">
                                 <FaBath className="text-lg" />
                                 {listing.bathrooms > 1
-                                    ? `${listing.bathrooms} phòng tắm `
-                                    : `${listing.bathrooms} phòng tắm `}
+                                    ? `${listing.bathrooms} Phòng tắm `
+                                    : `${listing.bathrooms} Phòng tắm `}
                             </li>
                             <li className="flex items-center gap-1 whitespace-nowrap ">
                                 <FaParking className="text-lg" />

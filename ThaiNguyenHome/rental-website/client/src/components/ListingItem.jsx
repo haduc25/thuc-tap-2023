@@ -33,14 +33,12 @@ export default function ListingItem({ listing }) {
                     </p>
                     <div className="text-slate-700 flex gap-4">
                         <div className="font-bold text-xs">
-                            {listing.bedrooms > 1
-                                ? `${listing.bedrooms} giường ngủ `
-                                : `${listing.bedrooms} giường ngủ `}
+                            {listing.bedrooms > 1 ? `${listing.bedrooms} Phòng ngủ ` : `${listing.bedrooms} Phòng ngủ `}
                         </div>
                         <div className="font-bold text-xs">
                             {listing.bathrooms > 1
-                                ? `${listing.bathrooms} phòng tắm `
-                                : `${listing.bathrooms} phòng tắm `}
+                                ? `${listing.bathrooms} Phòng tắm `
+                                : `${listing.bathrooms} Phòng tắm `}
                         </div>
                     </div>
                 </div>

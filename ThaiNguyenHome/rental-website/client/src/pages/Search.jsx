@@ -137,7 +137,7 @@ export default function Search() {
                         />
                     </div>
                     <div className="flex gap-2 flex-wrap items-start">
-                        <label className="font-semibold mr-2">Kiểu phòng:</label>
+                        <label className="font-semibold mr-2">Kiểu Phòng:</label>
                         <div className="flex-col">
                             <div className="flex gap-2">
                                 <input
@@ -177,7 +177,7 @@ export default function Search() {
                                     onChange={handleChange}
                                     checked={sidebardata.offer}
                                 />
-                                <span>Offer</span>
+                                <span>Giảm giá</span>
                             </div>
                         </div>
                     </div>

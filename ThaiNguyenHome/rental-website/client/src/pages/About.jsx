@@ -5,7 +5,7 @@ export default function About() {
         <div className="py-20 px-4 max-w-6xl mx-auto min-h-[83vh]">
             <h1 className="text-3xl font-bold mb-4 text-slate-800">Giới thiệu về ThaiNguyenHome</h1>
             <p className="mb-4 text-slate-700">
-                ThaiNguyenHome là một công ty cung cấp dịch vụ cho thuê phòng, chỗ ở hàng đầu chuyên về việc hỗ trợ
+                ThaiNguyenHome là một công ty cung cấp dịch vụ cho thuê Phòng, chỗ ở hàng đầu chuyên về việc hỗ trợ
                 khách hàng mua, bán và cho thuê tại những khu vực đắc địa nhất. Đội ngũ chuyên viên giàu kinh nghiệm của
                 chúng tôi cam kết cung cấp dịch vụ xuất sắc và làm cho quá trình trở nên mượt mà nhất có thể.
             </p>

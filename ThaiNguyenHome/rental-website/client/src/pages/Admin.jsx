@@ -9,7 +9,7 @@ import AdminListing from '../components/Admin/AdminListing';
 const RoomList = () => {
     return (
         <div className="min-h-[83vh]">
-            {/* Nội dung cho tab danh sách phòng */}
+            {/* Nội dung cho tab danh sách Phòng */}
             {/* ... */}
         </div>
     );
@@ -65,7 +65,7 @@ const Admin = () => {
     const tabs = [
         { key: 'dashboard', label: 'Trang tổng quan' },
         { key: 'users', label: 'Danh sách người dùng' },
-        { key: 'rooms', label: 'Danh sách phòng' },
+        { key: 'rooms', label: 'Danh sách Phòng' },
         { key: 'notifications', label: 'Thông báo' },
         // Thêm tab mới nếu cần
     ];

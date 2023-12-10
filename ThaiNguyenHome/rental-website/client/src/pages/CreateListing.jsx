@@ -184,14 +184,14 @@ export default function CreateListing() {
 
     return (
         <main className="p-3 max-w-4xl mx-auto min-h-screen">
-            <h1 className="text-3xl font-semibold text-center my-7">Tạo một danh sách phòng cho thuê</h1>
+            <h1 className="text-3xl font-semibold text-center my-7">Tạo một danh sách Phòng cho thuê</h1>
             <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-4">
                 <div className="flex flex-col gap-4 flex-1">
                     <input
                         onChange={handleChange}
                         value={formData.name}
                         type="text"
-                        placeholder="Nhập tên phòng"
+                        placeholder="Nhập tên Phòng"
                         className="border p-3 rounded-lg"
                         id="name"
                         maxLength="62"
@@ -202,7 +202,7 @@ export default function CreateListing() {
                         onChange={handleChange}
                         value={FormData.description}
                         type="text"
-                        placeholder="Mô tả chi tiết về phòng, tiện ích, và không gian xung quanh..."
+                        placeholder="Mô tả chi tiết về Phòng, tiện ích, và không gian xung quanh..."
                         className="border p-3 rounded-lg"
                         id="description"
                         required
@@ -211,7 +211,7 @@ export default function CreateListing() {
                         onChange={handleChange}
                         value={FormData.address}
                         type="text"
-                        placeholder="Địa chỉ chính xác của phòng - số nhà, đường, quận..."
+                        placeholder="Địa chỉ chính xác của Phòng - số nhà, đường, quận..."
                         className="border p-3 rounded-lg"
                         id="address"
                         maxLength="62"
@@ -268,7 +268,7 @@ export default function CreateListing() {
                                 id="offer"
                                 className="w-5"
                             />
-                            <span>Offer</span>
+                            <span>Giảm giá</span>
                         </div>
                     </div>
 
@@ -284,7 +284,7 @@ export default function CreateListing() {
                                 required
                                 className="p-3 border border-gray-300 rounded-lg"
                             />
-                            <p>Giường ngủ</p>
+                            <p>Phòng ngủ</p>
                         </div>
                         <div className="flex item-center gap-2">
                             <input

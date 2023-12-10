@@ -78,30 +78,6 @@ export default function AdminDashboard({ users, listings, handleEdit, handleDele
 
     // bd7
     // Dữ liệu mẫu cho biểu đồ diện cực
-    const polarAreaData = {
-        labels: ['Phòng A', 'Phòng B', 'Phòng C', 'Phòng D', 'Phòng E'],
-        datasets: [
-            {
-                data: [30, 15, 25, 20, 10],
-                backgroundColor: [
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(255, 205, 86, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                ],
-                borderColor: [
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(255, 205, 86, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(153, 102, 255, 1)',
-                ],
-                borderWidth: 1,
-            },
-        ],
-    };
-
     const firstFiveListings = danhSachListing.slice(0, 5);
 
     // Mảng màu mới
@@ -125,28 +101,28 @@ export default function AdminDashboard({ users, listings, handleEdit, handleDele
         labels: firstFiveListings.map((listing) => truncateText(listing.name, 16)),
         datasets: [
             {
-                label: 'Bathrooms',
+                label: 'Phòng tắm',
                 data: firstFiveListings.map((listing) => listing.bathrooms),
                 backgroundColor: backgroundColors,
                 borderColor: borderColors,
                 borderWidth: 1,
             },
             {
-                label: 'Bedrooms',
+                label: 'Phòng ngủ',
                 data: firstFiveListings.map((listing) => listing.bedrooms),
                 backgroundColor: backgroundColors,
                 borderColor: borderColors,
                 borderWidth: 1,
             },
             {
-                label: 'Furnished',
+                label: 'Wifi',
                 data: firstFiveListings.map((listing) => (listing.furnished ? 1 : 0)),
                 backgroundColor: backgroundColors,
                 borderColor: borderColors,
                 borderWidth: 1,
             },
             {
-                label: 'Parking',
+                label: 'Chỗ để xe',
                 data: firstFiveListings.map((listing) => (listing.parking ? 1 : 0)),
                 backgroundColor: backgroundColors,
                 borderColor: borderColors,
@@ -163,17 +139,24 @@ export default function AdminDashboard({ users, listings, handleEdit, handleDele
     };
 
     // bd8
-    // Dữ liệu mẫu cho biểu đồ diện tích
-    const areaChartData = {
-        labels: ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5'],
+    // Tính số lượng người dùng mới trong mỗi ngày
+    const userCountsByDay = {};
+    users.forEach((user) => {
+        const createdAt = new Date(user.createdAt).toLocaleDateString();
+        userCountsByDay[createdAt] = (userCountsByDay[createdAt] || 0) + 1;
+    });
+
+    // Chuyển dữ liệu thành định dạng phù hợp cho biểu đồ
+    const chartData = {
+        labels: Object.keys(userCountsByDay),
         datasets: [
             {
-                label: 'Số lượng đơn đặt phòng',
-                data: [12, 19, 3, 5, 2],
-                fill: true, // Tạo hiệu ứng diện tích
+                label: 'Số người tạo mới',
                 backgroundColor: 'rgba(75, 192, 192, 0.2)',
                 borderColor: 'rgba(75, 192, 192, 1)',
-                borderWidth: 1,
+                borderWidth: 2,
+                fill: true,
+                data: Object.values(userCountsByDay),
             },
         ],
     };
@@ -409,14 +392,13 @@ export default function AdminDashboard({ users, listings, handleEdit, handleDele
 
             {/* Phần biểu đồ */}
             <div className="my-2 mx-2 max-w-sm">
-                <h2>Biểu đồ Phân phối phòng theo diện tích (Diện cực)</h2>
-                <PolarArea data={polarAreaData} />
+                <h2>Biểu đồ polararea tổng quan về tiện ích</h2>
                 <PolarArea data={polarAreaChartData} />
             </div>
             {/* Phần biểu đồ */}
-            <div className="my-2 mx-2 max-w-sm">
-                <h2>Biểu đồ Số lượng đơn đặt phòng theo tháng (Diện tích)</h2>
-                <Line data={areaChartData} />
+            <div className="my-2 mx-2 max-w-lg">
+                <h2>Biểu đồ số người tạo mới trong 7 ngày qua</h2>
+                <Line data={chartData} />
             </div>
 
             {/* REAL DATA _ CHART */}

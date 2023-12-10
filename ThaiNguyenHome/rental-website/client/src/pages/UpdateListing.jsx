@@ -156,7 +156,7 @@ export default function CreateListing() {
     };
     return (
         <main className="p-3 max-w-4xl mx-auto min-h-screen">
-            <h1 className="text-3xl font-semibold text-center my-7">Cập nhật danh sách phòng cho thuê</h1>
+            <h1 className="text-3xl font-semibold text-center my-7">Cập nhật danh sách Phòng cho thuê</h1>
             <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-4">
                 <div className="flex flex-col gap-4 flex-1">
                     <input
@@ -237,7 +237,7 @@ export default function CreateListing() {
                                 onChange={handleChange}
                                 checked={formData.offer}
                             />
-                            <span>Offer</span>
+                            <span>Giảm giá</span>
                         </div>
                     </div>
                     <div className="flex flex-wrap gap-6">
@@ -252,7 +252,7 @@ export default function CreateListing() {
                                 onChange={handleChange}
                                 value={formData.bedrooms}
                             />
-                            <p>Giường ngủ</p>
+                            <p>Phòng ngủ</p>
                         </div>
                         <div className="flex items-center gap-2">
                             <input

@@ -57,7 +57,7 @@ export default function Home() {
                 <div className="text-gray-400 text-xs sm:text-sm">
                     ThaiNguyenHome là lựa chọn tốt nhất để tìm kiếm ngôi nhà hoàn hảo cho cuộc sống của bạn
                     <br />
-                    Chúng tôi có sẵn một loạt căn hộ, căn phòng rộng lớn để bạn lựa chọn.
+                    Chúng tôi có sẵn một loạt căn hộ, căn Phòng rộng lớn để bạn lựa chọn.
                 </div>
                 <Link to={'/search'} className="text-xs sm:text-sm text-blue-800 font-bold hover:underline">
                     Let's get started...
@@ -118,9 +118,9 @@ export default function Home() {
                 {saleListings && saleListings.length > 0 && (
                     <div className="">
                         <div className="my-3">
-                            <h2 className="text-2xl font-semibold text-slate-600">Địa điểm phòng đang được bán</h2>
+                            <h2 className="text-2xl font-semibold text-slate-600">Địa điểm Phòng đang được bán</h2>
                             <Link className="text-sm text-blue-800 hover:underline" to={'/search?type=sale'}>
-                                Hiển thị thêm phòng đang được bán
+                                Hiển thị thêm Phòng đang được bán
                             </Link>
                         </div>
                         <div className="flex flex-wrap gap-4">

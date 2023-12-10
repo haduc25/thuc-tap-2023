@@ -55,7 +55,7 @@ export default function AdminListing({ users, listings, handleEdit, handleDelete
                 <div className="px-6 py-3 whitespace-nowrap border bg-blue-500 hover:bg-blue-700 focus:border-blue-300 rounded-md hover:cursor-pointer">
                     <button onClick={() => handleAddUser()} className="flex items-center space-x-1 text-slate-100  ">
                         <FaPlusCircle className="text-xl" />
-                        <span className="hidden md:inline">Thêm danh sách phòng mới</span>
+                        <span className="hidden md:inline">Thêm danh sách Phòng mới</span>
                     </button>
                 </div>
                 {/* <input type="text" placeholder="Search..." /> */}
@@ -87,7 +87,7 @@ export default function AdminListing({ users, listings, handleEdit, handleDelete
                             scope="col"
                             className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                         >
-                            Tên phòng
+                            Tên Phòng
                         </th>
                         <th
                             scope="col"
