@@ -1,10 +1,11 @@
 // ICONS
-import { useEffect, useState } from 'react';
-import { FaSearch, FaUser, FaUserCog } from 'react-icons/fa';
+import { useState, useEffect } from 'react';
+import { FaSearch, FaUser, FaUserCog, FaEdit, FaTimesCircle, FaPlusCircle } from 'react-icons/fa';
 
-import { BarElement, CategoryScale, Chart as ChartJS, Legend, LinearScale, Title, Tooltip } from 'chart.js';
+import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
+import { Bar, Doughnut, Line, Pie, PolarArea, Radar } from 'react-chartjs-2';
 import 'chart.js/auto';
-import { Bar, Line, PolarArea } from 'react-chartjs-2';
+import ListingItem from '../ListingItem';
 import ListingItemCustom from '../ListingItemCustom';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
@@ -27,6 +28,19 @@ export default function AdminDashboard({ users, listings, handleEdit, handleDele
         };
         fetchListing();
     }, []);
+
+    function formatDateTime(input) {
+        const date = new Date(input);
+        const options = {
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric',
+        };
+        return date.toLocaleString('vi-VN', options);
+    }
 
     const roleIcons = {
         admin: <FaUserCog className="text-xl text-blue-500" />,
@@ -182,6 +196,30 @@ export default function AdminDashboard({ users, listings, handleEdit, handleDele
 
     // bd2
 
+    const calculateListingPercentage = () => {
+        const rentCount = danhSachListing.filter((listing) => listing.type === 'rent').length;
+        const saleCount = danhSachListing.length - rentCount;
+
+        const totalListings = danhSachListing.length;
+        const rentPercentage = (rentCount / totalListings) * 100;
+        const salePercentage = (saleCount / totalListings) * 100;
+
+        return [rentPercentage, salePercentage];
+    };
+
+    const createListingData = (data) => ({
+        labels: ['Cho thuê', 'Đang bán'],
+        datasets: [
+            {
+                // label: 'Tỷ lệ phần trăm (%) giữa các loại phòng',
+                data,
+                backgroundColor: ['#36A2EB', '#FF6384'],
+                borderColor: ['#36A2EB', '#FF6384'],
+                borderWidth: 1,
+            },
+        ],
+    });
+
     // sort for table
     // Sắp xếp mảng danhSachListing theo thời gian tạo mới giảm dần
     const sortedListings = danhSachListing.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
@@ -195,7 +233,6 @@ export default function AdminDashboard({ users, listings, handleEdit, handleDele
                 <div className="w-1/2 pl-4">
                     {/* Phần biểu đồ */}
                     <div className="my-32 mx-2 max-w-sm">
-                        <h1 className="font-semibold text-lg mb-8">Các biểu đồ số liệu</h1>
                         <h2>Biểu đồ polararea tổng quan về tiện ích</h2>
                         <PolarArea data={polarAreaChartData} />
                     </div>
@@ -224,7 +261,6 @@ export default function AdminDashboard({ users, listings, handleEdit, handleDele
                         </form>
                     </div>
 
-                    <h1 className="font-semibold text-lg pl-8">Danh sách các phòng mới nhất</h1>
                     {/* start: test add item */}
                     <div className="min-w-full flex-1 p-7 flex flex-wrap gap-4">
                         {latestListings.map((listing) => (
@@ -232,6 +268,68 @@ export default function AdminDashboard({ users, listings, handleEdit, handleDele
                         ))}
                     </div>
                     {/* end: test add item */}
+
+                    <table className="min-w-full divide-y divide-gray-200">
+                        <thead className="bg-gray-50">
+                            <tr>
+                                <th
+                                    scope="col"
+                                    className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                >
+                                    STT
+                                </th>
+                                <th
+                                    scope="col"
+                                    className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                >
+                                    Tên phòng
+                                </th>
+                                <th
+                                    scope="col"
+                                    className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                >
+                                    Ảnh bìa
+                                </th>
+                                <th
+                                    scope="col"
+                                    className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                >
+                                    Create At
+                                </th>
+                                <th
+                                    scope="col"
+                                    className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                >
+                                    Người đăng
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody className="bg-white divide-y divide-gray-200">
+                            {latestListings.map((listing, index) => {
+                                const userId = listing._id;
+                                return (
+                                    <tr key={listing._id} className={index % 2 === 0 ? 'bg-gray-100' : ''}>
+                                        <td className="px-6 py-4 whitespace-nowrap">{index + 1}</td>
+                                        <td className="px-6 py-4 whitespace-nowrap max-w-[250px] truncate truncate-overflow">
+                                            {listing.name}
+                                        </td>
+
+                                        <td className="px-6 py-4 whitespace-nowrap">
+                                            <img
+                                                src={listing.imageUrls[0]}
+                                                alt="preview image"
+                                                className="w-32 h-w-32 rounded-md"
+                                            />
+                                        </td>
+                                        <td className="px-6 py-4 whitespace-nowrap">
+                                            {formatDateTime(listing.createdAt)}
+                                        </td>
+                                        <td className="px-6 py-4 whitespace-nowrap">{listing.username}</td>
+                                    </tr>
+                                );
+                            })}
+                        </tbody>
+                    </table>
                 </div>
             </div>
 

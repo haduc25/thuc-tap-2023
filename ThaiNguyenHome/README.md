@@ -599,10 +599,11 @@ plugins: [require('@tailwindcss/line-clamp')],
 
 ## List shortcut in React
 
-| Shortcut  | Description                       |
-| --------- | --------------------------------- |
-| rfc       | React Function Component          |
-| MB1 + Alt | Dùng để sửa nhiều dòng cùng 1 lúc |
+| Shortcut        | Description                                       |
+| --------------- | ------------------------------------------------- |
+| rfc             | React Function Component                          |
+| MB1 + Alt       | Dùng để sửa nhiều dòng cùng 1 lúc                 |
+| Shift + Alt + o | Loại bỏ các thư viện mà không dùng đến trong file |
 
 ## Extentions VSCode
 

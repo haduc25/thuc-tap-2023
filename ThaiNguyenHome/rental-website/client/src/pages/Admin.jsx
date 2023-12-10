@@ -66,7 +66,6 @@ const Admin = () => {
         { key: 'dashboard', label: 'Trang tổng quan' },
         { key: 'users', label: 'Danh sách người dùng' },
         { key: 'rooms', label: 'Danh sách Phòng' },
-        { key: 'notifications', label: 'Thông báo' },
         // Thêm tab mới nếu cần
     ];
 
@@ -108,8 +107,6 @@ const Admin = () => {
                     handleEdit={handleEdit}
                     handleDelete={handleDelete}
                 />
-            ) : currentTab === 'notifications' ? (
-                <p>NotificationComponent</p>
             ) : (
                 <p>Component của tab này chưa được định nghĩa.</p>
             )}
