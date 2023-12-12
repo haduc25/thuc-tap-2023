@@ -87,10 +87,28 @@ const Admin = () => {
     return (
         <div>
             {showAccessDenied ? (
-                <div>
-                    <p>Bạn không có quyền truy cập trang này</p>
-                    <p>Quay lại sau: {secondsRemaining} giây</p>
-                    <button onClick={() => navigate('/')}>Quay lại trang chủ</button>
+                <div className="flex items-center justify-center min-h-[83vh]">
+                    <div className="text-center">
+                        {/* Hình ảnh "Access Denied" */}
+                        <img
+                            src="./src/assets/img/vecteezy_folder-security-no-bg.png"
+                            alt="Access Denied"
+                            style={{ maxWidth: '300px' }}
+                            draggable="false"
+                            className="mx-auto"
+                        />
+                        <p className="text-2xl mt-2 font-semibold">Bạn không có quyền truy cập trang này</p>
+                        <p className="text-lg">
+                            Tự động chuyển hướng sau <span className="text-red-500 font-bold">{secondsRemaining}</span>{' '}
+                            giây
+                        </p>
+                        <button
+                            onClick={() => navigate('/')}
+                            className="mt-4 py-3 px-6 bg-slate-700 text-white rounded-lg uppercase hover:opacity-95 disabled:opacity-80"
+                        >
+                            Quay lại trang chủ
+                        </button>
+                    </div>
                 </div>
             ) : (
                 <div>
