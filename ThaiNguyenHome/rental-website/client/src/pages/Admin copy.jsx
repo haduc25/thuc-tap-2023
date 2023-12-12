@@ -1,143 +1,151 @@
-import React from 'react';
+import { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 
-export default function Admin() {
-    const users = [
-        {
-            _id: '1',
-            username: 'john_doe',
-            email: 'john.doe@example.com',
-            avatar: 'https://th.bing.com/th/id/R.d066dbbaf670ea810082b082cbabf368?rik=dpSBI42TQxQehw&pid=ImgRaw&r=0',
-            createdAt: '2023-01-01T12:00:00Z',
-            updatedAt: '2023-01-05T15:30:00Z',
-            role: 'user',
-            postCount: 10,
-        },
-        {
-            _id: '2',
-            username: 'john_doe',
-            email: 'john.doe@example.com',
-            avatar: 'https://th.bing.com/th/id/R.d066dbbaf670ea810082b082cbabf368?rik=dpSBI42TQxQehw&pid=ImgRaw&r=0',
-            createdAt: '2023-01-01T12:00:00Z',
-            updatedAt: '2023-01-05T15:30:00Z',
-            role: 'user',
-            postCount: 10,
-        },
-        {
-            _id: '3',
-            username: 'john_doe',
-            email: 'john.doe@example.com',
-            avatar: 'https://th.bing.com/th/id/R.d066dbbaf670ea810082b082cbabf368?rik=dpSBI42TQxQehw&pid=ImgRaw&r=0',
-            createdAt: '2023-01-01T12:00:00Z',
-            updatedAt: '2023-01-05T15:30:00Z',
-            role: 'user',
-            postCount: 10,
-        },
-    ];
+// ICONS
+import AdminDashboard from '../components/Admin/AdminDashboard';
+import AdminListing from '../components/Admin/AdminListing';
+import AdminUserList from '../components/Admin/AdminUserList';
+import { useSelector } from 'react-redux';
+
+const Admin = () => {
+    const navigate = useNavigate();
+
+    const [danhSachUsers, setdanhSachUsers] = useState([]);
+    const [danhSachListing, setDanhSachListing] = useState([]);
+
+    const { currentUser } = useSelector((state) => state.user);
+    console.log('currentUser: ', currentUser.role); //user
+
+    // Kiểm tra nếu không phải là admin thì hiển thị thông báo và quay lại trang chủ
+    useEffect(() => {
+        if (currentUser.role !== 'admin') {
+            alert('Bạn không có quyền truy cập trang này');
+            // Thực hiện chuyển hướng đến trang chủ hoặc điều hướng khác
+            // Ví dụ: window.location.href = '/';
+
+            // chuyển hướng về trang chủ
+            navigate('/');
+        } else {
+            // Nếu là admin, thực hiện fetch dữ liệu
+            const fetchLandlord = async () => {
+                try {
+                    const res = await fetch(`/api/admin/getAllUsers`);
+                    const data = await res.json();
+                    setdanhSachUsers(data);
+                    console.log('running');
+                } catch (error) {
+                    console.log('error2: ', error);
+                }
+            };
+            fetchLandlord();
+
+            const fetchListing = async () => {
+                try {
+                    const res = await fetch('api/admin/getTotalPostCount');
+                    const data = await res.json();
+                    setDanhSachListing(data);
+                    console.log('running2');
+                } catch (error) {
+                    console.log('error2: ', error);
+                }
+            };
+            fetchListing();
+        }
+    }, [currentUser.role]);
+
+    // // users
+    // useEffect(() => {
+    //     const fetchLandlord = async () => {
+    //         try {
+    //             const res = await fetch(`/api/admin/getAllUsers`);
+    //             const data = await res.json();
+    //             setdanhSachUsers(data);
+    //             console.log('running');
+    //         } catch (error) {
+    //             console.log('error2: ', error);
+    //         }
+    //     };
+    //     fetchLandlord();
+    // }, []);
+
+    // // listing
+    // useEffect(() => {
+    //     const fetchListing = async () => {
+    //         try {
+    //             const res = await fetch('api/admin/getTotalPostCount');
+    //             const data = await res.json();
+    //             setDanhSachListing(data);
+    //             console.log('running2');
+    //         } catch (error) {
+    //             console.log('error2: ', error);
+    //         }
+    //     };
+    //     fetchListing();
+    // }, []);
 
     const handleEdit = (userId) => {
         // Xử lý chức năng sửa đổi
-        console.log(`Edit user with ID ${userId}`);
+        alert(`Edit user with ID ${userId}`);
     };
 
     const handleDelete = (userId) => {
         // Xử lý chức năng xóa
-        console.log(`Delete user with ID ${userId}`);
+        alert(`Delete user with ID ${userId}`);
     };
+
+    const [currentTab, setCurrentTab] = useState('dashboard'); // Mặc định hiển thị tab người dùng
+
+    // Thêm các tab mới vào mảng tabs khi cần
+    const tabs = [
+        { key: 'dashboard', label: 'Trang tổng quan' },
+        { key: 'users', label: 'Danh sách người dùng' },
+        { key: 'rooms', label: 'Danh sách Phòng' },
+        // Thêm tab mới nếu cần
+    ];
+
     return (
-        <div className="min-h-[83vh]">
-            <table className="min-w-full divide-y divide-gray-200">
-                <thead className="bg-gray-50">
-                    <tr>
-                        <th
-                            scope="col"
-                            className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                        >
-                            STT
-                        </th>
-                        <th
-                            scope="col"
-                            className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                        >
-                            Tên người dùng
-                        </th>
-                        <th
-                            scope="col"
-                            className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                        >
-                            Email
-                        </th>
-                        <th
-                            scope="col"
-                            className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                        >
-                            Avatar
-                        </th>
-                        <th
-                            scope="col"
-                            className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                        >
-                            Create At
-                        </th>
-                        <th
-                            scope="col"
-                            className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                        >
-                            Update At
-                        </th>
-                        <th
-                            scope="col"
-                            className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                        >
-                            Role
-                        </th>
-                        <th
-                            scope="col"
-                            className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                        >
-                            Số bài đã đăng
-                        </th>
-                        <th
-                            colSpan={2}
-                            scope="col"
-                            className="px-4 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider"
-                        >
-                            Tùy chọn
-                        </th>
-                    </tr>
-                </thead>
-                <tbody className="bg-white divide-y divide-gray-200">
-                    {users.map((user, index) => (
-                        <tr key={user._id} className={index % 2 === 0 ? 'bg-gray-100' : ''}>
-                            <td className="px-6 py-4 whitespace-nowrap">{index + 1}</td>
-                            <td className="px-6 py-4 whitespace-nowrap">{user.username}</td>
-                            <td className="px-6 py-4 whitespace-nowrap">{user.email}</td>
-                            <td className="px-6 py-4 whitespace-nowrap">
-                                <img src={user.avatar} alt="Avatar" className="w-8 h-8 rounded-full" />
-                            </td>
-                            <td className="px-6 py-4 whitespace-nowrap">{user.createdAt}</td>
-                            <td className="px-6 py-4 whitespace-nowrap">{user.updatedAt}</td>
-                            <td className="px-6 py-4 whitespace-nowrap">{user.role}</td>
-                            <td className="px-12 py-4 whitespace-nowrap">{user.postCount}</td>
-                            <td className="px-6 py-4 whitespace-nowrap border">
-                                <button
-                                    onClick={() => handleEdit(user._id)}
-                                    className="text-blue-500 hover:underline focus:outline-none focus:ring focus:border-blue-300"
-                                >
-                                    Sửa
-                                </button>
-                            </td>
-                            <td className="px-6 py-4 whitespace-nowrap border">
-                                <button
-                                    onClick={() => handleDelete(user._id)}
-                                    className="text-red-500 hover:underline focus:outline-none focus:ring focus:border-red-300"
-                                >
-                                    Xoá
-                                </button>
-                            </td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
+        <div>
+            <div className="flex">
+                {tabs.map((tab) => (
+                    <button
+                        key={tab.key}
+                        onClick={() => setCurrentTab(tab.key)}
+                        className={`px-4 py-2 mx-2 font-bold ${
+                            currentTab === tab.key ? 'bg-gray-100' : 'bg-gray-300 opacity-20'
+                        } rounded-md`}
+                    >
+                        {tab.label}
+                    </button>
+                ))}
+            </div>
+
+            {currentTab === 'dashboard' ? (
+                <AdminDashboard
+                    users={danhSachUsers}
+                    listings={danhSachListing}
+                    handleEdit={handleEdit}
+                    handleDelete={handleDelete}
+                />
+            ) : currentTab === 'users' ? (
+                <AdminUserList
+                    users={danhSachUsers}
+                    listings={danhSachListing}
+                    handleEdit={handleEdit}
+                    handleDelete={handleDelete}
+                />
+            ) : currentTab === 'rooms' ? (
+                // <RoomList />
+                <AdminListing
+                    users={danhSachUsers}
+                    listings={danhSachListing}
+                    handleEdit={handleEdit}
+                    handleDelete={handleDelete}
+                />
+            ) : (
+                <p>Component của tab này chưa được định nghĩa.</p>
+            )}
         </div>
     );
-}
+};
+
+export default Admin;

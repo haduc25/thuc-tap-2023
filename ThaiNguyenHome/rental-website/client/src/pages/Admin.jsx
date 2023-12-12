@@ -12,137 +12,128 @@ const Admin = () => {
 
     const [danhSachUsers, setdanhSachUsers] = useState([]);
     const [danhSachListing, setDanhSachListing] = useState([]);
+    const [showAccessDenied, setShowAccessDenied] = useState(false);
+    const [secondsRemaining, setSecondsRemaining] = useState(5);
 
     const { currentUser } = useSelector((state) => state.user);
-    console.log('currentUser: ', currentUser.role); //user
+    console.log('first');
 
-    // Kiểm tra nếu không phải là admin thì hiển thị thông báo và quay lại trang chủ
     useEffect(() => {
+        // Kiểm tra quyền truy cập và hiển thị thông báo nếu không phải admin
         if (currentUser.role !== 'admin') {
-            alert('Bạn không có quyền truy cập trang này');
-            // Thực hiện chuyển hướng đến trang chủ hoặc điều hướng khác
-            // Ví dụ: window.location.href = '/';
+            setShowAccessDenied(true);
 
-            // chuyển hướng về trang chủ
-            navigate('/');
-        } else {
-            // Nếu là admin, thực hiện fetch dữ liệu
-            const fetchLandlord = async () => {
-                try {
-                    const res = await fetch(`/api/admin/getAllUsers`);
-                    const data = await res.json();
-                    setdanhSachUsers(data);
-                    console.log('running');
-                } catch (error) {
-                    console.log('error2: ', error);
-                }
-            };
-            fetchLandlord();
+            // Sử dụng setInterval để cập nhật thời gian còn lại mỗi giây
+            const intervalId = setInterval(() => {
+                setSecondsRemaining((prevSeconds) => prevSeconds - 1);
+            }, 1000);
 
-            const fetchListing = async () => {
-                try {
-                    const res = await fetch('api/admin/getTotalPostCount');
-                    const data = await res.json();
-                    setDanhSachListing(data);
-                    console.log('running2');
-                } catch (error) {
-                    console.log('error2: ', error);
-                }
+            // Sử dụng setTimeout để chuyển hướng sau 5 giây
+            const timeoutId = setTimeout(() => {
+                navigate('/');
+            }, 5000);
+
+            // Clear interval và timeout khi component unmount để tránh memory leak
+            return () => {
+                clearInterval(intervalId);
+                clearTimeout(timeoutId);
             };
-            fetchListing();
+        }
+    }, [currentUser.role, navigate]);
+
+    useEffect(() => {
+        // Nếu là admin, thực hiện fetch dữ liệu
+        const fetchData = async () => {
+            try {
+                const [usersResponse, listingResponse] = await Promise.all([
+                    fetch(`/api/admin/getAllUsers`),
+                    fetch('api/admin/getTotalPostCount'),
+                ]);
+
+                const usersData = await usersResponse.json();
+                const listingData = await listingResponse.json();
+
+                setdanhSachUsers(usersData);
+                setDanhSachListing(listingData);
+
+                console.log('Data fetched');
+            } catch (error) {
+                console.log('Error fetching data: ', error);
+            }
+        };
+
+        // Kiểm tra nếu là admin mới fetch dữ liệu
+        if (currentUser.role === 'admin') {
+            fetchData();
         }
     }, [currentUser.role]);
 
-    // // users
-    // useEffect(() => {
-    //     const fetchLandlord = async () => {
-    //         try {
-    //             const res = await fetch(`/api/admin/getAllUsers`);
-    //             const data = await res.json();
-    //             setdanhSachUsers(data);
-    //             console.log('running');
-    //         } catch (error) {
-    //             console.log('error2: ', error);
-    //         }
-    //     };
-    //     fetchLandlord();
-    // }, []);
-
-    // // listing
-    // useEffect(() => {
-    //     const fetchListing = async () => {
-    //         try {
-    //             const res = await fetch('api/admin/getTotalPostCount');
-    //             const data = await res.json();
-    //             setDanhSachListing(data);
-    //             console.log('running2');
-    //         } catch (error) {
-    //             console.log('error2: ', error);
-    //         }
-    //     };
-    //     fetchListing();
-    // }, []);
-
     const handleEdit = (userId) => {
-        // Xử lý chức năng sửa đổi
         alert(`Edit user with ID ${userId}`);
     };
 
     const handleDelete = (userId) => {
-        // Xử lý chức năng xóa
         alert(`Delete user with ID ${userId}`);
     };
 
-    const [currentTab, setCurrentTab] = useState('dashboard'); // Mặc định hiển thị tab người dùng
+    const [currentTab, setCurrentTab] = useState('dashboard');
 
-    // Thêm các tab mới vào mảng tabs khi cần
     const tabs = [
         { key: 'dashboard', label: 'Trang tổng quan' },
         { key: 'users', label: 'Danh sách người dùng' },
         { key: 'rooms', label: 'Danh sách Phòng' },
-        // Thêm tab mới nếu cần
     ];
 
     return (
         <div>
-            <div className="flex">
-                {tabs.map((tab) => (
-                    <button
-                        key={tab.key}
-                        onClick={() => setCurrentTab(tab.key)}
-                        className={`px-4 py-2 mx-2 font-bold ${
-                            currentTab === tab.key ? 'bg-gray-100' : 'bg-gray-300 opacity-20'
-                        } rounded-md`}
-                    >
-                        {tab.label}
-                    </button>
-                ))}
-            </div>
-
-            {currentTab === 'dashboard' ? (
-                <AdminDashboard
-                    users={danhSachUsers}
-                    listings={danhSachListing}
-                    handleEdit={handleEdit}
-                    handleDelete={handleDelete}
-                />
-            ) : currentTab === 'users' ? (
-                <AdminUserList
-                    users={danhSachUsers}
-                    listings={danhSachListing}
-                    handleEdit={handleEdit}
-                    handleDelete={handleDelete}
-                />
-            ) : currentTab === 'rooms' ? (
-                // <RoomList />
-                <AdminListing
-                    users={danhSachUsers}
-                    listings={danhSachListing}
-                    handleEdit={handleEdit}
-                    handleDelete={handleDelete}
-                />
+            {showAccessDenied ? (
+                <div>
+                    <p>Bạn không có quyền truy cập trang này</p>
+                    <p>Quay lại sau: {secondsRemaining} giây</p>
+                    <button onClick={() => navigate('/')}>Quay lại trang chủ</button>
+                </div>
             ) : (
-                <p>Component của tab này chưa được định nghĩa.</p>
+                <div>
+                    <div className="flex">
+                        {tabs.map((tab) => (
+                            <button
+                                key={tab.key}
+                                onClick={() => setCurrentTab(tab.key)}
+                                className={`px-4 py-2 mx-2 font-bold ${
+                                    currentTab === tab.key ? 'bg-gray-100' : 'bg-gray-300 opacity-20'
+                                } rounded-md`}
+                            >
+                                {tab.label}
+                            </button>
+                        ))}
+                    </div>
+
+                    {/* Render nội dung dựa trên currentTab */}
+                    {currentTab === 'dashboard' ? (
+                        <AdminDashboard
+                            users={danhSachUsers}
+                            listings={danhSachListing}
+                            handleEdit={handleEdit}
+                            handleDelete={handleDelete}
+                        />
+                    ) : currentTab === 'users' ? (
+                        <AdminUserList
+                            users={danhSachUsers}
+                            listings={danhSachListing}
+                            handleEdit={handleEdit}
+                            handleDelete={handleDelete}
+                        />
+                    ) : currentTab === 'rooms' ? (
+                        <AdminListing
+                            users={danhSachUsers}
+                            listings={danhSachListing}
+                            handleEdit={handleEdit}
+                            handleDelete={handleDelete}
+                        />
+                    ) : (
+                        <p>Component của tab này chưa được định nghĩa.</p>
+                    )}
+                </div>
             )}
         </div>
     );
