@@ -156,12 +156,12 @@ export default function CreateListing() {
     };
     return (
         <main className="p-3 max-w-4xl mx-auto min-h-screen">
-            <h1 className="text-3xl font-semibold text-center my-7">Cập nhật danh sách Phòng cho thuê</h1>
+            <h1 className="text-3xl font-semibold text-center my-7">Cập nhật danh sách phòng cho thuê</h1>
             <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-4">
                 <div className="flex flex-col gap-4 flex-1">
                     <input
                         type="text"
-                        placeholder="Name"
+                        placeholder="Nhập tên phòng"
                         className="border p-3 rounded-lg"
                         id="name"
                         maxLength="128"
@@ -172,7 +172,7 @@ export default function CreateListing() {
                     />
                     <textarea
                         type="text"
-                        placeholder="Description"
+                        placeholder="Mô tả chi tiết về phòng, tiện ích, và không gian xung quanh..."
                         className="border p-3 rounded-lg"
                         id="description"
                         required
@@ -181,7 +181,7 @@ export default function CreateListing() {
                     />
                     <input
                         type="text"
-                        placeholder="Address"
+                        placeholder="Địa chỉ chính xác của phòng - số nhà, đường, quận..."
                         className="border p-3 rounded-lg"
                         id="address"
                         required

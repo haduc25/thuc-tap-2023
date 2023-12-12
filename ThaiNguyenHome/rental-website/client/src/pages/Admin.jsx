@@ -81,7 +81,7 @@ const Admin = () => {
     const tabs = [
         { key: 'dashboard', label: 'Trang tổng quan' },
         { key: 'users', label: 'Danh sách người dùng' },
-        { key: 'rooms', label: 'Danh sách Phòng' },
+        { key: 'rooms', label: 'Danh sách phòng' },
     ];
 
     return (
