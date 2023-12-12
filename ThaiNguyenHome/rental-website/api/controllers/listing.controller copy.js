@@ -26,61 +26,24 @@ export const deleteListing = async (req, res, next) => {
     }
 };
 
-// export const updateListing = async (req, res, next) => {
-//     const listing = await Listing.findById(req.params.id);
-
-//     if (!listing) return next(errorHandler(404, 'Listing not found!'));
-//     console.log('req.user.id: ', req.user.id);
-//     console.log('listing.userRef: ', listing.userRef);
-//     console.log('req.user.role: ', req.user.role);
-//     console.log('req.user: ', req.user);
-
-//     if (req.user.id !== listing.userRef) return next(errorHandler(401, 'You can only update your own listings!'));
-//     //     // Kiểm tra xem user có quyền admin không
-//     // if (req.user.role !== 'admin' && req.user.id !== listing.userRef) {
-//     //     return next(errorHandler(401, 'You can only update your own listings!'));
-//     // }
-
-//     try {
-//         const updatedListing = await Listing.findByIdAndUpdate(req.params.id, req.body, { new: true });
-//         res.status(200).json(updatedListing);
-//     } catch (error) {
-//         next(error);
-//     }
-// };
-
 export const updateListing = async (req, res, next) => {
     const listing = await Listing.findById(req.params.id);
 
     if (!listing) return next(errorHandler(404, 'Listing not found!'));
+    console.log('req.user.id: ', req.user.id);
+    console.log('listing.userRef: ', listing.userRef);
+    console.log('req.user.role: ', req.user.role);
+    console.log('req.user: ', req.user);
 
-    if (req.user.role !== 'admin' && req.user.id !== listing.userRef) {
-        return next(errorHandler(401, 'You can only update your own listings!'));
-    }
-
-    console.log('listing.controller.js_req.params.id (id cua listing): ', req.params.id);
-    console.log('listing.controller.js_req.body (body cua listing): ', req.body);
-    console.log('listing.controller.listing (body cua listing): ', listing.userRef);
+    if (req.user.id !== listing.userRef) return next(errorHandler(401, 'You can only update your own listings!'));
+    //     // Kiểm tra xem user có quyền admin không
+    // if (req.user.role !== 'admin' && req.user.id !== listing.userRef) {
+    //     return next(errorHandler(401, 'You can only update your own listings!'));
+    // }
 
     try {
-        // Kiểm tra xem user có quyền admin không
-        if (req.user.role === 'admin') {
-            // Nếu role là admin, giữ nguyên userRef
-            const updatedListing = await Listing.findByIdAndUpdate(
-                req.params.id,
-                { ...req.body, userRef: listing.userRef },
-                { new: true },
-            );
-            console.log('ADMINNN');
-            res.status(200).json(updatedListing);
-        } else {
-            // Nếu role là user
-            const updatedListing = await Listing.findByIdAndUpdate(req.params.id, req.body, { new: true });
-            res.status(200).json(updatedListing);
-            console.log('USERRRR');
-
-            res.status(200).json(updatedListing);
-        }
+        const updatedListing = await Listing.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        res.status(200).json(updatedListing);
     } catch (error) {
         next(error);
     }
