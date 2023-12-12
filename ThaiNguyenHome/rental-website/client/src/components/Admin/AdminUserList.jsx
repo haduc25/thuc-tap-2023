@@ -116,7 +116,7 @@ export default function AdminUserList({ users, listings, handleEdit, handleDelet
                                 <td className="px-6 py-4 whitespace-nowrap">{user.username}</td>
                                 <td className="px-6 py-4 whitespace-nowrap">{user.email}</td>
                                 <td className="px-6 py-4 whitespace-nowrap">
-                                    <img src={user.avatar} alt="Avatar" className="w-8 h-8 rounded-full" />
+                                    <img src={user.avatar} alt="Avatar" className="w-8 h-8 rounded-full object-cover" />
                                 </td>
                                 <td className="px-6 py-4 whitespace-nowrap">{formatDateTime(user.createdAt)}</td>
                                 <td className="px-6 py-4 whitespace-nowrap">{formatDateTime(user.updatedAt)}</td>

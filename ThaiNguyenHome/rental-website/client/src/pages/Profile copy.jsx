@@ -26,7 +26,6 @@ export default function Profile() {
     const [formData, setFormData] = useState({});
     const [updateSuccess, setUpdateSuccess] = useState(false);
     const [showListingsError, setShowListingsError] = useState(false);
-    const [showListings, setShowListings] = useState(false);
     const [userListings, setUserListings] = useState([]);
     const [dialogConfig, setDialogConfig] = useState({
         isOpen: false,
@@ -47,11 +46,6 @@ export default function Profile() {
             handleFileUpload(file);
         }
     }, [file]);
-
-    useEffect(() => {
-        // Gọi hàm handleShowListings khi component được tạo
-        // handleShowListings();
-    }, []);
 
     // upload image to firebase
     const handleFileUpload = (file) => {
@@ -154,23 +148,16 @@ export default function Profile() {
     const handleShowListings = async () => {
         try {
             setShowListingsError(false);
+            const res = await fetch(`api/user/listings/${currentUser._id}`);
+            const data = await res.json();
 
-            if (!showListings) {
-                // Chỉ fetch dữ liệu nếu danh sách không được hiển thị
-                const res = await fetch(`api/user/listings/${currentUser._id}`);
-                const data = await res.json();
-
-                if (data.success === false) {
-                    setShowListingsError(true);
-                    return;
-                }
-
-                // lưu listings
-                setUserListings(data);
+            if (data.success === false) {
+                setShowListingsError(true);
+                return;
             }
 
-            // Đảo ngược trạng thái hiển thị danh sách
-            setShowListings((prev) => !prev);
+            // lưu listings
+            setUserListings(data);
         } catch (error) {
             setShowListingsError(true);
         }
@@ -334,7 +321,7 @@ export default function Profile() {
             <p className="text-red-700 mt-5">{error ? error : ''}</p>
             <p className="text-green-700 mt-5">{updateSuccess ? 'User is updated successfully' : ''}</p>
 
-            {/* <button onClick={handleShowListings} className="text-green-700 w-full">
+            <button onClick={handleShowListings} className="text-green-700 w-full">
                 Hiển thị danh sách
             </button>
             <p className="text-red-700 mt-5">{showListingsError ? 'Error showing listings' : ''}</p>
@@ -376,53 +363,7 @@ export default function Profile() {
                         </div>
                     ))}
                 </div>
-            )} */}
-
-            <div>
-                <button onClick={handleShowListings} className="text-green-700 w-full">
-                    {showListings ? 'Ẩn danh sách' : 'Hiển thị danh sách'}
-                </button>
-                <p className="text-red-700 mt-5">{showListingsError ? 'Error showing listings' : ''}</p>
-                {showListings && userListings && userListings.length > 0 && (
-                    <div className="flex flex-col gap-4">
-                        <h1 className="text-center mt-7 text-2xl font-semibold">
-                            Danh sách của bạn ({userListings.length})
-                        </h1>
-                        {userListings.map((listing) => (
-                            <div
-                                key={listing._id}
-                                className="border rounded-lg p-3 flex justify-between items-center gap-4"
-                            >
-                                <Link to={`/listing/${listing._id}`}>
-                                    <img
-                                        src={listing.imageUrls[0]}
-                                        alt="listing cover"
-                                        className="h-16 w-16 object-contain"
-                                    />
-                                </Link>
-                                <Link
-                                    className="text-slate-700 font-semibold  hover:underline truncate flex-1"
-                                    to={`/listing/${listing._id}`}
-                                >
-                                    <p className="truncate max-w-[300px]">{listing.name}</p>
-                                </Link>
-
-                                <div className="flex flex-col items-center">
-                                    <button
-                                        onClick={() => handleListingDelete(listing._id)}
-                                        className="text-red-700 uppercase"
-                                    >
-                                        Xóa
-                                    </button>
-                                    <Link to={`/update-listing/${listing._id}`}>
-                                        <button className="text-green-700 uppercase">Chỉnh sửa</button>
-                                    </Link>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                )}
-            </div>
+            )}
 
             {/* Truyền các props cho ConfirmDialog */}
             <ConfirmDialog {...dialogConfig} />

@@ -19,8 +19,45 @@ export default function SignUp() {
         });
     };
 
+    const validateFormData = () => {
+        const { username, email, phoneNumber, password } = formData;
+
+        // Thực hiện các kiểm tra validation tại đây
+        if (!username || !email || !phoneNumber || !password) {
+            setError('Vui lòng điền đầy đủ thông tin');
+            return false;
+        }
+
+        // Validation cho email
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            setError('Email không hợp lệ');
+            return false;
+        }
+
+        // Validation cho số điện thoại (điều chỉnh regex tùy theo định dạng bạn muốn)
+        const phoneRegex = /^[0-9]{10}$/;
+        if (!phoneRegex.test(phoneNumber)) {
+            setError('Số điện thoại không hợp lệ');
+            return false;
+        }
+
+        // Validation cho mật khẩu (tối thiểu 8 ký tự)
+        if (password.length < 8) {
+            setError('Mật khẩu phải có ít nhất 8 ký tự');
+            return false;
+        }
+
+        return true;
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        if (!validateFormData()) {
+            return;
+        }
+
         try {
             setLoading(true);
             const res = await fetch('api/auth/signup', {
@@ -31,19 +68,16 @@ export default function SignUp() {
                 body: JSON.stringify(formData),
             });
             const data = await res.json();
-            console.log(data);
 
-            // check xem register thành công hay k?
             if (data.success === false) {
-                // nếu có lỗi
                 setLoading(false);
                 setError(data.message);
                 return;
             }
+
             setLoading(false);
             setError(null);
 
-            // chuyển hướng về trang đăng nhập
             navigate('/sign-in');
         } catch (error) {
             setLoading(false);
