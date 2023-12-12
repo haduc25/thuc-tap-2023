@@ -41,6 +41,7 @@ export default function Listing() {
                 setLoading(false);
                 setError(false);
             } catch (error) {
+                console.log('error: ', error);
                 setError(true);
                 setLoading(false);
             }
@@ -70,7 +71,7 @@ export default function Listing() {
     return (
         <main>
             {loading && <p className="text-center my-7 text-2xl">Loading...</p>}
-            {error && <p className="text-center my-7 text-2xl">Something went wrong!</p>}
+            {error && <p className="text-center my-7 text-2xl min-h-[75vh]">Something went wrong!</p>}
             {listing && !loading && !error && (
                 <div>
                     <Swiper navigation>

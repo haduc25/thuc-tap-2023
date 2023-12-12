@@ -30,8 +30,16 @@ export const updateListing = async (req, res, next) => {
     const listing = await Listing.findById(req.params.id);
 
     if (!listing) return next(errorHandler(404, 'Listing not found!'));
+    console.log('req.user.id: ', req.user.id);
+    console.log('listing.userRef: ', listing.userRef);
+    console.log('req.user.role: ', req.user.role);
+    console.log('req.user: ', req.user);
 
     if (req.user.id !== listing.userRef) return next(errorHandler(401, 'You can only update your own listings!'));
+    //     // Kiểm tra xem user có quyền admin không
+    // if (req.user.role !== 'admin' && req.user.id !== listing.userRef) {
+    //     return next(errorHandler(401, 'You can only update your own listings!'));
+    // }
 
     try {
         const updatedListing = await Listing.findByIdAndUpdate(req.params.id, req.body, { new: true });

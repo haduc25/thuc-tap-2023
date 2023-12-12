@@ -36,7 +36,7 @@ export const signin = async (req, res, next) => {
 
         // Tạo token (sử dụng `id` để nhận dạng)
         // thêm `secret key`
-        const token = jwt.sign({ id: validUser._id, role: validUser.role }, process.env.JWT_SECRET);
+        const token = jwt.sign({ id: validUser._id }, process.env.JWT_SECRET);
 
         // Xóa mật khẩu người dùng ở api (tránh bị leak)
         /**
@@ -65,7 +65,7 @@ export const google = async (req, res, next) => {
         const user = await User.findOne({ email: req.body.email });
         // check `user` tồn tại hay k? - sử dụng cookie
         if (user) {
-            const token = jwt.sign({ id: user._id, role: user.role }, process.env.JWT_SECRET);
+            const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
 
             // lưu lại mảng
             const { password: pass, ...rest } = user._doc;
@@ -103,7 +103,7 @@ export const google = async (req, res, next) => {
             await newUser.save();
 
             // tạo message (thông báo sign-in thành công)
-            const token = jwt.sign({ id: newUser._id, role: newUser.role }, process.env.JWT_SECRET);
+            const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET);
             // handle password
             const { password: pass, ...rest } = newUser._doc;
             res.cookie('access_token', token, { httpOnly: true }).status(200).json(rest);

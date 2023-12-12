@@ -1,16 +1,7 @@
 // ICONS
-import { useState, useEffect } from 'react';
-import {
-    FaSearch,
-    FaUser,
-    FaUserEdit,
-    FaUserPlus,
-    FaUserCog,
-    FaUserTimes,
-    FaEdit,
-    FaTimesCircle,
-    FaPlusCircle,
-} from 'react-icons/fa';
+import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { FaEdit, FaPlusCircle, FaSearch, FaTimesCircle, FaUser, FaUserCog } from 'react-icons/fa';
 
 export default function AdminListing({ users, listings, handleEdit, handleDelete }) {
     const [danhSachListing, setDanhSachListing] = useState([]);
@@ -55,7 +46,9 @@ export default function AdminListing({ users, listings, handleEdit, handleDelete
                 <div className="px-6 py-3 whitespace-nowrap border bg-blue-500 hover:bg-blue-700 focus:border-blue-300 rounded-md hover:cursor-pointer">
                     <button onClick={() => handleAddUser()} className="flex items-center space-x-1 text-slate-100  ">
                         <FaPlusCircle className="text-xl" />
-                        <span className="hidden md:inline">Thêm danh sách Phòng mới</span>
+                        <Link to={'/create-listing'} className="hidden md:inline">
+                            Thêm danh sách Phòng mới
+                        </Link>
                     </button>
                 </div>
                 {/* <input type="text" placeholder="Search..." /> */}
@@ -149,13 +142,15 @@ export default function AdminListing({ users, listings, handleEdit, handleDelete
                                     {listing.username}
                                 </td>
                                 <td className="px-6 py-4 whitespace-nowrap border ">
-                                    <button
-                                        onClick={() => handleEdit(listing._id)}
-                                        className="flex items-center space-x-1 text-blue-500 hover:text-blue-700  focus:border-blue-300 hover:underline"
-                                    >
-                                        <FaEdit className="text-xl" />
-                                        <span className="hidden md:inline">Sửa</span>
-                                    </button>
+                                    <Link to={`/update-listing/${listing._id}`}>
+                                        <button
+                                            // onClick={() => handleEdit(listing._id)}
+                                            className="flex items-center space-x-1 text-blue-500 hover:text-blue-700  focus:border-blue-300 hover:underline"
+                                        >
+                                            <FaEdit className="text-xl" />
+                                            <span className="hidden md:inline">Sửa</span>
+                                        </button>
+                                    </Link>
                                 </td>
                                 <td className="px-6 py-4 whitespace-nowrap border">
                                     <button
