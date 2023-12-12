@@ -64,13 +64,23 @@ export const updateListing = async (req, res, next) => {
 
     try {
         // Kiểm tra xem user có quyền admin không
-        const updatedListing = await Listing.findByIdAndUpdate(
-            req.params.id,
-            req.user.role === 'admin' ? { ...req.body, userRef: listing.userRef } : req.body,
-            { new: true },
-        );
-        console.log(req.user.role === 'admin' ? 'ADMINNN' : 'USERRRR');
-        res.status(200).json(updatedListing);
+        if (req.user.role === 'admin') {
+            // Nếu role là admin, giữ nguyên userRef
+            const updatedListing = await Listing.findByIdAndUpdate(
+                req.params.id,
+                { ...req.body, userRef: listing.userRef },
+                { new: true },
+            );
+            console.log('ADMINNN');
+            res.status(200).json(updatedListing);
+        } else {
+            // Nếu role là user
+            const updatedListing = await Listing.findByIdAndUpdate(req.params.id, req.body, { new: true });
+            res.status(200).json(updatedListing);
+            console.log('USERRRR');
+
+            res.status(200).json(updatedListing);
+        }
     } catch (error) {
         next(error);
     }

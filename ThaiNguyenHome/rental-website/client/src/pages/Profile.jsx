@@ -409,7 +409,11 @@ export default function Profile() {
 
                                 <div className="flex flex-col items-center">
                                     <button
-                                        onClick={() => handleListingDelete(listing._id)}
+                                        onClick={() =>
+                                            openDialog('Xóa bài đăng', 'Bạn có chắc chắn muốn xóa bài đăng này?', () =>
+                                                handleListingDelete(listing._id),
+                                            )
+                                        }
                                         className="text-red-700 uppercase"
                                     >
                                         Xóa

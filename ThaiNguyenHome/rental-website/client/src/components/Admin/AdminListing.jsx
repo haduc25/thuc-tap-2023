@@ -1,10 +1,20 @@
 // ICONS
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FaEdit, FaPlusCircle, FaSearch, FaTimesCircle, FaUser, FaUserCog } from 'react-icons/fa';
 
-export default function AdminListing({ users, listings, handleEdit, handleDelete }) {
+import ConfirmDialog from '../../components/ConfirmDialog';
+
+export default function AdminListing({ users, listings }) {
+    const navigate = useNavigate();
     const [danhSachListing, setDanhSachListing] = useState([]);
+    const [dialogConfig, setDialogConfig] = useState({
+        isOpen: false,
+        title: '',
+        message: '',
+        onCancel: () => setDialogConfig({ ...dialogConfig, isOpen: false }),
+        onConfirm: () => setDialogConfig({ ...dialogConfig, isOpen: false }),
+    });
 
     // listing with user
     useEffect(() => {
@@ -12,14 +22,41 @@ export default function AdminListing({ users, listings, handleEdit, handleDelete
             try {
                 const res = await fetch('api/admin/getAllListings');
                 const data = await res.json();
-                setDanhSachListing(data);
-                console.log('running2');
+
+                // Kiểm tra nếu data không phải là mảng, setDanhSachListing sẽ không được gọi
+                if (Array.isArray(data)) {
+                    setDanhSachListing(data);
+                    console.log('running2');
+                } else {
+                    console.error('Data is not an array:', data);
+                }
             } catch (error) {
-                console.log('error2: ', error);
+                console.error('Error fetching data:', error);
             }
         };
+
         fetchListing();
     }, []);
+
+    const handleListingDelete = async (listingId) => {
+        try {
+            const res = await fetch(`/api/listing/delete/${listingId}`, {
+                method: 'DELETE',
+            });
+
+            const data = await res.json();
+
+            if (data.success === false) {
+                console.log(data.message);
+                return;
+            }
+
+            // lọc trong `userListings`
+            setDanhSachListing((prev) => prev.filter((listing) => listing._id !== listingId));
+        } catch (error) {
+            console.log(data.message);
+        }
+    };
 
     function formatDateTime(input) {
         const date = new Date(input);
@@ -40,16 +77,28 @@ export default function AdminListing({ users, listings, handleEdit, handleDelete
         unset: <span className="text-gray-500">unset</span>,
     };
 
+    // confirm
+    const openDialog = (title, message, onConfirm) => {
+        setDialogConfig({
+            isOpen: true,
+            title,
+            message,
+            onCancel: () => setDialogConfig({ ...dialogConfig, isOpen: false }),
+            onConfirm: () => {
+                onConfirm && onConfirm();
+                setDialogConfig({ ...dialogConfig, isOpen: false });
+            },
+        });
+    };
+
     return (
         <div className="min-h-[83vh]">
             <div className="flex justify-between mx-6 my-10">
                 <div className="px-6 py-3 whitespace-nowrap border bg-blue-500 hover:bg-blue-700 focus:border-blue-300 rounded-md hover:cursor-pointer">
-                    <button onClick={() => handleAddUser()} className="flex items-center space-x-1 text-slate-100  ">
+                    <Link to={'/create-listing'} className="flex items-center space-x-1 text-slate-100  ">
                         <FaPlusCircle className="text-xl" />
-                        <Link to={'/create-listing'} className="hidden md:inline">
-                            Thêm danh sách Phòng mới
-                        </Link>
-                    </button>
+                        <span className="hidden md:inline">Thêm danh sách phòng mới</span>
+                    </Link>
                 </div>
                 {/* <input type="text" placeholder="Search..." /> */}
                 {/* <form onSubmit={handleSubmit} className="bg-slate-100 p-3 rounded-lg flex items-center"> */}
@@ -141,24 +190,38 @@ export default function AdminListing({ users, listings, handleEdit, handleDelete
                                     {/* {roleIcons[listing.role] || roleIcons.unset} */}
                                     {listing.username}
                                 </td>
-                                <td className="px-6 py-4 whitespace-nowrap border ">
-                                    <Link to={`/update-listing/${listing._id}`}>
-                                        <button
-                                            // onClick={() => handleEdit(listing._id)}
-                                            className="flex items-center space-x-1 text-blue-500 hover:text-blue-700  focus:border-blue-300 hover:underline"
-                                        >
-                                            <FaEdit className="text-xl" />
-                                            <span className="hidden md:inline">Sửa</span>
-                                        </button>
-                                    </Link>
-                                </td>
                                 <td className="px-6 py-4 whitespace-nowrap border">
                                     <button
-                                        onClick={() => handleDelete(listing._id)}
-                                        className="flex items-center space-x-1 text-red-500 hover:text-red-700  focus:border-red-300"
+                                        onClick={() =>
+                                            openDialog(
+                                                'Xác nhận sửa bài đăng',
+                                                'Bạn có chắc chắn muốn sửa bài đăng này với quyền quản trị viên hay không?',
+                                                () => {
+                                                    // Thực hiện chuyển hướng sau khi xác nhận
+                                                    navigate(`/update-listing/${listing._id}`);
+                                                },
+                                            )
+                                        }
+                                        className="flex items-center space-x-1 text-blue-500 hover:text-blue-700  focus:border-blue-300 hover:underline"
+                                    >
+                                        <FaEdit className="text-xl" />
+                                        <span className="hidden md:inline">Sửa</span>
+                                    </button>
+                                </td>
+
+                                <td className="px-6 py-4 whitespace-nowrap border">
+                                    <button
+                                        onClick={() =>
+                                            openDialog(
+                                                'Xóa bài đăng vĩnh viễn',
+                                                'Bạn có chắc chắn muốn xóa bài đăng này với quyền quản trị viên hay không?',
+                                                () => handleListingDelete(listing._id),
+                                            )
+                                        }
+                                        className="flex items-center space-x-1 text-red-500 hover:text-red-700 focus:border-red-300"
                                     >
                                         <FaTimesCircle className="text-xl" />
-                                        <span className="hidden md:inline">Xoá</span>
+                                        <span className="hidden md:inline">Xóa</span>
                                     </button>
                                 </td>
                             </tr>
@@ -166,6 +229,8 @@ export default function AdminListing({ users, listings, handleEdit, handleDelete
                     })}
                 </tbody>
             </table>
+
+            <ConfirmDialog {...dialogConfig} />
         </div>
     );
 }

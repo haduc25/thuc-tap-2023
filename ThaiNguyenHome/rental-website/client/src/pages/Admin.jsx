@@ -142,12 +142,7 @@ const Admin = () => {
                             handleDelete={handleDelete}
                         />
                     ) : currentTab === 'rooms' ? (
-                        <AdminListing
-                            users={danhSachUsers}
-                            listings={danhSachListing}
-                            handleEdit={handleEdit}
-                            handleDelete={handleDelete}
-                        />
+                        <AdminListing users={danhSachUsers} listings={danhSachListing} />
                     ) : (
                         <p>Component của tab này chưa được định nghĩa.</p>
                     )}
