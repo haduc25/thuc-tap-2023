@@ -1,7 +1,31 @@
-"# thuc-tap-2023 - Thực tập nghề nghệp"
+"# thuc-tap-2023 - Thực tập nghề nghệp (STA)"
 
 # Project: Thái Nguyên Home (SleepEZ version 2.0)
 
+#### PREVVIEW WEBSITE
+
+<p align="center">
+  <img src="assets/images/image4.png" alt="Giao diện website" width="500"/>
+</p>
+<p align="center">Giao diện website</p>
+
+
+<p align="center">
+  <img src="assets/images/image15.png" alt="Giao diện xem chi tiết" width="500"/>
+</p>
+<p align="center">Giao diện xem chi tiết</p>
+
+
+<p align="center">
+  <img src="assets/images/image16.png" alt="Giao diện trang quản trị" width="500"/>
+</p>
+<p align="center">Giao diện trang quản trị</p>
+
+
+<p align="center">
+  <img src="assets/images/image14.png" alt="Giao diện trang tìm kiếm" width="500"/>
+</p>
+<p align="center">Giao diện trang tìm kiếm</p>
 #### CONFIG START
 
 1. go to `...\ThaiNguyenHome\rental-website\client`
