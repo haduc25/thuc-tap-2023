@@ -2,7 +2,7 @@
 
 # Project: Thái Nguyên Home (SleepEZ version 2.0)
 
-#### PREVVIEW WEBSITE
+#### PREVIEW WEBSITE
 
 <p align="center">
   <img src="assets/images/image4.png" alt="Giao diện website" width="500"/>
@@ -26,6 +26,7 @@
   <img src="assets/images/image14.png" alt="Giao diện trang tìm kiếm" width="500"/>
 </p>
 <p align="center">Giao diện trang tìm kiếm</p>
+
 #### CONFIG START
 
 1. go to `...\ThaiNguyenHome\rental-website\client`
